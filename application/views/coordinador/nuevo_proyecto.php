@@ -134,7 +134,8 @@
         </ol>
         <div class="row">
 
-            <form class="form-control" method="post" action="<?php base_url('Coordinador/crearProyecto') ?>">
+
+            <?= form_open('/Coordinador/crearProyecto', array('class' => 'form-control')); ?>
             <div class="col-md-3">
                 <div class="form-group label-floating">
                     <label class="control-label">Nombre del proyecto</label>
@@ -157,7 +158,7 @@
             <div class="col">
                 <div class="radio">
                     <label class="radio">
-                        <input type="checkbox" class="option-input custom-checkbox" name="indefinido"/>
+                        <input type="checkbox" class="option-input custom-checkbox" name="indefinido" value="Indefinida"/>
                         Indefinido
                     </label>
                 </div>

@@ -9,7 +9,6 @@
 class Proyecto_model extends CI_Model
 {
 
-
     public function __construct()
     {
         parent::__construct();
@@ -18,10 +17,9 @@ class Proyecto_model extends CI_Model
 
     public function guardarProyecto($proyecto){
 
-        echo 'dentro de guardar proyecto';
+
         $this->db->insert('proyectos', $proyecto);
 
-        var_export($this);
     }
 
     public function __get($key)

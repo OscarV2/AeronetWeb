@@ -44,14 +44,15 @@
                         <a href="../cards.html">PM2.5</a>
                     </li>
                 </ul>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Estaciones">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irEstaciones');?>">
+                    <i class="fa fa-fw fa-table"></i>
+                    <span class="nav-link-text">Estaciones</span>
+                </a>
+            </li>
+
             </li>
         </ul>
-        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Estaciones">
-            <a class="nav-link" href="<?php echo site_url('Coordinador/irEstaciones');?>">
-                <i class="fa fa-fw fa-table"></i>
-                <span class="nav-link-text">Estaciones</span>
-            </a>
-        </li>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
                 <a class="nav-link text-center" id="sidenavToggler">
@@ -132,10 +133,39 @@
             </li>
         </ol>
         <div class="row">
-            <div class="col-12">
-                <h1>No hay proyectos</h1>
 
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Filtros pesados
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Duracion</th>
+                                <th>Fecha de Inicio</th>
+                                <th>Opciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($proyectos->result() as $proyecto) {
+                                echo '<tr><td>' .$proyecto->nombre . '</td>' .
+                                    '<td>'. $proyecto->duracion . '</td>' .
+                                    '<td>'. $proyecto->fechaInicio . '</td>' .
+                                    '<td></td>' .
+                                    '</tr>'  ;
+
+                            } ?>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+
+
         </div>
     </div>
     <!-- /.container-fluid-->

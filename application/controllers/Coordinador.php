@@ -17,8 +17,12 @@ class Coordinador extends CI_Controller
     }
 
     public function index(){
+        $proyectos = array(
+            'proyectos' => $this->Proyecto_model->obtenerTodosProyectos()
+        );
+
         $this->load->view('layout/header');
-        $this->load->view('coordinador/vista_coordinador');
+        $this->load->view('coordinador/vista_coordinador', $proyectos);
         $this->load->view('layout/footer');
 
     }
@@ -58,7 +62,7 @@ class Coordinador extends CI_Controller
         $indefinido = $this->input->post("indefinido");
 
         if ($indefinido == "Indefinida"){
-            $fechaInicio = "0";
+            $duracion = "Indefinida";
         }
         else{
             $fechaInicio = $this->input->post("fecha_inicio");

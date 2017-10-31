@@ -17,7 +17,9 @@ class Proyecto extends CI_Controller
 
     public function verTodosProyectos()
     {
-        $proyectos = $this->Proyecto_model->obtenerTodosProyectos();
+        $proyectos = array(
+            'proyectos' => $this->Proyecto_model->obtenerTodosProyectos()
+        );
         echo var_dump($proyectos);
     }
 

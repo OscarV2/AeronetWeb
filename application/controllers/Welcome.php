@@ -31,18 +31,19 @@ class Welcome extends CI_Controller {
     public function login(){
         $this->load->helper(array('form', 'url'));
 
-        $this->load->library('form_validation');
+        $rol = $this->input->post('rol');
 
-        if ($this->form_validation->run() == FALSE)
-        {
+        if ($rol == 'laboratorista'){
+            $this->load->view('layout/header');
+            $this->load->view('vista_laboratorio');
+            $this->load->view('layout/footer');
+        }elseif ($rol == 'analista'){
+
+        }else {
             $this->load->view('layout/header');
             $this->load->view('coordinador/vista_coordinador');
             $this->load->view('layout/footer');
-        }
-        else
-        {
-            $this->load->view('formsuccess');
-        }
+            }
     }
 
     public function irCrearProyecto()

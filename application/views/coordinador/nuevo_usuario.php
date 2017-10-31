@@ -185,9 +185,6 @@
                 </label></div>
             </div>
 
-
-
-
             <div class="col-md-12 col-md-offset-5">
                 <button type="button" class="btn btn-primary btn-lg">Guardar</button>
             </div>

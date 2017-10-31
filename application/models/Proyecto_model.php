@@ -17,9 +17,12 @@ class Proyecto_model extends CI_Model
 
     public function guardarProyecto($proyecto){
 
-
         $this->db->insert('proyectos', $proyecto);
+    }
 
+    public function obtenerTodosProyectos(){
+
+        return $this->db->get('proyectos');
     }
 
     public function __get($key)

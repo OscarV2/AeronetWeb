@@ -18,4 +18,9 @@ class Estacion_model extends CI_Model
     {
         return $this->db->get_where('estacion',array('proyectos_idproyectos' => $key));
     }
+
+    public function guardarNuevaEstacion($data)
+    {
+        $this->db->insert('estacion',$data);
+    }
 }

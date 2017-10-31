@@ -165,7 +165,7 @@
 
             </div>
             <div class="col-md-12 col-md-offset-5">
-                <button type="submit" class="btn btn-primary btn-lg"data-toggle="modal" data-target="#modalNuevoProyecto"">Guardar</button>
+                <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
             </div>
             </form>
         </div>

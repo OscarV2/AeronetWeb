@@ -84,6 +84,7 @@ class Coordinador extends CI_Controller
             'fechaInicio' =>$fechaInicio);
         $this->Proyecto_model->guardarProyecto($proyecto);
 
+        $this->load->view('sussess_message');
     }
 
 }

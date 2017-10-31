@@ -20,7 +20,7 @@
                     <span class="nav-link-text">Lista de proyectos</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+            <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Tables">
                 <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearUsuario');?>">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Nuevo Usuario</span>
@@ -186,7 +186,7 @@
             </div>
 
             <div class="col-md-12 col-md-offset-5">
-                <button type="button" class="btn btn-primary btn-lg">Guardar</button>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalNuevoUsuario">Guardar</button>
             </div>
         </div>
     </div>
@@ -203,5 +203,18 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
-
+    <!-- Logout Modal-->
+    <div class="modal fade" id="modalNuevoUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
+                </div>
+                <div class="modal-body">Usuario Registrado Exitosamente.</div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" href="#">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
 

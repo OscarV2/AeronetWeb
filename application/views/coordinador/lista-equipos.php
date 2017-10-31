@@ -36,7 +36,7 @@
                     <li>
                         <a href="lista-equipos.php">PM10</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="lista-equipos.php">PST</a>
 
                     </li>

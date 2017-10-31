@@ -15,7 +15,7 @@
                     <span class="nav-link-text">Nuevo Proyecto</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+            <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Charts">
                 <a class="nav-link" href="<?php echo site_url('Coordinador/irListaProyectos');?>">
                     <i class="fa fa-fw fa-area-chart"></i>
                     <span class="nav-link-text">Lista de proyectos</span>

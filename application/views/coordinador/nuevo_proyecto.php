@@ -165,7 +165,7 @@
 
             </div>
             <div class="col-md-12 col-md-offset-5">
-                <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
+                <button type="submit" class="btn btn-primary btn-lg"data-toggle="modal" data-target="#modalNuevoProyecto"">Guardar</button>
             </div>
             </form>
         </div>
@@ -184,18 +184,15 @@
         <i class="fa fa-angle-up"></i>
     </a>
     <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalNuevoProyecto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Nuevo Proyecto</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
                 </div>
-                <div class="modal-body">Proyecto Registrado Exitosamente</div>
+                <div class="modal-body">Se ha creado un nuevo proyecto</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="#">OK</a>
                 </div>
             </div>
         </div>

@@ -55,6 +55,17 @@ class Coordinador extends CI_Controller
 
     }
 
+    public function irAsignarFiltros()
+    {
+
+    }
+
+    public function asignarEquipos()
+    {
+        $data = $this->input->get('id');
+        echo 'datos: ' . $data;
+    }
+
     public function crearProyecto()
     {
         $nombre = $this->input->post("nombre");

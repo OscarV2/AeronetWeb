@@ -129,7 +129,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href=" href="<?php echo site_url('Coordinador/index');?>">Proyectos</a>
+                <a href="<?php echo site_url('Coordinador/index');?>">Proyectos</a>
             </li>
         </ol>
         <div class="row">
@@ -154,7 +154,16 @@
                                 echo '<tr><td>' .$proyecto->nombre . '</td>' .
                                     '<td>'. $proyecto->duracion . '</td>' .
                                     '<td>'. $proyecto->fechaInicio . '</td>' .
-                                    '<td></td>' .
+                                    '<td><div class="dropdown">' .
+ ' <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
+  'Dropdown button' .
+ '</button>' .
+'<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' .
+ '<a class="dropdown-item" href="'.  site_url('Coordinador/asignarEquipos')  . "?data=holaaaa" . '"  >Asignar</a>' .
+  '<a class="dropdown-item" href="#">Another action</a>' .
+  '  <a class="dropdown-item" href="#">Something else here</a>' .
+ ' </div>' .
+'</div></td>' .
                                     '</tr>'  ;
 
                             } ?>
@@ -162,6 +171,7 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </div>

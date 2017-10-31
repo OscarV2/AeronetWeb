@@ -23,9 +23,29 @@ class Coordinador extends CI_Controller
 
     }
 
+    public function irCrearUsuario(){
+        $this->load->view('layout/header');
+        $this->load->view('coordinador/nuevo_usuario');
+        $this->load->view('layout/footer');
+
+    }
+
+    public function irEstaciones(){
+        $this->load->view('layout/header');
+        $this->load->view('coordinador/estaciones');
+        $this->load->view('layout/footer');
+
+    }
+
+    public function irListaProyectos(){
+        $this->load->view('layout/header');
+        $this->load->view('coordinador/lista-proyectos');
+        $this->load->view('layout/footer');
+
+    }
+
     public function crearProyecto()
     {
-
         $nombre = $this->input->post("nombre");
         $duracion = $this->input->post("duracion");
         $indefinido = $this->input->post("indefinido");

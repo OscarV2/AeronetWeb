@@ -9,19 +9,19 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nuevo Proyecto">
-                <a class="nav-link" href="nuevo_proyecto.php">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearProyecto');?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Nuevo Proyecto</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                <a class="nav-link" href="lista-proyectos.php">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irListaProyectos');?>">
                     <i class="fa fa-fw fa-area-chart"></i>
                     <span class="nav-link-text">Lista de proyectos</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                <a class="nav-link" href="nuevo_usuario.php">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearUsuario');?>">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Nuevo Usuario</span>
                 </a>
@@ -45,7 +45,7 @@
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Estaciones">
-                <a class="nav-link" href="estaciones.php">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irEstaciones');?>">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Estaciones</span>
                 </a>
@@ -128,7 +128,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Proyectos</a>
+                <a href="<?php echo site_url('Coordinador/index');?>">Proyectos</a>
             </li>
             <li class="breadcrumb-item">Nuevo usuario</li>
         </ol>
@@ -203,21 +203,5 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Seguro quieres salir?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Haz click en "Cerrar" si estas seguro de terminar con la sesion actual.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="login.html">Cerrar</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
+

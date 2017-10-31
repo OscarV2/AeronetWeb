@@ -131,67 +131,10 @@
             <li class="breadcrumb-item">
                 <a href="<?php echo site_url('Coordinador/index');?>">Proyectos</a>
             </li>
-            <li class="breadcrumb-item">Nuevo usuario</li>
+            <li class="breadcrumb-item">Lista Proyectos</li>
         </ol>
         <div class="row">
 
-            <div class="col-md-3">
-                <div class="form-group label-floating">
-                    <label class="control-label">Nombres</label>
-                    <input type="text" name="codigoNuevoFiltro[]" required class="form-control">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group label-floating">
-                    <label class="control-label">Apellidos</label>
-                    <input type="text" name="codigoNuevoFiltro[]" required class="form-control">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group label-floating">
-                    <label class="control-label">Cedula</label>
-                    <input type="text" name="pesoNuevoFiltro[]" required  class="form-control">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group label-floating">
-                    <label class="control-label">Correo</label>
-                    <input type="number" name="fechaNuevoFiltro[]"  required class="form-control">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group label-floating">
-                    <label class="control-label">Telefono</label>
-                    <input type="text" name="codigoNuevoFiltro[]" required class="form-control">
-                </div>
-            </div>
-
-            <h4>Rol</h4>
-            <div class="col">
-                <div class="radio">
-                    <label class="radio">
-                        <input type="radio" class="option-input radio" name="example" checked />
-                        Laboratorista
-                    </label>
-                </div>
-                <div class="radio">
-                    <label class="radio">
-                        <input type="radio" class="option-input radio" name="example" />
-                        Campo
-                    </label></div>
-                <div class="radio">
-                    <label class="radio">
-                        <input type="radio" class="option-input radio" name="example" />
-                        Analista de datos
-                    </label></div>
-            </div>
-
-
-
-
-            <div class="col-md-12 col-md-offset-5">
-                <button type="button" class="btn btn-primary btn-lg">Guardar</button>
-            </div>
         </div>
     </div>
     <!-- /.container-fluid-->
@@ -207,21 +150,4 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Seguro quieres salir?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Haz click en "Cerrar" si estas seguro de terminar con la sesion actual.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="login.html">Cerrar</a>
-                </div>
-            </div>
-        </div>
-    </div>
+

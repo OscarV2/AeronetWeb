@@ -46,6 +46,12 @@
                 </ul>
             </li>
         </ul>
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Estaciones">
+            <a class="nav-link" href="<?php echo site_url('Coordinador/irEstaciones');?>">
+                <i class="fa fa-fw fa-table"></i>
+                <span class="nav-link-text">Estaciones</span>
+            </a>
+        </li>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
                 <a class="nav-link text-center" id="sidenavToggler">

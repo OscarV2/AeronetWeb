@@ -10,19 +10,19 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nuevo Proyecto">
-                <a class="nav-link" href="nuevo_proyecto.php">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearProyecto');?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Nuevo Proyecto</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                <a class="nav-link" href="lista-proyectos.php">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irListaProyectos');?>">
                     <i class="fa fa-fw fa-area-chart"></i>
                     <span class="nav-link-text">Lista de proyectos</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                <a class="nav-link" href="nuevo_usuario.php">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearUsuario');?>">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Nuevo Usuario</span>
                 </a>
@@ -46,7 +46,7 @@
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Estaciones">
-                <a class="nav-link" href="estaciones.php">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irEstaciones');?>">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Estaciones</span>
                 </a>
@@ -129,7 +129,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Proyectos</a>
+                <a href="<?php echo site_url('Coordinador/index');?>">Proyectos</a>
             </li>
             <li class="breadcrumb-item">Nuevo usuario</li>
         </ol>

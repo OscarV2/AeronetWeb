@@ -20,8 +20,35 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+        $this->load->helper('form');
         $this->load->view('layout/header');
-		$this->load->view('Inicio_admin');
+		$this->load->view('login');
         $this->load->view('layout/footer');
-	}
+
+    }
+
+    public function login(){
+        $this->load->helper(array('form', 'url'));
+
+        $this->load->library('form_validation');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('layout/header');
+            $this->load->view('coordinador/vista_coordinador');
+            $this->load->view('layout/footer');
+        }
+        else
+        {
+            $this->load->view('formsuccess');
+        }
+    }
+
+    public function irCrearProyecto()
+    {
+        $this->load->view('layout/header');
+        $this->load->view('coordinador/nuevo_proyecto');
+        $this->load->view('layout/footer');
+    }
+
 }

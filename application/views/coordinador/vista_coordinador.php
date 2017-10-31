@@ -15,14 +15,14 @@
                     <span class="nav-link-text">Nuevo Proyecto</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                <a class="nav-link" href="../charts.html">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ListaProyectos">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irListaProyectos');?>">
                     <i class="fa fa-fw fa-area-chart"></i>
                     <span class="nav-link-text">Lista de proyectos</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                <a class="nav-link" href="../tables.html">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearUsuario');?>">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Nuevo Usuario</span>
                 </a>
@@ -122,7 +122,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="../index.html">Proyectos</a>
+                <a href=" href="<?php echo site_url('Coordinador/index');?>">Proyectos</a>
             </li>
         </ol>
         <div class="row">

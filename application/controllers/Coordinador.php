@@ -16,6 +16,13 @@ class Coordinador extends CI_Controller
         $this->load->helper('form');
     }
 
+    public function index(){
+        $this->load->view('layout/header');
+        $this->load->view('coordinador/vista_coordinador');
+        $this->load->view('layout/footer');
+
+    }
+
     public function irCrearProyecto(){
         $this->load->view('layout/header');
         $this->load->view('coordinador/nuevo_proyecto');

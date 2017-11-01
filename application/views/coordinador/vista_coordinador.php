@@ -159,9 +159,9 @@
   'Opciones' .
  '</button>' .
 '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' .
- '<a class="dropdown-item" href="'.  site_url('Coordinador/asignarEquipos')  . "?id=" .$proyecto->idProyecto . '" >Gestionar Filtros</a>' .
-  '<a class="dropdown-item" href="#">Asignar Filtros</a>' .
-  '  <a class="dropdown-item" href="#">Asignar Estaciones</a>' .
+ '<a class="dropdown-item" href="'.  site_url('Filtros/irGestionarFiltros')  . "?id=" .$proyecto->idProyecto . '" >Gestionar Filtros</a>' .
+  '<a class="dropdown-item" href="'.  site_url('Filtros/irAsignarFiltros')  . "?id=" .$proyecto->idProyecto . '">Asignar Filtros</a>' .
+  '  <a class="dropdown-item" href="'.  site_url('Estaciones/irAsignarEstaciones')  . "?id=" .$proyecto->idProyecto . '">Asignar Estaciones</a>' .
  ' </div>' .
 '</div></td>' .
                                     '</tr>';

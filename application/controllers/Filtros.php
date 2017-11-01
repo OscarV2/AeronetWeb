@@ -20,14 +20,14 @@ class Filtros extends CI_Controller
     public function irAsignarFiltros()
     {
         $this->load->view('layout/header');
-        $this->load->view('coordinador/');
+        $this->load->view('coordinador/asignar_filtros');
         $this->load->view('layout/footer');
     }
 
     public function irGestionarFiltros()
     {
         $this->load->view('layout/header');
-        $this->load->view('coordinador/');
+        $this->load->view('coordinador/gestionar_filtros');
         $this->load->view('layout/footer');
     }
 

@@ -16,4 +16,18 @@ class Filtros extends CI_Controller
         $this->load->helper('form');
     }
 
+    public function asignarFiltros()
+    {
+
+    }
+
+    public function gestionarFiltros()
+    {
+
+    }
+
+    public function Filtros()
+    {
+
+    }
 }

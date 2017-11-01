@@ -146,7 +146,7 @@
                                 <th>Nombre</th>
                                 <th>Duracion</th>
                                 <th>Fecha de Inicio</th>
-                                <th>Opciones</th>
+                                <th>Menu</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -156,22 +156,19 @@
                                     '<td>'. $proyecto->fechaInicio . '</td>' .
                                     '<td><div class="dropdown">' .
  ' <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
-  'Dropdown button' .
+  'Opciones' .
  '</button>' .
 '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' .
- '<a class="dropdown-item" href="'.  site_url('Coordinador/asignarEquipos')  . "?data=holaaaa" . '"  >Asignar</a>' .
-  '<a class="dropdown-item" href="#">Another action</a>' .
-  '  <a class="dropdown-item" href="#">Something else here</a>' .
+ '<a class="dropdown-item" href="'.  site_url('Coordinador/asignarEquipos')  . "?id=" .$proyecto->idProyecto . '" >Gestionar Filtros</a>' .
+  '<a class="dropdown-item" href="#">Asignar Filtros</a>' .
+  '  <a class="dropdown-item" href="#">Asignar Estaciones</a>' .
  ' </div>' .
 '</div></td>' .
-                                    '</tr>'  ;
-
+                                    '</tr>';
                             } ?>
-
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -181,7 +178,7 @@
     <footer class="sticky-footer">
         <div class="container">
             <div class="text-center">
-                <small>Copyright © Qualys 2017</small>
+                <small>Copyright © Qualis 2017</small>
             </div>
         </div>
     </footer>

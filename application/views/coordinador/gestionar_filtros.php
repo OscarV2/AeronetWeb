@@ -133,9 +133,45 @@
             </li>
             <li class="breadcrumb-item">Gestionar Filtros</li>
         </ol>
-        <div class="row">
+
+
+        <!-- Formulario  Gestionar filtros -->
+        <select class="custom-select">
+            <option selected>Seleccionar Usuario</option>
+            <option value="1">JANNER</option>
+            <option value="2">OSCAR</option>
+            <option value="3">WILLIAN</option>
+        </select>
+
+            <div class="col">
+                <div class="radio">
+                    <label class="radio">
+                        <input type="checkbox" class="option-input custom-checkbox" name="indefinido" value="Indefinida"/>
+                        PST
+                    </label>
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="radio">
+                    <label class="radio">
+                        <input type="checkbox" class="option-input custom-checkbox" name="indefinido" value="Indefinida"/>
+                        PM10
+                    </label>
+                </div>
+
+            </div>
+            <div class="col">
+            <div class="radio">
+                <label class="radio">
+                    <input type="checkbox" class="option-input custom-checkbox" name="indefinido" value="Indefinida"/>
+                    PM2.5
+                </label>
+            </div>
 
         </div>
+
+
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->

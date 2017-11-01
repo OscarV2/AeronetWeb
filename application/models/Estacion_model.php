@@ -23,4 +23,11 @@ class Estacion_model extends CI_Model
     {
         $this->db->insert('estacion',$data);
     }
+
+    public function asignarEstacion($data, $id)
+    {
+
+        $this->db->where('id', $id);
+        $this->db->update('estacion',$data);
+    }
 }

@@ -12,8 +12,7 @@ class Estaciones extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Proyecto_model');
-        $this->load->helper('form');
+        $this->load->model('Estacion_model');
     }
 
     public function irAsignarEstaciones()
@@ -23,4 +22,14 @@ class Estaciones extends CI_Controller
         $this->load->view('layout/footer');
     }
 
+    public function gestionarEstaciones()
+    {
+        // ids de estaciones seleccionadas
+        $estaciones = $this->input->post('estacion');
+        $idProyecto = $this->input->post('idProyecto');
+        foreach ($estaciones as $estacion){
+            echo $estacion;
+        }
+        //$this->Estacion_model->asignarEstacion($estaciones, $idProyecto);
+    }
 }

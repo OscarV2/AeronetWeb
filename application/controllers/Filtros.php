@@ -16,7 +16,6 @@ class Filtros extends CI_Controller
         $this->load->helper('form');
     }
 
-
     public function irAsignarFiltros()
     {
         $this->load->view('layout/header');
@@ -30,6 +29,5 @@ class Filtros extends CI_Controller
         $this->load->view('coordinador/gestionar_filtros');
         $this->load->view('layout/footer');
     }
-
 
 }

@@ -129,9 +129,9 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="<?php echo site_url('Coordinador/index');?>">Proyectos</a>
+                <a href="<?php echo site_url('Coordinador/index');?>"</a>
             </li>
-            <li class="breadcrumb-item">Lista Proyectos</li>
+            <li class="breadcrumb-item">Asignar Filtros</li>
         </ol>
         <div class="row">
 

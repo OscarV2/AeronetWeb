@@ -2,8 +2,8 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="../index.html">Qualys</a>
-    <a class="navbar-brand" href="../index.html">Oscar Vega</a>
+    <a class="navbar-brand" href="#">Qualys</a>
+    <a class="navbar-brand" href="#">Oscar Vega</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -15,7 +15,7 @@
                     <span class="nav-link-text">Nuevo Proyecto</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ListaProyectos">
+            <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Charts">
                 <a class="nav-link" href="<?php echo site_url('Coordinador/irListaProyectos');?>">
                     <i class="fa fa-fw fa-area-chart"></i>
                     <span class="nav-link-text">Lista de proyectos</span>
@@ -34,16 +34,17 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
                     <li>
-                        <a href="../navbar.html">PM10</a>
+                        <a href="lista-equipos.php">PM10</a>
                     </li>
                     <li>
-                        <a href="../cards.html">PST</a>
+                        <a href="lista-equipos.php">PST</a>
 
                     </li>
                     <li>
-                        <a href="../cards.html">PM2.5</a>
+                        <a href="lista-equipos.php">PM2.5</a>
                     </li>
                 </ul>
+            </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Estaciones">
                 <a class="nav-link" href="<?php echo site_url('Coordinador/irEstaciones');?>">
                     <i class="fa fa-fw fa-table"></i>
@@ -51,7 +52,6 @@
                 </a>
             </li>
 
-            </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
@@ -78,31 +78,31 @@
                     <a class="dropdown-item" href="#">
               <span class="text-success">
                 <strong>
-                  <i class="fa fa-long-arrow-up fa-fw"></i>William ha pesado 20 filtros</strong>
+                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
               </span>
                         <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">William peso filtros PST</div>
+                        <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">
               <span class="text-danger">
                 <strong>
-                  <i class="fa fa-long-arrow-down fa-fw"></i>Johnny instalo filtros</strong>
+                  <i class="fa fa-long-arrow-down fa-fw"></i>Status Update</strong>
               </span>
                         <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">Johnny instalo filtros en Coluvion</div>
+                        <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">
               <span class="text-success">
                 <strong>
-                  <i class="fa fa-long-arrow-up fa-fw"></i>Maria recogió muestras</strong>
+                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
               </span>
                         <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">Maria recogio filtros instalados en Coluvion.</div>
+                        <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item small" href="#">Ver todas</a>
+                    <a class="dropdown-item small" href="#">View all alerts</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -129,48 +129,12 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="<?php echo site_url('Coordinador/index');?>">Proyectos</a>
+                <a href="<?php echo site_url('Coordinador/index');?>"</a>
             </li>
+            <li class="breadcrumb-item">Gestionar Filtros</li>
         </ol>
         <div class="row">
 
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fa fa-table"></i> Filtros pesados
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Duracion</th>
-                                <th>Fecha de Inicio</th>
-                                <th>Menu</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach($proyectos->result() as $proyecto) {
-                                echo '<tr><td>' .$proyecto->nombre . '</td>' .
-                                    '<td>'. $proyecto->duracion . '</td>' .
-                                    '<td>'. $proyecto->fechaInicio . '</td>' .
-                                    '<td><div class="dropdown">' .
-                                    ' <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
-                                    'Opciones' .
-                                    '</button>' .
-                                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' .
-                                    '<a class="dropdown-item" href="'.  site_url('Coordinador/asignarEquipos')  . "?id=" .$proyecto->idProyecto . '" >Gestionar Filtros</a>' .
-                                    '<a class="dropdown-item" href="#">Asignar Filtros</a>' .
-                                    '  <a class="dropdown-item" href="#">Asignar Estaciones</a>' .
-                                    ' </div>' .
-                                    '</div></td>' .
-                                    '</tr>';
-                            } ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <!-- /.container-fluid-->
@@ -178,7 +142,7 @@
     <footer class="sticky-footer">
         <div class="container">
             <div class="text-center">
-                <small>Copyright © Qualis 2017</small>
+                <small>Copyright © Qualys 2017</small>
             </div>
         </div>
     </footer>

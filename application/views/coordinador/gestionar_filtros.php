@@ -129,7 +129,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="<?php echo site_url('Coordinador/index');?>"</a>
+                <a href="<?php echo site_url('Coordinador/index');?>">hola</a>
             </li>
             <li class="breadcrumb-item">Gestionar Filtros</li>
         </ol>
@@ -143,7 +143,8 @@
             <option value="3">WILLIAN</option>
         </select>
 
-            <div class="col">
+        <div class="row">
+            <div class="col-md-1">
                 <div class="radio">
                     <label class="radio">
                         <input type="checkbox" class="option-input custom-checkbox" name="indefinido" value="Indefinida"/>
@@ -152,6 +153,9 @@
                 </div>
 
             </div>
+<input class="col-md-2" type="text">
+        </div>
+
             <div class="col">
                 <div class="radio">
                     <label class="radio">

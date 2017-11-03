@@ -47,13 +47,15 @@ class Filtros extends CI_Controller
             'idProyecto' => $this->input->get('idProyecto'),
         );
 
-      /*  echo '<p> idUsuario' . $data['idusuario'] . '</p>';
-        echo '<p>pst'  . $data['cant_pst']. '</p>';
-        echo '<p>pm10'  .$data['cant_pm10']. '</p>';
-        echo '<p>pm25'  .$data['cant_pm25']. '</p>';
-        echo '<p>PRO'  .$data['idProyecto']. '</p>';
-      */
       $this->LoteFiltro_model->nuevo($data);
     }
+
+    public function irPesarFiltros()
+    {
+        $this->load->view('layout/header');
+        $this->load->view('');
+        $this->load->view('layout/footer');
+    }
+
 
 }

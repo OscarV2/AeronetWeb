@@ -89,4 +89,10 @@ class Coordinador extends CI_Controller
         $this->load->view('layout/footer');
     }
 
+    public function vistaActividadExitosa()
+    {
+        $this->load->view('layout/header');
+        $this->load->view('success_message');
+        $this->load->view('layout/footer');
+    }
 }

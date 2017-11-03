@@ -36,12 +36,12 @@
 
             <div class="form-group">
             <label for=""></label>
-            <select id="exampleFormControlInput1" name="lote" class="custom-select form-control">
+            <select id="exampleFormControlInput1" name="id" class="custom-select form-control" required>
                 <option selected disabled>Seleccionar Lote de Filtros</option>
                 <?php
                 foreach ($lotes->result() as $lote)
                 {
-                    echo '<option value="'. $lote->id . '">' . $lote->mes . '</option>';
+                    echo '<option value="'. $lote->id . '">' . $lote->mes . $lote->id.'</option>';
                 }
                 ?>
             </select>
@@ -65,5 +65,4 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
-
 

@@ -65,15 +65,16 @@ class Filtros extends CI_Controller
 
         $filtros = array(
 
-            'cant_PST'   => $this->Filtro_model->getCantFiltrosPSTPesados($idLote),
-            'cant_PM10'  => $this->Filtro_model->getCantFiltrosPM10Pesados($idLote),
-            'cant_PM25'  => $this->Filtro_model->getCantFiltrosPM25Pesados($idLote),
+            'cant_pst'   => $this->Filtro_model->getCantFiltrosPSTPesados($idLote),
+            'cant_pm10'  => $this->Filtro_model->getCantFiltrosPM10Pesados($idLote),
+            'cant_pm25'  => $this->Filtro_model->getCantFiltrosPM25Pesados($idLote),
             'cant_Total' => $this->Filtro_model->getTotalPesados($idLote)
         );
 
         $this->load->view('layout/header');
         $this->load->view('vista_laboratorio', $filtros);
         $this->load->view('layout/footer');
+
     }
 
 }

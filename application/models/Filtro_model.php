@@ -36,8 +36,8 @@ class Filtro_model extends CI_Model
 
         $this->db->where('lotefiltros_id', $idLote);
         $this->db->where('tipo', 'PM10');
-        $this->db->where('pesado IS', null);
-        return $this->db->count_all_results();
+    //    $this->db->where('pesado IS', null);
+        return $this->db->count_all_results('filtros');
     }
 
     public function getCantFiltrosPSTPesados($idLote)
@@ -46,8 +46,8 @@ class Filtro_model extends CI_Model
 
         $this->db->where('lotefiltros_id', $idLote);
         $this->db->where('tipo', 'PST');
-        $this->db->where('pesado IS', null);
-        return $this->db->count_all_results();
+       // $this->db->where('pesado IS', null);
+        return $this->db->count_all_results('filtros');
     }
 
     public function getCantFiltrosPM25Pesados($idLote)
@@ -56,14 +56,14 @@ class Filtro_model extends CI_Model
 
         $this->db->where('lotefiltros_id', $idLote);
         $this->db->where('tipo', 'PM25');
-        $this->db->where('pesado IS', null);
-        return $this->db->count_all_results();
+    //    $this->db->where('pesado IS', null);
+        return $this->db->count_all_results('filtros');
     }
 
     public function getTotalPesados($idLote)
     {
         $this->db->where('lotefiltros_id', $idLote);
-        $this->db->where('pesado IS NOT', null);
-        return $this->db->count_all_results();
+       // $this->db->where('pesado IS NOT', null);
+        return $this->db->count_all_results('filtros');
     }
 }

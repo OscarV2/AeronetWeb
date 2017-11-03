@@ -14,6 +14,8 @@ class Filtros extends CI_Controller
         parent::__construct();
         $this->load->model('Usuario_model');
         $this->load->model('LoteFiltro_model');
+        $this->load->model('Filtro_model');
+
     }
 
     public function irAsignarFiltros()
@@ -57,5 +59,21 @@ class Filtros extends CI_Controller
         $this->load->view('layout/footer');
     }
 
+    public function irLoteFiltros()
+    {
+        $idLote = $this->input->post('id');
+
+        $filtros = array(
+
+            'cant_PST'   => $this->Filtro_model->getCantFiltrosPSTPesados($idLote),
+            'cant_PM10'  => $this->Filtro_model->getCantFiltrosPM10Pesados($idLote),
+            'cant_PM25'  => $this->Filtro_model->getCantFiltrosPM25Pesados($idLote),
+            'cant_Total' => $this->Filtro_model->getTotalPesados($idLote)
+        );
+
+        $this->load->view('layout/header');
+        $this->load->view('vista_laboratorio', $filtros);
+        $this->load->view('layout/footer');
+    }
 
 }

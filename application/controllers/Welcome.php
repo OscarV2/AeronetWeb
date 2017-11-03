@@ -32,7 +32,6 @@ class Welcome extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Proyecto_model');
-
     }
 
     public function login(){
@@ -41,8 +40,13 @@ class Welcome extends CI_Controller {
         $rol = $this->input->post('rol');
 
         if ($rol == 'laboratorista'){
+
+            $this->load->model('LoteFiltro_model');
+            $lotes =array(
+                'lotes' => $this->LoteFiltro_model->getLoteUsuario(2)
+            );
             $this->load->view('layout/header');
-            $this->load->view('vista_laboratorio');
+            $this->load->view('menu_laboratorio', $lotes);
             $this->load->view('layout/footer');
         }elseif ($rol == 'analista'){
 

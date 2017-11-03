@@ -18,4 +18,11 @@ class LoteFiltro_model extends CI_Controller
     {
         $this->db->insert('lotefiltros', $data);
     }
+
+    public function getLoteUsuario($id)
+    {
+        $this->db->select('mes, id');
+        $this->db->where('idusuario', $id);
+        return $this->db->get('lotefiltros');
+    }
 }

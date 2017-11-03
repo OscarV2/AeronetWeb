@@ -30,4 +30,40 @@ class Filtro_model extends CI_Model
         $this->db->update('filtros',$data);
     }
 
+    public function getCantFiltrosPM10Pesados($idLote)
+    {
+        //$this->db->select('mes, id');
+
+        $this->db->where('lotefiltros_id', $idLote);
+        $this->db->where('tipo', 'PM10');
+        $this->db->where('pesado IS', null);
+        return $this->db->count_all_results();
+    }
+
+    public function getCantFiltrosPSTPesados($idLote)
+    {
+        //$this->db->select('mes, id');
+
+        $this->db->where('lotefiltros_id', $idLote);
+        $this->db->where('tipo', 'PST');
+        $this->db->where('pesado IS', null);
+        return $this->db->count_all_results();
+    }
+
+    public function getCantFiltrosPM25Pesados($idLote)
+    {
+        //$this->db->select('mes, id');
+
+        $this->db->where('lotefiltros_id', $idLote);
+        $this->db->where('tipo', 'PM25');
+        $this->db->where('pesado IS', null);
+        return $this->db->count_all_results();
+    }
+
+    public function getTotalPesados($idLote)
+    {
+        $this->db->where('lotefiltros_id', $idLote);
+        $this->db->where('pesado IS NOT', null);
+        return $this->db->count_all_results();
+    }
 }

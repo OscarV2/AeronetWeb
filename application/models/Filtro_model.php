@@ -11,7 +11,6 @@ class Filtro_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        $this->load->database();
     }
 
     public function getFiltrosPorUsuario($key)
@@ -32,12 +31,14 @@ class Filtro_model extends CI_Model
 
     public function getCantFiltrosPM10Pesados($idLote)
     {
-        //$this->db->select('mes, id');
+        //$this->db->select();
 
         $this->db->where('lotefiltros_id', $idLote);
         $this->db->where('tipo', 'PM10');
     //    $this->db->where('pesado IS', null);
-        return $this->db->count_all_results('filtros');
+        return $this->db->get('filtros');
+
+        // return $this->db->count_all_results('filtros');
     }
 
     public function getCantFiltrosPSTPesados($idLote)

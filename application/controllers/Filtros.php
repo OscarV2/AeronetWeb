@@ -12,9 +12,8 @@ class Filtros extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Usuario_model');
-        $this->load->model('LoteFiltro_model');
         $this->load->model('Filtro_model');
+        $this->load->model('LoteFiltro_model');
 
     }
 
@@ -23,19 +22,6 @@ class Filtros extends CI_Controller
         $this->load->view('layout/header');
         $this->load->view('coordinador/asignar_filtros');
         $this->load->view('layout/footer');
-    }
-
-    public function irGestionarFiltros()
-    {
-        $data = array(
-            'usuarios' => $this->Usuario_model->getUsuariosLaboratorio(),
-            'idProyecto' => $this->input->get('id')
-    );
-
-        $this->load->view('layout/header');
-        $this->load->view('coordinador/gestionar_filtros', $data);
-        $this->load->view('layout/footer');
-
     }
 
     public function nuevoLote(){
@@ -62,6 +48,7 @@ class Filtros extends CI_Controller
     public function irLoteFiltros()
     {
         $idLote = $this->input->post('id');
+        echo '<h2>'. $idLote .'</h2>';
 
         $filtros = array(
 
@@ -76,5 +63,4 @@ class Filtros extends CI_Controller
         $this->load->view('layout/footer');
 
     }
-
 }

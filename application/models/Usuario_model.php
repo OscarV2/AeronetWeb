@@ -11,7 +11,6 @@ class Usuario_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        $this->load->database();
     }
 
     public function guardarNuevosUsuario($data)
@@ -24,5 +23,10 @@ class Usuario_model extends CI_Model
         $this->db->select('nombre, idusuarios');
         $this->db->where('rol', 'laboratorista');
         return $this->db->get('usuarios');
+    }
+
+    public function existeUsuario($usuario, $password)
+    {
+
     }
 }

@@ -19,4 +19,10 @@ class Usuario_model extends CI_Model
         $this->db->insert('usuarios',$data);
     }
 
+    public function getUsuariosLaboratorio()
+    {
+        $this->db->select('nombre, idusuarios');
+        $this->db->where('rol', 'laboratorista');
+        return $this->db->get('usuarios');
+    }
 }

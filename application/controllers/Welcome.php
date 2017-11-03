@@ -51,14 +51,7 @@ class Welcome extends CI_Controller {
             $proyectos = array(
                 'proyectos' => $this->Proyecto_model->obtenerTodosProyectos()
             );
-           /* foreach ($proyectos->result() as $row)
-            {
-                echo $row->nombre;
-                echo $row->duracion;
-                echo $row->fechaInicio;
-            }
 
-            */
             $this->load->view('layout/header');
             $this->load->view('coordinador/vista_coordinador', $proyectos);
             $this->load->view('layout/footer');

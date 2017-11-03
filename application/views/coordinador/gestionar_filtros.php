@@ -134,47 +134,58 @@
             <li class="breadcrumb-item">Gestionar Filtros</li>
         </ol>
 
-
+        <h3>Nuevo Lote de filtros</h3>
+        <form action="<?php echo site_url('Filtros/nuevoLote') . '?idProyecto=' . $idProyecto;?>" method="post">
         <!-- Formulario  Gestionar filtros -->
-        <select class="custom-select">
-            <option selected>Seleccionar Usuario</option>
-            <option value="1">JANNER</option>
-            <option value="2">OSCAR</option>
-            <option value="3">WILLIAN</option>
-        </select>
-
-        <div class="row">
-            <div class="col-md-1">
-                <div class="radio">
-                    <label class="radio">
-                        <input type="checkbox" class="option-input custom-checkbox" name="indefinido" value="Indefinida"/>
-                        PST
-                    </label>
+            <div class="form-inline">
+                <div class="form-group">
+                    <select name="lab" class="custom-select">
+                        <option selected disabled>Seleccionar Laboratorio</option>
+                        <?php
+                        foreach ($usuarios->result() as $usuario)
+                        {
+                            echo '<option value="'. $usuario->idusuarios . '">' . $usuario->nombre . '</option>';
+                        }
+                        ?>
+                    </select>
                 </div>
-
-            </div>
-<input class="col-md-2" type="text">
-        </div>
-
-            <div class="col">
-                <div class="radio">
-                    <label class="radio">
-                        <input type="checkbox" class="option-input custom-checkbox" name="indefinido" value="Indefinida"/>
-                        PM10
-                    </label>
+                <div class="form-group mx-sm-3">
+                    <select name="mes" class="custom-select">
+                        <option selected disabled>Seleccionar mes</option>
+                        <option>Enero</option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                    </select>
                 </div>
-
-            </div>
-            <div class="col">
-            <div class="radio">
-                <label class="radio">
-                    <input type="checkbox" class="option-input custom-checkbox" name="indefinido" value="Indefinida"/>
-                    PM2.5
-                </label>
+                <div class="form-group">
+                    <input type="number" name="year" min="2017" max="2020" class="form-control" id="exampleFormControlInput1" placeholder="Año">
+                </div>
             </div>
 
-        </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">PST</label>
+                <input type="number" name="cant_pst" min="0" max="50" class="form-control" id="exampleFormControlInput1" placeholder="max 50 Filtros">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput2">PM10</label>
+                <input type="number" name="cant_pm10" min="0" max="50" class="form-control" id="exampleFormControlInput2" placeholder="max 50 Filtros">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput3">PM2.5</label>
+                <input type="number" name="cant_pm25" min="0" max="50" class="form-control" id="exampleFormControlInput3" placeholder="max 50 Filtros">
+            </div>
 
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
 
     </div>
     <!-- /.container-fluid-->

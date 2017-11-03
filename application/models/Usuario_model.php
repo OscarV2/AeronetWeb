@@ -25,6 +25,13 @@ class Usuario_model extends CI_Model
         return $this->db->get('usuarios');
     }
 
+    public function getUsuariosCampo()
+    {
+        $this->db->select('nombre, idusuarios');
+        $this->db->where('rol', 'campo');
+        return $this->db->get('usuarios');
+    }
+
     public function existeUsuario($usuario, $password)
     {
 

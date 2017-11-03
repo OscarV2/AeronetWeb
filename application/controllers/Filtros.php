@@ -8,13 +8,25 @@
 
 class Filtros extends CI_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
         $this->load->model('Filtro_model');
         $this->load->model('LoteFiltro_model');
 
+    }
+
+    public function irPesarFiltros()
+    {
+        $data = array(
+            'idLote' => $this->input->get('idLote'),
+            'tipo' => $this->input->get('tipo'),
+            'consecutivo' => $this->input->get('consecutivo')
+        );
+
+        $this->load->view('layout/header');
+        $this->load->view('vista_pesar_filtros', $data);
+        $this->load->view('layout/footer');
     }
 
     public function irAsignarFiltros()
@@ -38,29 +50,52 @@ class Filtros extends CI_Controller
       $this->LoteFiltro_model->nuevo($data);
     }
 
-    public function irPesarFiltros()
-    {
-        $this->load->view('layout/header');
-        $this->load->view('');
-        $this->load->view('layout/footer');
-    }
-
     public function irLoteFiltros()
     {
         $idLote = $this->input->post('id');
-        echo '<h2>'. $idLote .'</h2>';
 
         $filtros = array(
 
             'cant_pst'   => $this->Filtro_model->getCantFiltrosPSTPesados($idLote),
             'cant_pm10'  => $this->Filtro_model->getCantFiltrosPM10Pesados($idLote),
             'cant_pm25'  => $this->Filtro_model->getCantFiltrosPM25Pesados($idLote),
-            'cant_Total' => $this->Filtro_model->getTotalPesados($idLote)
+            'cant_Total' => $this->Filtro_model->getTotalPesados($idLote),
+            'idLote' => $idLote
         );
 
         $this->load->view('layout/header');
         $this->load->view('vista_laboratorio', $filtros);
         $this->load->view('layout/footer');
 
+    }
+
+    public function guardarFiltros()
+    {
+        $idLote = $this->input->get('idLote');
+        $tipo = $this->input->get('tipo');
+        $codigos = $this->input->post('codigoNuevoFiltro[]');
+        $pesos = $this->input->post('pesoNuevoFiltro[]');
+        $fechas = $this->input->post('fechaNuevoFiltro[]');
+    //    echo '<h3>'. var_dump($codigos).'</h3>';
+    //    echo '<h3>'. var_dump($pesos).'</h3>';
+    //    echo '<h3>'. var_dump($fechas).'</h3>';
+
+        $data = array();
+        //llenar array con filtros (array of arrays)
+        for ($i = 0; $i < sizeof($codigos); $i++){
+            $data[$i] = array(
+                'identificador' => $codigos[$i],
+                'pesado' => $fechas[0],
+                'pesoInicial' => $pesos[$i],
+                'tipo' => $tipo,
+                'lotefiltros_id' => $idLote
+            );
+        }
+
+        /*
+        foreach ($data as $datos){
+echo '<h3>'. var_dump($datos).'</h3>';
+        }*/
+        $this->Filtro_model->guardarNuevosFiltros($data);
     }
 }

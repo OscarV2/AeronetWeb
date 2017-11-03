@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pesar Filtros</title>
-
-    <!-- Bootstrap core CSS-->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom fonts for this template-->
-    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- Page level plugin CSS-->
-    <link href="../vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-    <!-- Custom styles for this template-->
-    <link href="../css/sb-admin.css" rel="stylesheet">
-</head>
 <body class="fixed-nav">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
@@ -53,38 +38,46 @@
             <li class="breadcrumb-item active">Cerro Largo / Pesar Filtros</li>
         </ol>
 
-        <section id="form_nuevo_cliente">
-        <h3 class="page-title">Nuevo Filtro</h3>
+        <form action="<?php echo site_url('Filtros/guardarFiltros')  . "?idLote=" .$idLote . "&tipo=" . $tipo;?>" method="post">
+            <h3 class="page-title">Nuevo Filtro</h3>
+            <section id="form_nuevo_filtros" class="form-row">
 
-            <div class="row">
                 <div class="col-md-3">
                     <div class="form-group label-floating">
                         <label class="control-label">Codigo:</label>
-                        <input type="text" name="codigoNuevoFiltro[]" required class="form-control">
+                        <input type="text"
+                               name="codigoNuevoFiltro[]"
+                               required class="form-control"
+                               readonly
+                               value="<?php echo strtoupper($tipo) .'-'. date('dmY'). '-' . $consecutivo?>">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group label-floating">
                         <label class="control-label">Peso (ug):</label>
-                        <input type="text" name="pesoNuevoFiltro[]" required  class="form-control">
+                        <input type="text" name="pesoNuevoFiltro[]"  class="form-control">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group label-floating">
                         <label class="control-label">Fecha:</label>
-                        <input type="number" name="fechaNuevoFiltro[]"  required class="form-control">
+                        <input type="text"
+                               name="fechaNuevoFiltro[]"
+                               required class="form-control"
+                               readonly
+                               value="<?php echo date('d-m-Y');?>">
                     </div>
                 </div>
                 <div class="demo-button">
                     <button id="btn_add_nuevo" type="button" class="btn btn-primary btn-lg"><i class="fa fa-plus-square"></i>  Agregar Filtro</button>
                 </div>
-            </div>
 
         </section>
+            <div class="demo-button">
+                <button id="btn_guardar_filtros" type="submit" class="btn btn-primary btn-lg">  Guardar</button>
+            </div>
+        </form>
 
-        <div class="demo-button">
-            <button id="btn_guardar_filtros" type="button" class="btn btn-primary btn-lg">  Guardar</button>
-        </div>
 
     </div>
     <!-- /.container-fluid-->
@@ -100,23 +93,28 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
-         <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="../vendor/chart.js/Chart.min.js"></script>
-    <script src="../vendor/datatables/jquery.dataTables.js"></script>
-    <script src="../vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="../js/sb-admin-datatables.min.js"></script>
 
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery-easing/jquery.easing.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.js')?>"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="<?php echo base_url('assets/js/sb-admin.min.js')?>"></script>
+    <!-- Custom scripts for this page-->
+    <script src="<?php echo base_url('assets/js/sb-admin-datatables.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
     <script>
 
-        var clientes = 0;
+       var clientes = 0;
+        var fecha = getFecha();
+        var consecutivo = parseInt(<?php echo $consecutivo?>);
+        var tipo = <?php echo json_encode(strtoupper($tipo)) ;?> ;
         $(document).ready(function () {
            setNuevoFiltro();
         });
@@ -127,55 +125,50 @@
                 e.preventDefault();
                 if (clientes < 10) {
                     clientes++;
-                    $("#form_nuevo_cliente").append('<div class="row">' +
+                    consecutivo++;
+
+                    $("#form_nuevo_filtros").append(
                         '<div class="col-md-3">' +
                         '<div class="form-group label-floating">' +
                         '<label class="control-label">Codigo:</label>' +
-                        '<input type="text" name="codigoNuevoFiltro[]" class="form-control">' +
+                        '<input id="txtCodigoNuevoFiltro" type="text" name="codigoNuevoFiltro[]" class="form-control" readonly value="'+ tipo + "-" + fecha + "-" + consecutivo + '">' +
                         '</div>' +
                         '</div>' +
                         '<div class="col-md-3">' +
                         '<div class="form-group label-floating">' +
-                        '<label class="control-label">Peso:</label>' +
-                        '<input type="text" name="pesoNuevoFiltro[]" class="form-control">' +
+                        '<label class="control-label">Peso(ug):</label>' +
+                        '<input type="number" name="pesoNuevoFiltro[]" class="form-control" min="0" max="100">' +
                         '</div>' +
                         '</div>' +
                         '<div class="col-md-3">' +
                         '<div class="form-group label-floating">' +
                         '<label class="control-label">Fecha:</label>' +
-                        '<input type="text" name="FechaNuevoFiltro[]" class="form-control">' +
+                        '<input type="text" name="FechaNuevoFiltro[]" class="form-control" readonly value="'+fecha+'">' +
                         '</div>' +
                         '</div>' +
-                        '<br>' +
-                        '<button class="remove_field btn btn-primary">Eliminar</button></p></div>'
+                        '<button class="remove_field btn btn-primary">Eliminar</button>'
                     );
+
+                    console.log('numero de inputs con el name codigonuevofiltro: ' + $("input[id=txtCodigoNuevoFiltro]").length);
                 }
             });
-            $("#form_nuevo_cliente").on("click", ".remove_field", function (e) { //user click on remove text
+            $("#form_nuevo_filtros").on("click", ".remove_field", function (e) { //user click on remove text
                 e.preventDefault();
+                console.log('holllalala');
                 $(this).parent('div').remove();
                 clientes--;
+                consecutivo--;
             });
+        }
+        
+        function getFecha() {
+            var today = new Date();
+            var dia = today.getDate();
+            var mes = today.getMonth()+1; //Enero es 0!
+            var year = today.getFullYear();
+             return dia + "/" + mes + "/" + year;
         }
 
     </script>
-
     <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Seguro quieres salir?</h5>
-                </div>
-                <div class="modal-body">Haz click en "Cerrar" si estas seguro de terminar con la sesion actual.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="login.html">Cerrar</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</body>
 
-</html>

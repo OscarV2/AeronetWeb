@@ -11,6 +11,7 @@ class Filtro_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+        $this->load->database();
     }
 
     public function getFiltrosPorUsuario($key)
@@ -18,9 +19,17 @@ class Filtro_model extends CI_Model
         return $this->db->get_where('filtros',array('usuarios_idusuarios' => $key));
     }
 
+    public function getFiltrosPorLote($key)
+    {
+        return $this->db->get_where('filtros',array('lotefiltros_id' => $key));
+    }
+
     public function guardarNuevosFiltros($data)
     {
-        $this->db->insert('filtros',$data);
+        foreach ($data as $datos){
+            $this->db->insert('filtros',$datos);
+
+        }
     }
 
     public function actualizarFiltros($id ,$data)
@@ -31,40 +40,33 @@ class Filtro_model extends CI_Model
 
     public function getCantFiltrosPM10Pesados($idLote)
     {
-        //$this->db->select();
-
         $this->db->where('lotefiltros_id', $idLote);
         $this->db->where('tipo', 'PM10');
-    //    $this->db->where('pesado IS', null);
-        return $this->db->get('filtros');
+        $this->db->where('pesado', NULL);
 
-        // return $this->db->count_all_results('filtros');
+         return $this->db->count_all_results('filtros');
     }
 
     public function getCantFiltrosPSTPesados($idLote)
     {
-        //$this->db->select('mes, id');
-
         $this->db->where('lotefiltros_id', $idLote);
         $this->db->where('tipo', 'PST');
-       // $this->db->where('pesado IS', null);
+        $this->db->where('pesado', NULL);
         return $this->db->count_all_results('filtros');
     }
 
     public function getCantFiltrosPM25Pesados($idLote)
     {
-        //$this->db->select('mes, id');
-
         $this->db->where('lotefiltros_id', $idLote);
         $this->db->where('tipo', 'PM25');
-    //    $this->db->where('pesado IS', null);
+        $this->db->where('pesado', NULL);
         return $this->db->count_all_results('filtros');
     }
 
     public function getTotalPesados($idLote)
     {
         $this->db->where('lotefiltros_id', $idLote);
-       // $this->db->where('pesado IS NOT', null);
+        $this->db->where('pesado', !NULL);
         return $this->db->count_all_results('filtros');
     }
 }

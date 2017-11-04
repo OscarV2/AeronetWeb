@@ -167,26 +167,29 @@
 
             <h4>Rol</h4>
             <div class="col">
-                <div class="radio">
-                    <label class="radio">
-                        <input type="radio" class="option-input radio" name="example" checked />
+
+                    <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                        <input type="radio" class="custom-control-input" name="example" checked value="laboratorista"/>
                         Laboratorista
+                        <span class="custom-control-indicator"></span>
                     </label>
-                </div>
-                <div class="radio">
-                <label class="radio">
-                    <input type="radio" class="option-input radio" name="example" />
+
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio" class="custom-control-input" name="example" value=""/>
                     Campo
-                </label></div>
-                    <div class="radio">
-                <label class="radio">
-                    <input type="radio" class="option-input radio" name="example" />
+                    <span class="custom-control-indicator"></span>
+                </label>
+
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio" class="custom-control-input" name="example" value=""/>
                     Analista de datos
-                </label></div>
+                    <span class="custom-control-indicator"></span>
+                </label>
+
             </div>
 
             <div class="col-md-12 col-md-offset-5">
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalNuevoUsuario">Guardar</button>
+                <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalNuevoUsuario">Guardar</button>
             </div>
         </div>
     </div>

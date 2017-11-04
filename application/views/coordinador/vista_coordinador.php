@@ -159,9 +159,9 @@
   'Opciones' .
  '</button>' .
 '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' .
- '<a class="dropdown-item" href="'.  site_url('Usuarios/irGestionarFiltros')  . "?id=" .$proyecto->idProyecto . '" >Gestionar Filtros</a>' .
-  '<a class="dropdown-item" href="'.  site_url('Filtros/irAsignarFiltros')  . "?id=" .$proyecto->idProyecto . '">Asignar Filtros</a>' .
-  '  <a class="dropdown-item" href="'.  site_url('Estaciones/irAsignarEstaciones')  . "?id=" .$proyecto->idProyecto . '">Asignar Estaciones</a>' .
+ '<a class="dropdown-item" href="'.  site_url('Usuarios/irGestionarFiltros')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'" >Gestionar Filtros</a>' .
+  '<a class="dropdown-item" href="'.  site_url('Filtros/irAsignarFiltros')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Asignar Filtros</a>' .
+  '  <a class="dropdown-item" href="'.  site_url('Estaciones/irAsignarEstaciones')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Asignar Estaciones</a>' .
  ' </div>' .
 '</div></td>' .
                                     '</tr>';

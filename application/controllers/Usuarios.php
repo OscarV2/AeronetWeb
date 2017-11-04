@@ -14,6 +14,20 @@ class Usuarios extends CI_Controller
         $this->load->model('Usuario_model');
     }
 
+    public function nuevoUsuario()
+    {
+
+        $usuario = array(
+            'rol' => $this->input->post('rol'),
+            'correo' => $this->input->post('correo'),
+            'nombre' => $this->input->post('nombre'),
+            'apellidos' => $this->input->post('apellidos'),
+            'telefono' => $this->input->post('telefono'),
+            'password' => $this->input->post('password')
+    );
+
+        $this->Usuario_model->guardarNuevosUsuario($usuario);
+    }
     public function irGestionarFiltros()
     {
         $data = array(

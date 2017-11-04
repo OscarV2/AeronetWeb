@@ -24,10 +24,24 @@ class Estacion_model extends CI_Model
         $this->db->insert('estacion',$data);
     }
 
+    public function getEstacionSinProyecto()
+    {
+        $this->db->where('proyectos_idProyecto', NULL);
+        return $this->db->get('estacion');
+    }
+
+
     public function asignarEstacion($data, $id)
     {
+        $idProyecto = array(
+            'proyectos_idProyecto' => $id
+        );
 
-        $this->db->where('id', $id);
-        $this->db->update('estacion',$data);
+        foreach ($data as $estacion){
+            //se busca la estacion a asignar por el id
+            $this->db->where('idestacion', $estacion);
+            $this->db->update('estacion',$idProyecto);
+        }
+
     }
 }

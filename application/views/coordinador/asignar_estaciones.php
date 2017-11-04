@@ -129,13 +129,51 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="<?php echo site_url('Coordinador/index');?>"</a>
+                <a href="<?php echo site_url('Coordinador/index');?>"></a>
             </li>
             <li class="breadcrumb-item">Asignar Estaciones</li>
         </ol>
-        <div class="row">
 
-        </div>
+        <h3>Asignar estaciones a <?php echo $nombre;?></h3>
+
+        <form action="<?php echo site_url('Estaciones/gestionarEstaciones'). "?idProyecto=" . $idProyecto ;?>" method="post">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Estaciones sin asignar
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Estacion</th>
+                                <th>Agregar</th>
+                            </tr>
+                            <?php
+                            foreach ($estaciones->result() as $estacion){
+                                echo
+                                '<tr>'.
+                                '<td>'. $estacion->nombre.'</td>' .
+                                '<td><label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">' .
+                                '<input name="estacion[]" value="'. $estacion->idestacion. '" type="checkbox" class="custom-control-input">'.
+                                '<span class="custom-control-indicator"></span>'.
+                                '</label></td>' .
+                            '</tr>';
+                            }
+                            ?>
+                            <tr>
+                                <td>Estacion</td>
+                                <td>Agregar</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block"><strong>Guardar</strong></button>
+        </form>
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->

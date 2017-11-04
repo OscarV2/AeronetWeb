@@ -134,63 +134,73 @@
         </ol>
         <div class="row">
 
-            <div class="col-md-3">
-                <div class="form-group label-floating">
-                    <label class="control-label">Nombres</label>
-                    <input type="text" name="codigoNuevoFiltro[]" required class="form-control">
+            <form class="form-control"
+                  style="margin-left: 10px; margin-right: 10px"
+                  action="<?php echo site_url('Usuarios/nuevoUsuario');?>"
+                  method="post">
+
+<div class="form-row">
+    <div class="col">
+        <div class="form-group label-floating">
+            <label class="control-label">Nombres</label>
+            <input type="text" name="nombre" required class="form-control">
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-group label-floating">
+            <label class="control-label">Apellidos</label>
+            <input type="text" name="apellidos" required class="form-control">
+        </div>
+    </div>
+</div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Cedula</label>
+                            <input type="number" name="password" required  class="form-control">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Correo</label>
+                            <input type="email" name="correo"  required class="form-control">
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group label-floating">
-                    <label class="control-label">Apellidos</label>
-                    <input type="text" name="codigoNuevoFiltro[]" required class="form-control">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group label-floating">
-                    <label class="control-label">Cedula</label>
-                    <input type="text" name="pesoNuevoFiltro[]" required  class="form-control">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group label-floating">
-                    <label class="control-label">Correo</label>
-                    <input type="number" name="fechaNuevoFiltro[]"  required class="form-control">
-                </div>
-            </div>
+
             <div class="col-md-3">
                 <div class="form-group label-floating">
                     <label class="control-label">Telefono</label>
-                    <input type="text" name="codigoNuevoFiltro[]" required class="form-control">
+                    <input type="number" name="telefono" class="form-control">
                 </div>
             </div>
 
             <h4>Rol</h4>
             <div class="col">
 
-                    <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                        <input type="radio" class="custom-control-input" name="example" checked value="laboratorista"/>
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                        <input type="radio" class="custom-control-input" name="rol" checked value="laboratorista"/>
                         Laboratorista
                         <span class="custom-control-indicator"></span>
                     </label>
 
                 <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                    <input type="radio" class="custom-control-input" name="example" value=""/>
+                    <input type="radio" class="custom-control-input" name="rol" value="campo"/>
                     Campo
                     <span class="custom-control-indicator"></span>
                 </label>
 
                 <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                    <input type="radio" class="custom-control-input" name="example" value=""/>
+                    <input type="radio" class="custom-control-input" name="rol" value="analista"/>
                     Analista de datos
                     <span class="custom-control-indicator"></span>
                 </label>
 
             </div>
+                <button style="margin-top: 15px;" type="submit" class="btn btn-primary btn-lg">Guardar</button>
 
-            <div class="col-md-12 col-md-offset-5">
-                <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalNuevoUsuario">Guardar</button>
-            </div>
+            </form>
         </div>
     </div>
     <!-- /.container-fluid-->

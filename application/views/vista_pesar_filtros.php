@@ -37,47 +37,46 @@
             </li>
             <li class="breadcrumb-item active">Cerro Largo / Pesar Filtros</li>
         </ol>
+        <h3 class="page-title">Nuevo Filtro</h3>
 
-        <form action="<?php echo site_url('Filtros/guardarFiltros')  . "?idLote=" .$idLote . "&tipo=" . $tipo;?>" method="post">
-            <h3 class="page-title">Nuevo Filtro</h3>
-            <section id="form_nuevo_filtros" class="form-row">
+        <form id="form_nuevo_filtros"
+              action="<?php echo site_url('Filtros/guardarFiltros')  . "?idLote=" .$idLote . "&tipo=" . $tipo;?>"
+              method="post"
+              >
 
-                <div class="col-md-3">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Codigo:</label>
-                        <input type="text"
-                               name="codigoNuevoFiltro[]"
-                               required class="form-control"
-                               readonly
-                               value="<?php echo strtoupper($tipo) .'-'. date('dmY'). '-' . $consecutivo?>">
-                    </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                <label class="control-label">Codigo:</label>
+                <input type="text"
+                       name="codigoNuevoFiltro[]"
+                       required class="form-control"
+                       readonly
+                       value="<?php echo strtoupper($tipo) .'-'. date('dmY'). '-' . $consecutivo?>">
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Peso (ug):</label>
-                        <input type="text" name="pesoNuevoFiltro[]"  class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Fecha:</label>
-                        <input type="text"
-                               name="fechaNuevoFiltro[]"
-                               required class="form-control"
-                               readonly
-                               value="<?php echo date('d-m-Y');?>">
-                    </div>
-                </div>
-                <div class="demo-button">
-                    <button id="btn_add_nuevo" type="button" class="btn btn-primary btn-lg"><i class="fa fa-plus-square"></i>  Agregar Filtro</button>
+                <div class="form-group col-md-3">
+                <label class="control-label">Peso (ug):</label>
+                <input type="text" name="pesoNuevoFiltro[]"  class="form-control">
                 </div>
 
-        </section>
-            <div class="demo-button">
-                <button id="btn_guardar_filtros" type="submit" class="btn btn-primary btn-lg">  Guardar</button>
+                <div class="form-group col-md-3">
+                <label class="control-label">Fecha:</label>
+                <input type="text"
+                       name="fechaNuevoFiltro[]"
+                       required class="form-control"
+                       readonly
+                       value="<?php echo date('d-m-Y');?>">
+                </div>
+                <div class="demo-button btn">
+                    <button id="btn_add_nuevo" type="button" class="btn btn-primary btn-lg"><i class="fa fa-plus-square"></i>  </button>
+                </div>
+                <div class="demo-button btn">
+                    <button id="btn_eliminar"  type="button" class="remove_field btn btn-primary btn-lg"><i class="fa fa-minus-circle"></i>  </button>
+                </div>
             </div>
         </form>
-
+        <div class="btn btn-primary col">
+            <button id="btn_guardar_filtros" type="submit" class="btn btn-primary btn-lg">  Guardar</button>
+        </div>
 
     </div>
     <!-- /.container-fluid-->
@@ -128,37 +127,41 @@
                     consecutivo++;
 
                     $("#form_nuevo_filtros").append(
-                        '<div class="col-md-3">' +
-                        '<div class="form-group label-floating">' +
+                        '<div class="form-row"><div class="form-group col-md-3">' +
                         '<label class="control-label">Codigo:</label>' +
                         '<input id="txtCodigoNuevoFiltro" type="text" name="codigoNuevoFiltro[]" class="form-control" readonly value="'+ tipo + "-" + fecha + "-" + consecutivo + '">' +
                         '</div>' +
-                        '</div>' +
-                        '<div class="col-md-3">' +
-                        '<div class="form-group label-floating">' +
+                        '<div class="form-group col-md-3">' +
                         '<label class="control-label">Peso(ug):</label>' +
                         '<input type="number" name="pesoNuevoFiltro[]" class="form-control" min="0" max="100">' +
                         '</div>' +
-                        '</div>' +
-                        '<div class="col-md-3">' +
-                        '<div class="form-group label-floating">' +
+                        '<div class="form-group col-md-3">' +
                         '<label class="control-label">Fecha:</label>' +
                         '<input type="text" name="FechaNuevoFiltro[]" class="form-control" readonly value="'+fecha+'">' +
                         '</div>' +
-                        '</div>' +
-                        '<button class="remove_field btn btn-primary">Eliminar</button>'
+                        '</div>'
                     );
-
-                    console.log('numero de inputs con el name codigonuevofiltro: ' + $("input[id=txtCodigoNuevoFiltro]").length);
                 }
+
             });
             $("#form_nuevo_filtros").on("click", ".remove_field", function (e) { //user click on remove text
                 e.preventDefault();
                 console.log('holllalala');
-                $(this).parent('div').remove();
+
+                var filtros = $(".form-row");
+                if (filtros.length > 1){
+                    filtros.get(filtros.length -1).remove();
+                }
+
+                //$(".form-row").append('<h1>holaaaa</h1>');
+
                 clientes--;
                 consecutivo--;
             });
+            
+            function removeFiltro() {
+
+            }
         }
         
         function getFecha() {

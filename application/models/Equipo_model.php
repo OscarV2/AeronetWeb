@@ -29,4 +29,30 @@ class Equipo_model extends CI_Model
         $this->db->insert('equipos',$data);
     }
 
+    public function getEquiposPorProyecto($key)
+    {
+
+        $estaciones = $this->db->get_where('estacion',array('proyectos_idProyecto' => $key));
+        // recuperar equipos de las estaciones del proyecto
+        $data = array();
+        foreach ($estaciones->result() as $estacion){
+
+            $this->db->select('codigo, clase, idequipo, descripcion');
+            $this->db->where('estacion_idestacion' , $estacion->idestacion);
+            $query = $this->db->get('equipos');
+            foreach ($query->result() as $equipo){
+                array_push($data, array(
+                    'estacion' => $estacion->nombre,
+                    'codigo' => $equipo->codigo,
+                    'id' => $equipo->idequipo,
+                    'descripcion' => $equipo->descripcion
+                ));
+            }
+
+        }
+
+
+        return $data;
+    }
+
 }

@@ -15,27 +15,26 @@
 
                 <h5>Rol</h5>
                 <div class="col">
-                <div class="radio">
-                    <label class="radio">
-                        <input type="radio" class="option-input radio" name="rol" checked value="laboratorista"/>
-                        Laboratorista
+                    <label class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="rol" checked value="laboratorista"/>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Laboratorista</span>
                     </label>
-                </div>
-                <div class="radio">
-                    <label class="radio">
-                        <input type="radio" class="option-input radio" name="rol" value="coordinador"/>
-                        Coordinador
-                    </label></div>
-                <div class="radio">
-                    <label class="radio">
-                        <input type="radio" class="option-input radio" name="rol" value="analista"/>
-                        Analista de datos
-                    </label></div>
+
+                    <label class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="rol" value="coordinador"/>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Coordinador</span>
+                    </label>
+
+                    <label class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="rol" value="analista"/>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Analista de datos</span>
+                    </label>
             </div>
                 <button type="submit" class="btn btn-primary btn-block" href="index.html">Entrar</button>
             </form>
-            <div class="text-center">
-            </div>
         </div>
     </div>
 </div>

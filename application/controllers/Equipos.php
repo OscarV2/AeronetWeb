@@ -13,7 +13,7 @@ class Equipos extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Equipo_model');
-        $this->load->helper('form');
+        $this->load->model('Filtro_model');
     }
 
     //Asignar equipos
@@ -21,5 +21,29 @@ class Equipos extends CI_Controller
     {
 
         echo 'success';
+    }
+
+    public function irAsignarFiltros()
+    {
+
+        $id = $this->input->get('id');
+        //echo '<h1>'.$id.'</h1>';
+
+        $idLote = $this->input->post('idLote');
+        $data = array(
+           'equipos' => $this->Equipo_model->getEquiposPorProyecto($id),
+            'filtros' => $this->Filtro_model->getFiltrosPorLote($idLote)
+        );
+
+        $this->load->view('layout/header');
+        $this->load->view('coordinador/asignar_filtros', $data);
+        $this->load->view('layout/footer');
+
+    }
+
+    public function asignarFiltros(){
+
+
+
     }
 }

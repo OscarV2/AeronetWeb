@@ -15,4 +15,19 @@ class LoteFiltros extends CI_Controller
         $this->load->model('LoteFiltro_model');
     }
 
+    public function irMenuLotes()
+    {
+        $id = $this->input->get('id');
+
+        $data = array(
+           'lotes' =>  $this->LoteFiltro_model->getLotesProyecto($id),
+           'idProyecto' => $id
+        );
+
+        $this->load->view('layout/header');
+        $this->load->view('coordinador/vista_lotes', $data);
+        $this->load->view('layout/footer');
+
+    }
+
 }

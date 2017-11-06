@@ -129,14 +129,29 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="<?php echo site_url('Coordinador/index');?>"</a>
+                <a href="<?php echo site_url('Coordinador/index');?>"></a>
             </li>
             <li class="breadcrumb-item">Asignar Filtros</li>
         </ol>
         <div class="row">
-            <form>
-                <!--Cargar equipos de estaciones asignadas -->
-                <button type="submit" class="btn btn-primary btn-block"><strong>Guardar</strong></button>
+            <form action="<?php echo site_url('Equipos/irAsignarFiltros'). "?id=". $idProyecto;?>" method="post">
+                <!-- Formulario  Gestionar filtros -->
+
+                <div class="form-group">
+                    <label for=""></label>
+                    <select id="exampleFormControlInput1" name="idLote" class="custom-select form-control" required>
+                        <option selected disabled>Seleccionar Lote de Filtros</option>
+                        <?php
+                        foreach ($lotes->result() as $lote)
+                        {
+                            echo '<option value="'. $lote->id . '">' . $lote->mes.'</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Asignar equipos</button>
+
             </form>
         </div>
     </div>
@@ -153,4 +168,3 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
-

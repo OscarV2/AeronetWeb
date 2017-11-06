@@ -29,13 +29,6 @@ class Filtros extends CI_Controller
         $this->load->view('layout/footer');
     }
 
-    public function irAsignarFiltros()
-    {
-        $this->load->view('layout/header');
-        $this->load->view('coordinador/asignar_filtros');
-        $this->load->view('layout/footer');
-    }
-
     public function nuevoLote(){
         $periodo =  $this->input->post('mes') ."-" .$this->input->post('year');
         $data = array(

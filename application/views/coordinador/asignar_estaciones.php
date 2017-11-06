@@ -158,7 +158,7 @@
                                 '<input name="estacion[]" value="'. $estacion->idestacion. '" type="checkbox" class="custom-control-input">'.
                                 '<span class="custom-control-indicator"></span>'.
                                 '</label></td>' .
-                            '</tr>';
+                                '</tr>';
                             }
                             ?>
                             <tr>

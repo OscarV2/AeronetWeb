@@ -31,13 +31,12 @@ class Equipo_model extends CI_Model
 
     public function getEquiposPorProyecto($key)
     {
-
         $estaciones = $this->db->get_where('estacion',array('proyectos_idProyecto' => $key));
         // recuperar equipos de las estaciones del proyecto
         $data = array();
         foreach ($estaciones->result() as $estacion){
 
-            $this->db->select('codigo, clase, idequipo, descripcion');
+            $this->db->select('codigo, clase, idequipo, descripcion, ocupado');
             $this->db->where('estacion_idestacion' , $estacion->idestacion);
             $query = $this->db->get('equipos');
             foreach ($query->result() as $equipo){
@@ -45,14 +44,34 @@ class Equipo_model extends CI_Model
                     'estacion' => $estacion->nombre,
                     'codigo' => $equipo->codigo,
                     'id' => $equipo->idequipo,
-                    'descripcion' => $equipo->descripcion
+                    'clase' => $equipo->clase,
+                    'descripcion' => $equipo->descripcion,
+                    'ocupado' => $equipo->ocupado
                 ));
             }
-
         }
-
-
         return $data;
     }
 
+    public function ocuparEquipo($id)
+    {
+        // al asignar se un filtro el estado ocupado
+        // cambia a TRUE
+        $data = array('ocupado' => 1);
+        $this->db->where('idequipo', $id);
+        $this->db->update('equipos', $data);
+    }
+
+    public function getEquiposDesocupados($key)
+    {
+        $equiposProyecto = $this->getEquiposPorProyecto($key);
+        $data = array();
+        foreach ($equiposProyecto as $item) {
+            if ($item['ocupado'] == 0){
+                array_push($data, $item);
+            }
+        }
+
+        return $data;
+    }
 }

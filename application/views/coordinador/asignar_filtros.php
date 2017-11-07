@@ -129,13 +129,50 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="<?php echo site_url('Coordinador/index');?>"</a>
+                <a href="<?php echo site_url('Coordinador/index');?>"></a>
             </li>
             <li class="breadcrumb-item">Asignar Filtros</li>
         </ol>
         <div class="row">
-            <form>
+            <form method="post" action="">
                 <!--Cargar equipos de estaciones asignadas -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Estacion</th>
+                                <th>Equipo</th>
+                                <th>Clase</th>
+                                <th>Descripcion</th>
+                                <th>Filtro</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            foreach ($equipos as $equipo){
+                                echo
+                                    '<tr>'.
+                                    '<td>'. $equipo['estacion'].'</td>' .
+                                    '<td>'. $equipo['codigo'] .
+                                    '<input name="idEquipos[]" hidden value="'.$equipo['id'].'"></td>' .
+                                    '<td>'. $equipo['clase'] .'</td>' .
+                                    '<td>'. $equipo['descripcion'] .'</td>' ;
+
+                                echo '<td><select name="idFiltros[]">';
+
+                                foreach ($filtros as $filtro){
+
+                                    echo '<option>'. $filtro->identificador.'</option>';
+                                }
+                                echo '</select></td></tr>';
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--Cargar filtros de lote seleccionado -->
                 <button type="submit" class="btn btn-primary btn-block"><strong>Guardar</strong></button>
             </form>
         </div>
@@ -154,3 +191,62 @@
         <i class="fa fa-angle-up"></i>
     </a>
 
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery-easing/jquery.easing.min.js')?>"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.js')?>"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="<?php echo base_url('assets/js/sb-admin.min.js')?>"></script>
+    <!-- Custom scripts for this page-->
+    <script src="<?php echo base_url('assets/js/sb-admin-datatables.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
+
+    <!-- -->
+    <script>
+
+        $('form').on('submit', function (e) {
+
+            var values = [];
+            $("select[name='idFiltros[]']").each(function() {
+
+                values.push($(this).val());
+            });
+            console.log("array se repiten:" + checkIfArrayIsUnique(values));
+            if (!checkIfArrayIsUnique(values)){
+                alert('ADVERTENCIA: Solo puede asignar un filtro por equipo');
+            }else{
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo site_url('EquipoFiltro/asignarEquipos');?>" ,
+                    data: $('form').serialize(),
+                    success: function (data) {
+                        console.log(data) ;
+                        if (data === 'success'){
+                            // mostrar modal
+                            alert('Filtros Asignados exitosamente');
+                        }
+                    }
+                });
+            }
+            e.preventDefault();
+
+        });
+
+        function checkIfArrayIsUnique(myArray) {
+            return myArray.length === new Set(myArray).size;
+        }
+
+    </script>
+</div>
+</body>
+
+</html>

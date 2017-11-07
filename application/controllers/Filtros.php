@@ -62,6 +62,7 @@ class Filtros extends CI_Controller
 
     }
 
+
     public function guardarFiltros()
     {
         $idLote = $this->input->get('idLote');
@@ -69,9 +70,6 @@ class Filtros extends CI_Controller
         $codigos = $this->input->post('codigoNuevoFiltro[]');
         $pesos = $this->input->post('pesoNuevoFiltro[]');
         $fechas = $this->input->post('fechaNuevoFiltro[]');
-    //    echo '<h3>'. var_dump($codigos).'</h3>';
-    //    echo '<h3>'. var_dump($pesos).'</h3>';
-    //    echo '<h3>'. var_dump($fechas).'</h3>';
 
         $data = array();
         //llenar array con filtros (array of arrays)
@@ -85,10 +83,6 @@ class Filtros extends CI_Controller
             );
         }
 
-        /*
-        foreach ($data as $datos){
-echo '<h3>'. var_dump($datos).'</h3>';
-        }*/
         $this->Filtro_model->guardarNuevosFiltros($data);
     }
 }

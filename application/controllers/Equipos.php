@@ -16,12 +16,7 @@ class Equipos extends CI_Controller
         $this->load->model('Filtro_model');
     }
 
-    //Asignar equipos
-    public function asignarEquipos()
-    {
 
-        echo 'success';
-    }
 
     public function irAsignarFiltros()
     {
@@ -31,13 +26,14 @@ class Equipos extends CI_Controller
 
         $idLote = $this->input->post('idLote');
         $data = array(
-           'equipos' => $this->Equipo_model->getEquiposPorProyecto($id),
-            'filtros' => $this->Filtro_model->getFiltrosPorLote($idLote)
+           'equipos' => $this->Equipo_model->getEquiposDesocupados($id),
+           'filtros' => ($this->Filtro_model->getFiltrosSinAsignar($idLote))->result()
         );
+
+        //echo var_dump($data['filtros']);
 
         $this->load->view('layout/header');
         $this->load->view('coordinador/asignar_filtros', $data);
-        $this->load->view('layout/footer');
 
     }
 

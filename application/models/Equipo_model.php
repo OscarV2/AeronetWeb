@@ -73,7 +73,7 @@ class Equipo_model extends CI_Model
             $this->db->select('codigo, clase, idequipo, descripcion, ocupado');
             $query = $this->db->get_where('equipos',array(
                 'estacion_idestacion' => $estacion->idestacion,
-                'ocuado' => 1
+                'ocupado' => 1
             ) );
             foreach ($query->result() as $equipo){
 
@@ -89,20 +89,13 @@ class Equipo_model extends CI_Model
                     'clase' => $equipo->clase,
                     'descripcion' => $equipo->descripcion,
                     'ocupado' => $equipo->ocupado,
-                    'filtro' => $filtros->result()
+                    'filtro' => $filtros->result()[0]
                 ));
-                /*
-                array_push($data, array(
-                    'estacion' => $estacion->nombre,
-                    'codigo' => $equipo->codigo,
-                    'id' => $equipo->idequipo,
-                    'clase' => $equipo->clase,
-                    'descripcion' => $equipo->descripcion,
-                    'ocupado' => $equipo->ocupado
-                ));
-                */
+
             }
         }
+
+        return $data;
     }
 
     public function getEquiposDesocupados($key)

@@ -16,8 +16,6 @@ class Equipos extends CI_Controller
         $this->load->model('Filtro_model');
     }
 
-
-
     public function irAsignarFiltros()
     {
 
@@ -37,9 +35,19 @@ class Equipos extends CI_Controller
 
     }
 
-    public function asignarFiltros(){
+    public function verFiltrosAsignados()
+    {
+        $idProyecto = $this->input->get('id');
+        $equipos = $this->Equipo_model->getEquiposFiltrosAsignados($idProyecto);
 
+        $data = array(
+          'equipos' => $equipos
+        );
 
+        $this->load->view('layout/header');
+        $this->load->view('coordinador/verEquipoConFiltroAsig', $data);
+        $this->load->view('layout/footer');
 
+        //echo var_dump($equipos);
     }
 }

@@ -133,46 +133,42 @@
             </li>
         </ol>
         <div class="row">
-
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fa fa-table"></i> Filtros pesados
-                </div>
+                <!--Cargar equipos de estaciones asignadas -->
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Duracion</th>
-                                <th>Fecha de Inicio</th>
-                                <th>Menu</th>
+                                <th>Estacion</th>
+                                <th>Equipo</th>
+                                <th>Clase</th>
+                                <th>Descripcion</th>
+                                <th>Filtro</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($proyectos->result() as $proyecto) {
-                                echo '<tr><td>' .$proyecto->nombre . '</td>' .
-                                    '<td>'. $proyecto->duracion . '</td>' .
-                                    '<td>'. $proyecto->fechaInicio . '</td>' .
-                                    '<td><div class="dropdown">' .
- ' <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
-  'Opciones' .
- '</button>' .
-'<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' .
- '<a class="dropdown-item" href="'. site_url('Usuarios/irGestionarFiltros')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'" >Gestionar Filtros</a>' .
- '<a class="dropdown-item" href="'. site_url('LoteFiltros/irMenuLotes')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Asignar Filtros</a>' .
- '<a class="dropdown-item" href="'. site_url('Estaciones/irAsignarEstaciones')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Asignar Estaciones</a>' .
- '<a class="dropdown-item" href="'. site_url('Equipos/verFiltrosAsignados')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Ver Equipos</a>' .
+                            <?php
+                            if ($equipos != NULL){
+                                foreach ($equipos as $equipo){
+                                    echo
+                                        '<tr>'.
+                                        '<td>'. $equipo['estacion'].'</td>' .
+                                        '<td>'. $equipo['codigo'] .
+                                        '<input name="idEquipos[]" hidden value="'.$equipo['id'].'"></td>' .
+                                        '<td>'. $equipo['clase'] .'</td>' .
+                                        '<td>'. $equipo['descripcion'] .'</td>' .
+                                        '<td>'. $equipo['filtro']->identificador .'</td></tr>';
+                                }
 
-                                    ' </div>' .
-'</div></td>' .
-                                    '</tr>';
-                            } ?>
+                            }else {
+                                echo '<h2>EL PROYECTO NO CUENTA CON FILTROS ASIGNADOS A EQUIPOS</h2>';
+                            }
+                            ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
-            </div>
+                <!--Cargar filtros de lote seleccionado -->
         </div>
     </div>
     <!-- /.container-fluid-->

@@ -6,7 +6,7 @@
  * Time: 07:25 AM
  */
 
-class Calibrador extends CI_Model
+class Calibrador_model extends CI_Model
 {
     public function __construct()
     {
@@ -16,7 +16,7 @@ class Calibrador extends CI_Model
 
     public function getCalibradores()
     {
-        return $this->db->get('calibrador');
+        return $this->db->get('CalibradorModel');
     }
 
 

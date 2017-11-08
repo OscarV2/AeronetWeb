@@ -28,4 +28,20 @@ class Proyecto extends CI_Controller
         $this->load->view('coordinador/detalles_proyecto');
         $this->load->view('layout/footer');
     }
+
+    public function culminarProyecto()
+    {
+        //Al culminar el proyecto sus estaciones
+        //quedaran disponibles para asignarse a otro proyecto
+        $id = $this->input->get('id');
+        $fecha = $this->input->post('fecha');
+
+        $data = array(
+            'fechafin' => $fecha,
+            'estado' => 'culminado'
+        );
+
+        $this->Proyecto_model->culminarProyecto($id, $data);
+        echo '<h1>success</h1>';
+    }
 }

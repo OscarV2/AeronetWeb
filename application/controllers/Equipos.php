@@ -50,4 +50,17 @@ class Equipos extends CI_Controller
 
         //echo var_dump($equipos);
     }
+
+    public function verEquiposPM10()
+    {
+        $tipo = $this->input->get('tipo');
+
+        $data = array(
+            'equipos' => $this->Equipo_model->getEquiposPorTipo($tipo),
+            'tipo' => $tipo
+        );
+
+        $this->load->view('layout/header');
+        $this->load->view('coordinador/equipos', $data);
+    }
 }

@@ -110,4 +110,9 @@ class Equipo_model extends CI_Model
 
         return $data;
     }
+
+    public function getEquiposPorTipo($tipo)
+    {
+        return $this->db->get_where('equipos',array('variable' => $tipo));
+    }
 }

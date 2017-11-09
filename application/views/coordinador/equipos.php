@@ -34,13 +34,14 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
                     <li>
-                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pm10" ;?>">PM10</a>
+                        <a href="../navbar.html">PM10</a>
                     </li>
                     <li>
-                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pst" ;?>"">PST</a>
+                        <a href="../cards.html">PST</a>
+
                     </li>
                     <li>
-                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pm2.5" ;?>"">PM2.5</a>
+                        <a href="../cards.html">PM2.5</a>
                     </li>
                 </ul>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Estaciones">
@@ -49,6 +50,7 @@
                     <span class="nav-link-text">Estaciones</span>
                 </a>
             </li>
+
             </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
@@ -131,41 +133,33 @@
             </li>
         </ol>
         <div class="row">
-
             <div class="card mb-3" style="margin-left: 10px;">
                 <div class="card-header">
-                    <i class="fa fa-table"></i> <strong>Proyectos Creados</strong>
+                    <i class="fa fa-table"></i> <strong>Equipos <?php echo $tipo;?></strong>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Duracion</th>
-                                <th>Fecha de Inicio</th>
-                                <th>Menu</th>
+                                <th>Codigo</th>
+                                <th>Modelo</th>
+                                <th>Clase</th>
+                                <th>Estacion</th>
+
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($proyectos->result() as $proyecto) {
-                                echo '<tr><td>' .$proyecto->nombre . '</td>' .
-                                    '<td>'. $proyecto->duracion . '</td>' .
-                                    '<td>'. $proyecto->fechaInicio . '</td>' .
-                                    '<td><div class="dropdown">' .
- ' <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
-  'Opciones' .
- '</button>' .
-'<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' .
- '<a class="dropdown-item" href="'. site_url('Usuarios/irGestionarFiltros')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'" >Gestionar Filtros</a>' .
- '<a class="dropdown-item" href="'. site_url('LoteFiltros/irMenuLotes')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Asignar Filtros</a>' .
- '<a class="dropdown-item" href="'. site_url('Estaciones/irAsignarEstaciones')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Asignar Estaciones</a>' .
- '<a class="dropdown-item" href="'. site_url('Equipos/verFiltrosAsignados')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Ver Equipos</a>' .
-
-                                    ' </div>' .
-'</div></td>' .
-                                    '</tr>';
-                            } ?>
+                            <?php
+                            foreach ($equipos->result() as $equipo){
+                                echo
+                                    '<tr>'.
+                                    '<td>'. $equipo->localizacion.'</td>' .
+                                    '<td>'. $equipo->codigo .
+                                    '<td>'. $equipo->clase .'</td>' .
+                                    '<td>'. $equipo->descripcion .'</td></tr>';
+                            }
+                            ?>
                             </tbody>
                         </table>
                     </div>
@@ -186,3 +180,4 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
+

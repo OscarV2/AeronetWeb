@@ -134,9 +134,9 @@
         </ol>
         <div class="row">
 
-            <div class="card mb-3">
+            <div class="card mb-3" style="margin-left: 10px;">
                 <div class="card-header">
-                    <i class="fa fa-table"></i> Filtros pesados
+                    <i class="fa fa-table"></i> <strong>Proyectos Creados</strong>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

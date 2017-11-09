@@ -22,12 +22,7 @@ class LoteFiltro_model extends CI_Model
 
     public function getLotesProyecto($id)
     {
-        return $this->db->get('lotefiltros');
-        /*
-        $this->db->select('mes, id');
-        $this->db->where('idProyecto', $id);
-        return $this->db->get('lotefiltros');
-        */
+        return $this->db->get_where('lotefiltros', array('idProyecto' => $id));
     }
     public function getLoteUsuario($id)
     {

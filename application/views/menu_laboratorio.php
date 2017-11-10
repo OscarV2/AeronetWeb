@@ -10,18 +10,6 @@
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item">
-                <form class="form-inline my-2 my-lg-0 mr-lg-2">
-                    <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Buscar Filtro...">
-                        <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-                    </div>
-                </form>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
                     <i class="fa fa-fw fa-sign-out"></i>Cerrar Sesion</a>
             </li>
@@ -31,7 +19,7 @@
 <div>
     <div class="container-fluid">
 
-        <form method="post">
+        <form action="<?php echo site_url('Filtros/irLoteFiltros');?>" method="post">
             <!-- Formulario  Gestionar filtros -->
 
             <div class="form-group">
@@ -53,7 +41,7 @@
 
             </div>
 
-            <button type="submit" class="btn btn-primary">Ver Lote</button>
+            <button id="btnVerLotes" type="submit" class="btn btn-primary">Ver Lote</button>
 
         </form>
 
@@ -91,28 +79,19 @@
     </div>
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
-    <?php echo site_url('EquipoFiltro/asignarEquipos');?>
     <script>
 
-        $('form').on('submit', function (e) {
+        $(document).ready(function () {
+           var lotes = <?php echo json_encode($lotes->result());?>;
 
-            console.log("el valor del select es" + $("#selectLote").val());
-            if ($("#selectLote").val() === null){
-                alert('ADVERTENCIA: No tiene Lotes disponibles');
-            }else{
+           if (lotes === null){
+               $("#btnVerLotes").hide();
 
-                alert('holaaaa');
-
-                $.ajax({
-                    type: 'post',
-                    url: "<?php echo site_url('Filtros/irLoteFiltros');?>" ,
-                    data: $('form').serialize()
-                });
-            }
-            e.preventDefault();
-
+               console.log("nuloooooooooo");
+           }else {
+               console.log("puede seguir");
+           }
         });
-
     </script>
 
     <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>

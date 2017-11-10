@@ -21,7 +21,7 @@ class Filtros extends CI_Controller
         $data = array(
             'idLote' => $this->input->get('idLote'),
             'tipo' => $this->input->get('tipo'),
-            'consecutivo' => $this->input->get('consecutivo')
+            'consecutivo' => $this->input->get('consecutivo') +1
         );
 
         $this->load->view('layout/header');

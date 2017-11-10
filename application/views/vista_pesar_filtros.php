@@ -31,52 +31,55 @@
 <div>
     <div class="container-fluid">
         <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
+        <ol  class="breadcrumb" style="margin-top: 10px;">
             <li class="breadcrumb-item">
-                <a href="#">Proyecto</a>
+                <a href="">Pesar Filtros</a>
             </li>
-            <li class="breadcrumb-item active">Cerro Largo / Pesar Filtros</li>
+            <li class="breadcrumb-item active"></li>
         </ol>
         <h3 class="page-title">Nuevo Filtro</h3>
 
-        <form id="form_nuevo_filtros"
-              action="<?php echo site_url('Filtros/guardarFiltros')  . "?idLote=" .$idLote . "&tipo=" . $tipo;?>"
+        <form action="<?php echo site_url('Filtros/guardarFiltros')  . "?idLote=" .$idLote . "&tipo=" . $tipo;?>"
               method="post"
               >
 
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                <label class="control-label">Codigo:</label>
-                <input type="text"
-                       name="codigoNuevoFiltro[]"
-                       required class="form-control"
-                       readonly
-                       value="<?php echo strtoupper($tipo) .'-'. date('dmY'). '-' . $consecutivo?>">
-                </div>
-                <div class="form-group col-md-3">
-                <label class="control-label">Peso (ug):</label>
-                <input type="text" name="pesoNuevoFiltro[]"  class="form-control">
-                </div>
+            <section id="form_nuevo_filtros">
+                <div  class="form-row">
+                    <div class="form-group col-md-3">
+                        <label class="control-label">Codigo:</label>
+                        <input type="text"
+                               name="codigoNuevoFiltro[]"
+                               required class="form-control"
+                               readonly
+                               value="<?php echo strtoupper($tipo) .'-'. date('dmY'). '-' . $consecutivo;?>">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="control-label">Peso (ug):</label>
+                        <input type="text" name="pesoNuevoFiltro[]"  class="form-control" required>
+                    </div>
 
-                <div class="form-group col-md-3">
-                <label class="control-label">Fecha:</label>
-                <input type="text"
-                       name="fechaNuevoFiltro[]"
-                       required class="form-control"
-                       readonly
-                       value="<?php echo date('d-m-Y');?>">
+                    <div class="form-group col-md-3">
+                        <label class="control-label">Fecha:</label>
+                        <input type="text"
+                               name="fechaNuevoFiltro[]"
+                               required class="form-control"
+                               readonly
+                               value="<?php echo date('d-m-Y');?>">
+                    </div>
+                    <div class="demo-button btn">
+                        <button id="btn_add_nuevo" type="button" class="btn btn-primary btn-lg"><i class="fa fa-plus-square"></i>  </button>
+                    </div>
+                    <div class="demo-button btn">
+                        <button id="btn_eliminar"  type="button" class="remove_field btn btn-primary btn-lg"><i class="fa fa-minus-circle"></i>  </button>
+                    </div>
                 </div>
-                <div class="demo-button btn">
-                    <button id="btn_add_nuevo" type="button" class="btn btn-primary btn-lg"><i class="fa fa-plus-square"></i>  </button>
-                </div>
-                <div class="demo-button btn">
-                    <button id="btn_eliminar"  type="button" class="remove_field btn btn-primary btn-lg"><i class="fa fa-minus-circle"></i>  </button>
-                </div>
+            </section>
+
+            <div class="btn btn-primary col">
+                <button id="btn_guardar_filtros" type="submit" class="btn btn-primary btn-lg">  Guardar</button>
             </div>
         </form>
-        <div class="btn btn-primary col">
-            <button id="btn_guardar_filtros" type="submit" class="btn btn-primary btn-lg">  Guardar</button>
-        </div>
+
 
     </div>
     <!-- /.container-fluid-->
@@ -133,7 +136,7 @@
                         '</div>' +
                         '<div class="form-group col-md-3">' +
                         '<label class="control-label">Peso(ug):</label>' +
-                        '<input type="number" name="pesoNuevoFiltro[]" class="form-control" min="0" max="100">' +
+                        '<input type="number" name="pesoNuevoFiltro[]" class="form-control" min="0" max="100" required>' +
                         '</div>' +
                         '<div class="form-group col-md-3">' +
                         '<label class="control-label">Fecha:</label>' +

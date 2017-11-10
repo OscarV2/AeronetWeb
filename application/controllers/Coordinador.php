@@ -70,17 +70,16 @@ class Coordinador extends CI_Controller
         $nombre = $this->input->post("nombre");
         $duracion = $this->input->post("duracion");
         $indefinido = $this->input->post("indefinido");
-
+        $descripcion =  $this->input->post("descripcion");
+        $fechaInicio = $this->input->post("fecha_inicio");
         if ($indefinido == "Indefinida"){
             $duracion = "Indefinida";
-        }
-        else{
-            $fechaInicio = $this->input->post("fecha_inicio");
         }
 
         $proyecto = array('nombre' => $nombre,
             'duracion' =>$duracion,
-            'fechaInicio' =>$fechaInicio);
+            'fechaInicio' => $fechaInicio,
+            'descripcion' => $descripcion);
         $this->Proyecto_model->guardarProyecto($proyecto);
 
         $this->load->view('layout/header');

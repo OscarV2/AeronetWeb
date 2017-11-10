@@ -132,43 +132,39 @@
             </li>
             <li class="breadcrumb-item">Nuevo Proyecto</li>
         </ol>
-        <div class="row">
 
+            <form action="<?php echo site_url('Coordinador/crearProyecto');?>" >
 
-            <?= form_open('/Coordinador/crearProyecto', array('class' => 'form-control')); ?>
-            <div class="col-md-3">
-                <div class="form-group label-floating">
-                    <label class="control-label">Nombre del proyecto</label>
+                <div class="form-group">
+                    <label>Nombre del proyecto</label>
                     <input type="text" name="nombre" required class="form-control">
                 </div>
-            </div>
-            <div class="col-md-3">
                 <div class="form-group label-floating">
                     <label class="control-label">Duracion (meses)</label>
                     <input type="number" name="duracion" class="form-control">
                 </div>
-            </div>
-            <div class="col-md-3">
+                <div class="col">
+                    <div class="radio">
+                        <label class="radio">
+                            <input type="checkbox" class="option-input custom-checkbox" name="indefinido" value="Indefinida"/>
+                            Indefinido
+                        </label>
+                    </div>
+
+                </div>
                 <div class="form-group label-floating">
                     <label class="control-label">Fecha de inicio</label>
                     <input type="date" name="fecha_inicio" required class="form-control">
                 </div>
-            </div>
 
-            <div class="col">
-                <div class="radio">
-                    <label class="radio">
-                        <input type="checkbox" class="option-input custom-checkbox" name="indefinido" value="Indefinida"/>
-                        Indefinido
-                    </label>
+            <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Descripción</label>
+                    <textarea name="descripcion" class="form-control" required id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
-
-            </div>
             <div class="col-md-12 col-md-offset-5">
                 <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
             </div>
             </form>
-        </div>
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->

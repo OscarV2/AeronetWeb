@@ -53,6 +53,8 @@ class Filtros extends CI_Controller
             'cant_pm10'  => $this->Filtro_model->getCantFiltrosPM10Pesados($idLote),
             'cant_pm25'  => $this->Filtro_model->getCantFiltrosPM25Pesados($idLote),
             'cant_Total' => $this->Filtro_model->getTotalPesados($idLote),
+            'filtrosPesados' => $this->Filtro_model->getFiltrosPorLote($idLote),
+
             'idLote' => $idLote
         );
 
@@ -61,7 +63,6 @@ class Filtros extends CI_Controller
         $this->load->view('layout/footer');
 
     }
-
 
     public function guardarFiltros()
     {

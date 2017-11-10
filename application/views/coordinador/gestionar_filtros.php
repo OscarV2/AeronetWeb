@@ -129,7 +129,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="<?php echo site_url('Coordinador/index');?>">hola</a>
+                <a href="<?php echo site_url('Coordinador/index');?>">Proyectos</a>
             </li>
             <li class="breadcrumb-item">Gestionar Filtros</li>
         </ol>

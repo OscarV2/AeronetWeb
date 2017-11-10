@@ -31,20 +31,26 @@
 <div>
     <div class="container-fluid">
 
-        <form action="<?php echo site_url('Filtros/irLoteFiltros');?>" method="post">
+        <form method="post">
             <!-- Formulario  Gestionar filtros -->
 
             <div class="form-group">
-            <label for=""></label>
-            <select id="exampleFormControlInput1" name="id" class="custom-select form-control" required>
-                <option selected disabled>Seleccionar Lote de Filtros</option>
+            <label for="selectLote">Seleccionar Lote de Filtros</label>
+            <select id="selectLote" name="id" class="custom-select form-control" required>
                 <?php
                 foreach ($lotes->result() as $lote)
                 {
-                    echo '<option value="'. $lote->id . '">' . $lote->mes . $lote->id.'</option>';
+                    echo '<option value="'. $lote->id . '">' . $lote->mes.'</option>';
                 }
                 ?>
             </select>
+                <?php
+                if ($lotes == NULL){
+
+                    echo '<h2>No tiene lotes disponibles</h2>';
+                }
+                ?>
+
             </div>
 
             <button type="submit" class="btn btn-primary">Ver Lote</button>
@@ -65,4 +71,67 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Seguro quieres salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Haz click en "Cerrar" si estas seguro de terminar con la sesion actual.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="login.html">Cerrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
+    <?php echo site_url('EquipoFiltro/asignarEquipos');?>
+    <script>
+
+        $('form').on('submit', function (e) {
+
+            console.log("el valor del select es" + $("#selectLote").val());
+            if ($("#selectLote").val() === null){
+                alert('ADVERTENCIA: No tiene Lotes disponibles');
+            }else{
+
+                alert('holaaaa');
+
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo site_url('Filtros/irLoteFiltros');?>" ,
+                    data: $('form').serialize()
+                });
+            }
+            e.preventDefault();
+
+        });
+
+    </script>
+
+    <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery-easing/jquery.easing.min.js')?>"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.js')?>"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="<?php echo base_url('assets/js/sb-admin.min.js')?>"></script>
+    <!-- Custom scripts for this page-->
+    <script src="<?php echo base_url('assets/js/sb-admin-datatables.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
+</div>
+</body>
+
+</html>
 

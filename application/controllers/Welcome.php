@@ -47,7 +47,6 @@ class Welcome extends CI_Controller {
             );
             $this->load->view('layout/header');
             $this->load->view('menu_laboratorio', $lotes);
-            $this->load->view('layout/footer');
         }elseif ($rol == 'analista'){
 
         }else {

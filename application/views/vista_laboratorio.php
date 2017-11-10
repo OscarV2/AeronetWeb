@@ -95,7 +95,7 @@
                         <span class="float-left"></span>
                         <span class="float-right">
                         <i class="fa"></i>
-              </span>
+                        </span>
                     </a>
                 </div>
             </div>
@@ -117,67 +117,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>PM10-10082015-001</td>
-                            <td>PM10</td>
-                            <td>12</td>
-                            <td>2012/08/06</td>
-                        </tr>
-                        <tr>
-                            <td>PM10-10082015-002</td>
-                            <td>PM10</td>
-                            <td>13</td>
-                            <td>2010/10/14</td>
-                        </tr>
-                        <tr>
-                            <td>PM10-10082015-003</td>
-                            <td>PM10</td>
-                            <td>45</td>
-                            <td>2009/09/15</td>
-                        </tr>
-                        <tr>
-                            <td>PM10-10082015-004</td>
-                            <td>PM10</td>
-                            <td>32</td>
-                            <td>2008/12/13</td>
-                        </tr>
-                        <tr>
-                            <td>PM10-10082015-005</td>
-                            <td>PM10</td>
-                            <td>23</td>
-                            <td>2008/12/19</td>
-
-                        </tr>
-                        <tr>
-                            <td>PM10-10082015-006</td>
-                            <td>PM10</td>
-                            <td>12</td>
-                            <td>2013/03/03</td>
-                        </tr>
-                        <tr>
-                            <td>PM10-10082015-007</td>
-                            <td>PM10</td>
-                            <td>21</td>
-                            <td>2008/10/16</td>
-                        </tr>
-                        <tr>
-                            <td>PM10-10082015-008</td>
-                            <td>PM10</td>
-                            <td>23</td>
-                            <td>2012/12/18</td>
-                        </tr>
-                        <tr>
-                            <td>PM10-10082015-009</td>
-                            <td>PM10</td>
-                            <td>32</td>
-                            <td>2010/03/17</td>
-                        </tr>
-                        <tr>
-                            <td>PM10-10082015-010</td>
-                            <td>PM10</td>
-                            <td>22</td>
-                            <td>2012/11/27</td>
-                        </tr>
+                        <?php
+                        foreach ($filtrosPesados->result() as $filtro){
+                            echo
+                                '<tr>'.
+                                '<td>'. $filtro->identificador.'</td>' .
+                                '<td>'. $filtro->tipo .
+                                '<td>'. $filtro->pesoInicial .'</td>' .
+                                '<td>'. $filtro->pesado .'</td></tr>';
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -198,5 +147,4 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
-
 

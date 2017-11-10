@@ -130,9 +130,8 @@
                 <a href="<?php echo site_url('Coordinador/index');?>">Proyectos</a>
             </li>
         </ol>
-        <div class="row">
 
-            <div class="card mb-3" style="margin-left: 10px;">
+            <div class="card mb-3">
                 <div class="card-header">
                     <i class="fa fa-table"></i> <strong>Proyectos Creados</strong>
                 </div>
@@ -171,7 +170,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->

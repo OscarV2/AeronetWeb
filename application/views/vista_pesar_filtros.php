@@ -39,7 +39,7 @@
         </ol>
         <h3 class="page-title">Nuevo Filtro</h3>
 
-        <form action="<?php echo site_url('Filtros/guardarFiltros')  . "?idLote=" .$idLote . "&tipo=" . $tipo;?>"
+        <form action=""
               method="post"
               >
 
@@ -161,10 +161,6 @@
                 clientes--;
                 consecutivo--;
             });
-            
-            function removeFiltro() {
-
-            }
         }
         
         function getFecha() {
@@ -175,6 +171,38 @@
              return dia + "/" + mes + "/" + year;
         }
 
+       $('form').on('submit', function (e) {
+           e.preventDefault();
+           $.ajax({
+                   type: 'post',
+                   url: "<?php echo site_url('Filtros/guardarFiltros')  . "?idLote=" .$idLote . "&tipo=" . $tipo;?>" ,
+                   data: $('form').serialize(),
+                   success: function (data) {
+                       console.log(data) ;
+                       if (data === 'success'){
+                           // mostrar modal
+                           alert('Filtros Pesados exitosamente');
+                       }
+                   }
+               });
+
+
+
+       });
+
     </script>
-    <!-- Logout Modal-->
+    <!--Modal Pesados con exito-->
+    <div class="modal fade" id="modalAtras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Filtros pesados exitosamente</h5>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" href="login.html">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 

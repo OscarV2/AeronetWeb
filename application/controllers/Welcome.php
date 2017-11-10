@@ -50,21 +50,18 @@ class Welcome extends CI_Controller {
         }elseif ($rol == 'analista'){
 
         }else {
-           //$proyectos = $this->Proyecto_model->obtenerTodosProyectos();
-            $proyectos = array(
-                'proyectos' => $this->Proyecto_model->obtenerTodosProyectos()
-            );
-
-            $this->load->view('layout/header');
-            $this->load->view('coordinador/vista_coordinador', $proyectos);
-            $this->load->view('layout/footer');
+           $this->irInicio();
             }
     }
 
-    public function irCrearProyecto()
+    public function irInicio()
     {
+        $proyectos = array(
+            'proyectos' => $this->Proyecto_model->obtenerTodosProyectos()
+        );
+
         $this->load->view('layout/header');
-        $this->load->view('coordinador/nuevo_proyecto');
+        $this->load->view('coordinador/vista_coordinador', $proyectos);
         $this->load->view('layout/footer');
     }
 

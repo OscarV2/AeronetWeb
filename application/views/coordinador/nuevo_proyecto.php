@@ -133,7 +133,7 @@
             <li class="breadcrumb-item">Nuevo Proyecto</li>
         </ol>
 
-            <form action="<?php echo site_url('Coordinador/crearProyecto');?>" >
+            <form action="" >
 
                 <div class="form-group">
                     <label>Nombre del proyecto</label>
@@ -143,20 +143,17 @@
                     <label class="control-label">Duracion (meses)</label>
                     <input type="number" name="duracion" class="form-control">
                 </div>
-                <div class="col">
-                    <div class="radio">
-                        <label class="radio">
-                            <input type="checkbox" class="option-input custom-checkbox" name="indefinido" value="Indefinida"/>
-                            Indefinido
-                        </label>
-                    </div>
 
-                </div>
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input name="indefinido" value="Indefinida" type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    Indefinido
+                    </label>
+
                 <div class="form-group label-floating">
                     <label class="control-label">Fecha de inicio</label>
                     <input type="date" name="fecha_inicio" required class="form-control">
                 </div>
-
             <div class="form-group">
                     <label for="exampleFormControlTextarea1">Descripción</label>
                     <textarea name="descripcion" class="form-control" required id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -179,18 +176,80 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="modalNuevoProyecto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="modalAtras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Nuevo Proyecto</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Proyecto creado exitosamente</h5>
                 </div>
-                <div class="modal-body">Se ha creado un nuevo proyecto</div>
                 <div class="modal-footer">
-                    <a class="btn btn-primary" href="#">OK</a>
+                    <a class="btn btn-primary"
+                       href="<?php echo site_url('Welcome/irInicio');?>">Ok</a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Seguro quieres salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Haz click en "Cerrar" si estas seguro de terminar con la sesion actual.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="login.html">Cerrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
+
+    <script>
+
+        $('form').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: "<?php echo site_url('Coordinador/crearProyecto');?>" ,
+                data: $('form').serialize(),
+                success: function (data) {
+                    console.log(data) ;
+                    if (data === 'success'){
+                        // mostrar modal
+                        $('#modalAtras').modal('show');
+                    }else{
+                        alert('Error');
+                    }
+                }
+            });
+        });
+
+    </script>
+
+    <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery-easing/jquery.easing.min.js')?>"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.js')?>"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="<?php echo base_url('assets/js/sb-admin.min.js')?>"></script>
+    <!-- Custom scripts for this page-->
+    <script src="<?php echo base_url('assets/js/sb-admin-datatables.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
+</div>
+</body>
+
+</html>

@@ -29,7 +29,6 @@ class Coordinador extends CI_Controller
     public function irCrearProyecto(){
         $this->load->view('layout/header');
         $this->load->view('coordinador/nuevo_proyecto');
-        $this->load->view('layout/footer');
 
     }
 
@@ -82,9 +81,7 @@ class Coordinador extends CI_Controller
             'descripcion' => $descripcion);
         $this->Proyecto_model->guardarProyecto($proyecto);
 
-        $this->load->view('layout/header');
-        $this->load->view('success_message');
-        $this->load->view('layout/footer');
+        echo 'success';
     }
 
     public function vistaActividadExitosa()

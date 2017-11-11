@@ -131,46 +131,56 @@
             </li>
         </ol>
 
-        <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fa fa-table"></i> <strong>Proyectos Creados</strong>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Duracion</th>
-                                <th>Fecha de Inicio</th>
-                                <th>Menu</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach($proyectos->result() as $proyecto) {
-                                echo '<tr><td>' .$proyecto->nombre . '</td>' .
-                                    '<td>'. $proyecto->duracion . '</td>' .
-                                    '<td>'. $proyecto->fechaInicio . '</td>' .
-                                    '<td><div class="dropdown">' .
- ' <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
-  'Opciones' .
- '</button>' .
-'<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' .
- '<a class="dropdown-item" href="'. site_url('Estaciones/irAsignarEstaciones')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Asignar Estaciones</a>' .
- '<a class="dropdown-item" href="'. site_url('Usuarios/irGestionarFiltros')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'" >Gestionar Filtros</a>' .
- '<a class="dropdown-item" href="'. site_url('LoteFiltros/irMenuLotes')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Asignar Filtros</a>' .
- '<a class="dropdown-item" href="'. site_url('LoteFiltros/irVerLotesProyecto')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Ver Lotes</a>' .
- '<a class="dropdown-item" href="'. site_url('Equipos/verFiltrosAsignados')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Ver Equipos</a>' .
-
-                                    ' </div>' .
-'</div></td>' .
-                                    '</tr>';
-                            } ?>
-                            </tbody>
-                        </table>
-                    </div>
+        <h4>Lotes</h4>
+        <div class="card mb-3" style="margin-left: 10px;">
+            <div class="card-header">
+                <i class="fa fa-table"></i> <strong>Lotes <?php echo $nombre;?></strong>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Mes y año</th>
+                            <th>Cantidad de filtros PST</th>
+                            <th>Cantidad de filtros PM10</th>
+                            <th>Cantidad de filtros PM2.5</th>
+                            <th>Filtros pesados PST</th>
+                            <th>Filtros pesados PM10</th>
+                            <th>Filtros pesados PM2.5</th>
+                            <th>Filtros instalados PST</th>
+                            <th>Filtros instalados PM10</th>
+                            <th>Filtros instalados PM2.5</th>
+                            <th>Muestras recogidas PST</th>
+                            <th>Muestras recogidas PM10</th>
+                            <th>Muestras recogidas PM2.5</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($lotes->result() as $lote){
+                            echo
+                                '<tr>'.
+                                '<td>'. $lote->mes.'</td>' .
+                                '<td>'. $lote->cant_pst .
+                                '<td>'. $lote->cant_pm10 .'</td>' .
+                                '<td>'. $lote->cant_pm25.'</td>' .
+                                '<td>'. $lote->pesadospst.
+                                '<td>'. $lote->pesadospm10 .'</td>' .
+                                '<td>'. $lote->pesadospm25.'</td>' .
+                                '<td>'. $lote->instaladospst.
+                                '<td>'. $lote->instaladospm10 .'</td>' .
+                                '<td>'. $lote->instaladospm25.'</td>' .
+                                '<td>'. $lote->recogidospst.'</td>' .
+                                '<td>'. $lote->recogidospm10 .'</td>' .
+                                '<td>'. $lote->recogidospm25 .'</td></tr>';
+                        }
+                        ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
 
     </div>
     <!-- /.container-fluid-->

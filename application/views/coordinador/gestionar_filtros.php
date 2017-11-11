@@ -129,7 +129,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="<?php echo site_url('Coordinador/index');?>">Proyectos</a>
+                <a href="<?php echo site_url('Welcome/irInicio');?>">Proyectos</a>
             </li>
             <li class="breadcrumb-item">Gestionar Filtros</li>
         </ol>
@@ -189,8 +189,10 @@
                 <label for="exampleFormControlInput3">PM2.5</label>
                 <input type="number" name="cant_pm25" min="0" max="50" class="form-control" id="exampleFormControlInput3" placeholder="max 50 Filtros" required>
             </div>
-
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <small><b>Nota: </b>Si no desea solicitar filtros de algun tipo ingrese cero 0.</small>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><b>GUARDAR</b></button>
+            </div>
         </form>
 
     </div>
@@ -207,11 +209,12 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
-    <div class="modal fade" id="modalAtras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalAtras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static"
+         data-keyboard="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Proyecto creado exitosamente</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Lotes guardados exitosamente</h5>
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-primary"
@@ -263,8 +266,6 @@
                     }
                 });
             }
-
-
         });
 
     </script>

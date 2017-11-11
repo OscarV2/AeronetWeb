@@ -26,8 +26,6 @@ class LoteFiltros extends CI_Controller
 
         $this->load->view('layout/header');
         $this->load->view('coordinador/vista_lotes', $data);
-        $this->load->view('layout/footer');
-
     }
 
 }

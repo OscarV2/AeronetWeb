@@ -35,7 +35,6 @@ class Coordinador extends CI_Controller
     public function irCrearUsuario(){
         $this->load->view('layout/header');
         $this->load->view('coordinador/nuevo_usuario');
-        $this->load->view('layout/footer');
 
     }
 

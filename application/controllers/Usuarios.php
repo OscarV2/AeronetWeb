@@ -27,6 +27,7 @@ class Usuarios extends CI_Controller
     );
 
         $this->Usuario_model->guardarNuevosUsuario($usuario);
+        echo 'success';
     }
     public function irGestionarFiltros()
     {

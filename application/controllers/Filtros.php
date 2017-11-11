@@ -41,6 +41,7 @@ class Filtros extends CI_Controller
         );
 
       $this->LoteFiltro_model->nuevo($data);
+      echo 'success';
     }
 
     public function irLoteFiltros()

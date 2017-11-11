@@ -139,20 +139,20 @@
                   action="<?php echo site_url('Usuarios/nuevoUsuario');?>"
                   method="post">
 
-<div class="form-row">
-    <div class="col">
+            <div class="form-row">
+            <div class="col">
         <div class="form-group label-floating">
             <label class="control-label">Nombres</label>
             <input type="text" name="nombre" required class="form-control">
         </div>
     </div>
-    <div class="col">
+            <div class="col">
         <div class="form-group label-floating">
             <label class="control-label">Apellidos</label>
             <input type="text" name="apellidos" required class="form-control">
         </div>
     </div>
-</div>
+            </div>
 
                 <div class="form-row">
                     <div class="col">

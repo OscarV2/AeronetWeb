@@ -53,11 +53,6 @@ class Coordinador extends CI_Controller
 
     }
 
-    public function irAsignarFiltros()
-    {
-
-    }
-
     public function asignarEquipos()
     {
         $data = $this->input->get('id');

@@ -133,25 +133,32 @@
             </li>
             <li class="breadcrumb-item">Gestionar Filtros</li>
         </ol>
+        <!-- Formulario  Gestionar filtros -->
 
         <h3>Nuevo Lote de filtros</h3>
-        <form action="<?php echo site_url('Filtros/nuevoLote') . '?idProyecto=' . $idProyecto;?>" method="post">
-        <!-- Formulario  Gestionar filtros -->
-            <div class="form-inline">
-                <div class="form-group">
-                    <select name="lab" class="custom-select">
-                        <option selected disabled>Seleccionar Laboratorio</option>
-                        <?php
-                        foreach ($usuarios->result() as $usuario)
-                        {
-                            echo '<option value="'. $usuario->idusuarios . '">' . $usuario->nombre . '</option>';
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="form-group mx-sm-3">
-                    <select name="mes" class="custom-select">
-                        <option selected disabled>Seleccionar mes</option>
+        <form action="" method="post">
+            <?php
+            if ($usuarios->result() == NULL)
+            {
+                echo '<h3>No tiene laboratorios asignados.</h3>';
+            }
+            ?>
+
+            <div class="form-group">
+                <label for="exampleSelect1">Seleccionar Laboratorio</label>
+                <select name="lab" class="form-control" id="exampleSelect1">
+                    <?php
+                    foreach ($usuarios->result() as $usuario)
+                    {
+                        echo '<option value="'. $usuario->idusuarios . '">' . $usuario->nombre . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleSelect1">Seleccionar mes</label>
+                    <select name="mes" class="form-control" required>
                         <option>Enero</option>
                         <option>Febrero</option>
                         <option>Marzo</option>
@@ -166,22 +173,21 @@
                         <option>Diciembre</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <input type="number" name="year" min="2017" max="2020" class="form-control" id="exampleFormControlInput1" placeholder="Año">
+            <div class="form-group">
+                    <input type="number" name="year" min="2017" max="2020" class="form-control" id="exampleFormControlInput1" placeholder="Año" required>
                 </div>
-            </div>
 
             <div class="form-group">
                 <label for="exampleFormControlInput1">PST</label>
-                <input type="number" name="cant_pst" min="0" max="50" class="form-control" id="exampleFormControlInput1" placeholder="max 50 Filtros">
+                <input type="number" name="cant_pst" min="0" max="50" class="form-control" id="exampleFormControlInput1" placeholder="max 50 Filtros" required>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput2">PM10</label>
-                <input type="number" name="cant_pm10" min="0" max="50" class="form-control" id="exampleFormControlInput2" placeholder="max 50 Filtros">
+                <input type="number" name="cant_pm10" min="0" max="50" class="form-control" id="exampleFormControlInput2" placeholder="max 50 Filtros" required>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput3">PM2.5</label>
-                <input type="number" name="cant_pm25" min="0" max="50" class="form-control" id="exampleFormControlInput3" placeholder="max 50 Filtros">
+                <input type="number" name="cant_pm25" min="0" max="50" class="form-control" id="exampleFormControlInput3" placeholder="max 50 Filtros" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
@@ -201,4 +207,83 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
+    <div class="modal fade" id="modalAtras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Proyecto creado exitosamente</h5>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary"
+                       href="<?php echo site_url('Welcome/irInicio');?>">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Seguro quieres salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Haz click en "Cerrar" si estas seguro de terminar con la sesion actual.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="login.html">Cerrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
 
+    <script>
+
+        $('form').on('submit', function (e) {
+            e.preventDefault();
+            if ($("#exampleSelect1").val() === null){
+                alert("No hay laboratorios registrados.")
+            }else{
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo site_url('Filtros/nuevoLote') . '?idProyecto=' . $idProyecto;?>" ,
+                    data: $('form').serialize(),
+                    success: function (data) {
+                        console.log(data) ;
+                        if (data === 'success'){
+                            // mostrar modal
+                            $('#modalAtras').modal('show');
+                        }else{
+                            alert('Error');
+                        }
+                    }
+                });
+            }
+
+
+        });
+
+    </script>
+
+    <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery-easing/jquery.easing.min.js')?>"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.js')?>"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="<?php echo base_url('assets/js/sb-admin.min.js')?>"></script>
+    <!-- Custom scripts for this page-->
+    <script src="<?php echo base_url('assets/js/sb-admin-datatables.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
+</div>
+</body>
+</html>

@@ -25,8 +25,6 @@ class Estaciones extends CI_Controller
 
         $this->load->view('layout/header');
         $this->load->view('coordinador/asignar_estaciones', $data);
-        $this->load->view('layout/footer');
-
     }
 
     public function gestionarEstaciones()
@@ -35,12 +33,9 @@ class Estaciones extends CI_Controller
         $estaciones = $this->input->post('estacion');
         $idProyecto = $this->input->get('idProyecto');
 
-        $data = array();
-        for ($i = 0; $i < sizeof($estaciones); $i++){
-            $data[$i] = $estaciones[$i];
-        }
-
         $this->Estacion_model->asignarEstacion($estaciones, $idProyecto);
+        echo 'success';
+
     }
 
 }

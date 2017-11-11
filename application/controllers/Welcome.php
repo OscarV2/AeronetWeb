@@ -43,7 +43,7 @@ class Welcome extends CI_Controller {
 
             $this->load->model('LoteFiltro_model');
             $lotes =array(
-                'lotes' => $this->LoteFiltro_model->getLoteUsuario(2)
+                'lotes' => $this->LoteFiltro_model->getLoteUsuario(7)
             );
             $this->load->view('layout/header');
             $this->load->view('menu_laboratorio', $lotes);

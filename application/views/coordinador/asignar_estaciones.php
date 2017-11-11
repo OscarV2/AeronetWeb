@@ -136,7 +136,7 @@
 
         <h3>Asignar estaciones a <?php echo $nombre;?></h3>
 
-        <form action="<?php echo site_url('Estaciones/gestionarEstaciones'). "?idProyecto=" . $idProyecto ;?>" method="post">
+        <form action="" method="post">
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fa fa-table"></i> Estaciones sin asignar
@@ -161,10 +161,6 @@
                                 '</tr>';
                             }
                             ?>
-                            <tr>
-                                <td>Estacion</td>
-                                <td>Agregar</td>
-                            </tr>
                             </thead>
                             <tbody>
                             </tbody>
@@ -188,4 +184,88 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
+
+    <!-- Modal Exito-->
+    <div class="modal fade" id="modalAtras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Estaciones asignadas exitosamente.</h5>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary"
+                       href="<?php echo site_url('Welcome/irInicio');?>">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Seguro quieres salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Haz click en "Cerrar" si estas seguro de terminar con la sesion actual.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="login.html">Cerrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery-easing/jquery.easing.min.js')?>"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.js')?>"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="<?php echo base_url('assets/js/sb-admin.min.js')?>"></script>
+    <!-- Custom scripts for this page-->
+    <script src="<?php echo base_url('assets/js/sb-admin-datatables.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
+    <script>
+
+        $('form').on('submit', function (e) {
+            var estaciones = $("input[name='estacion[]']:checked");
+
+            e.preventDefault();
+            if (estaciones.length === 0){
+                alert("No ha seleccionado ninguna estacion");
+            }else {
+                //console.log($('form').serialize());
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo site_url('Estaciones/gestionarEstaciones') . "?idProyecto=" . $idProyecto;?>" ,
+                    data: $('form').serialize(),
+                    success: function (data) {
+                        console.log(data) ;
+                        if (data === 'success'){
+                            // mostrar modal
+                            $('#modalAtras').modal('show');
+                        }else{
+                            alert('Error');
+                        }
+                    }
+                });
+            }
+        });
+
+    </script>
+</div>
+</body>
+
+</html>
 

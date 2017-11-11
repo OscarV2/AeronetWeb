@@ -156,9 +156,9 @@
   'Opciones' .
  '</button>' .
 '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' .
+ '<a class="dropdown-item" href="'. site_url('Estaciones/irAsignarEstaciones')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Asignar Estaciones</a>' .
  '<a class="dropdown-item" href="'. site_url('Usuarios/irGestionarFiltros')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'" >Gestionar Filtros</a>' .
  '<a class="dropdown-item" href="'. site_url('LoteFiltros/irMenuLotes')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Asignar Filtros</a>' .
- '<a class="dropdown-item" href="'. site_url('Estaciones/irAsignarEstaciones')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Asignar Estaciones</a>' .
  '<a class="dropdown-item" href="'. site_url('Equipos/verFiltrosAsignados')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Ver Equipos</a>' .
 
                                     ' </div>' .

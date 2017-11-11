@@ -37,8 +37,6 @@ class Usuarios extends CI_Controller
 
         $this->load->view('layout/header');
         $this->load->view('coordinador/gestionar_filtros', $data);
-        $this->load->view('layout/footer');
 
     }
-
 }

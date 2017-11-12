@@ -41,6 +41,7 @@
 
         <form action=""
               method="post"
+              id="formFiltros"
               >
 
             <section id="form_nuevo_filtros">
@@ -51,7 +52,7 @@
                                name="codigoNuevoFiltro[]"
                                required class="form-control"
                                readonly
-                               value="<?php echo strtoupper($tipo) .'-'. date('dmY'). '-' . $consecutivo;?>">
+                               value="<?php echo strtoupper($tipo) .'-'. date('d/m/Y'). '-' . $consecutivo;?>">
                     </div>
                     <div class="form-group col-md-3">
                         <label class="control-label">Peso (ug):</label>
@@ -79,7 +80,6 @@
                 <button id="btn_guardar_filtros" type="submit" class="btn btn-primary btn-lg">  Guardar</button>
             </div>
         </form>
-
 
     </div>
     <!-- /.container-fluid-->
@@ -113,19 +113,27 @@
     <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
     <script>
 
-       var clientes = 0;
+       var clientes = 1;
         var fecha = getFecha();
         var consecutivo = parseInt(<?php echo $consecutivo?>);
+        var max = parseInt(<?php echo $max?>);
+        var filtrosPorPesar = parseInt(<?php echo $fpp?>);
+
         var tipo = <?php echo json_encode(strtoupper($tipo)) ;?> ;
+
         $(document).ready(function () {
-           setNuevoFiltro();
+
+           if (filtrosPorPesar ===  0){
+               $("#formFiltros").hide();
+           }else
+           {setNuevoFiltro();}
         });
 
         function setNuevoFiltro() {
             $("#btn_add_nuevo").click(function (e) {
 
                 e.preventDefault();
-                if (clientes < 10) {
+                if (clientes < max) {
                     clientes++;
                     consecutivo++;
 
@@ -181,28 +189,31 @@
                        console.log(data) ;
                        if (data === 'success'){
                            // mostrar modal
-                           alert('Filtros Pesados exitosamente');
+                           $('#modalAtras').modal('show');
+                       }else{
+                           alert('Error');
                        }
                    }
                });
-
-
-
        });
 
     </script>
     <!--Modal Pesados con exito-->
-    <div class="modal fade" id="modalAtras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade"
+         id="modalAtras"
+         tabindex="-1"
+         role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true"
+         data-backdrop="static"
+         data-keyboard="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Filtros pesados exitosamente</h5>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-primary" href="login.html">Ok</a>
+                    <a class="btn btn-primary" href="<?php echo site_url('Filtros/irLoteFiltros') . "?id=" . $idLote ;?>">Ok</a>
                 </div>
             </div>
         </div>
     </div>
-
-

@@ -216,7 +216,10 @@
         <i class="fa fa-angle-up"></i>
     </a>
     <!-- Modal-->
-    <div class="modal fade" id="modalNuevoUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static"
+    <div class="modal fade" id="modalNuevoUsuario"
+         tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true"
+         data-backdrop="static"
          data-keyboard="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -253,15 +256,6 @@
     <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
 
     <script>
-/*
-        $(document).ready(function () {
-
-            $('#modalNuevoUsuario').modal({
-                backdrop: 'static',
-                keyboard: false
-            });
-        });
-*/
 
         $('form').on('submit', function (e) {
             e.preventDefault();

@@ -27,10 +27,10 @@
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-filter"></i>
                         </div>
-                        <div class="mr-5"><?php echo $cant_pst;?> Filtros <strong>PST</strong></div>
+                        <div class="mr-5"><?php echo $FppPST;?> Filtros <strong>PST</strong></div>
                     </div>
                     <a class="card-footer text-white clearfix small z-1"
-                       href="<?php echo site_url('Filtros/irPesarFiltros')  . "?idLote=" .$idLote . "&tipo=pst" . "&consecutivo=". $cant_pst ;?>">
+                       href="<?php echo site_url('Filtros/irPesarFiltros')  . "?idLote=" .$idLote . "&tipo=pst" . "&consecutivo=". $consePST ."&max=".$maxPST ."&filtrosporpesar=". $FppPST;?>">
                         <span class="float-left">Pesar Filtros</span>
                         <span class="float-right">
                         <i class="fa fa-angle-right"></i>
@@ -44,9 +44,9 @@
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-filter"></i>
                         </div>
-                        <div class="mr-5"><?php echo $cant_pm10;?> Filtros PM10</div>
+                        <div class="mr-5"><?php echo $FppPM10;?> Filtros PM10</div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="<?php echo site_url('Filtros/irPesarFiltros')  . "?idLote=" .$idLote . "&tipo=pm10" . "&consecutivo=". $cant_pm10;?>">
+                    <a class="card-footer text-white clearfix small z-1" href="<?php echo site_url('Filtros/irPesarFiltros')  . "?idLote=" .$idLote . "&tipo=pm10" . "&consecutivo=". $consePM10."&max=".$maxPM10 ."&filtrosporpesar=". $FppPM10;?>">
                         <span class="float-left">Pesar Filtros</span>
                         <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -60,10 +60,10 @@
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-filter"></i>
                         </div>
-                        <div class="mr-5"><?php echo $cant_pm25;?> Filtros PM2.5</div>
+                        <div class="mr-5"><?php echo $FppPM25;?> Filtros PM2.5</div>
                     </div>
                     <a class="card-footer text-white clearfix small z-1"
-                       href="<?php echo site_url('Filtros/irPesarFiltros')  . "?idLote=" .$idLote . "&tipo=pm25" . "&consecutivo=". $cant_pm25;?>">
+                       href="<?php echo site_url('Filtros/irPesarFiltros')  . "?idLote=" .$idLote . "&tipo=pm25" . "&consecutivo=". $consePM25 ."&max=".$maxPM25 ."&filtrosporpesar=". $FppPM25;?>">
                         <span class="float-left">Pesar Filtros</span>
                         <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -77,7 +77,7 @@
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-filter"></i>
                         </div>
-                        <div class="mr-5"><?php echo $cant_Total;?> Filtros pesados</div>
+                        <div class="mr-5"><?php echo $filtrosPesados;?> Filtros pesados</div>
                     </div>
                     <a class="card-footer text-white clearfix small z-1">
                         <span class="float-left"></span>
@@ -106,7 +106,7 @@
                         </thead>
                         <tbody>
                         <?php
-                        foreach ($filtrosPesados->result() as $filtro){
+                        foreach ($filtrosTodos->result() as $filtro){
                             echo
                                 '<tr>'.
                                 '<td>'. $filtro->identificador.'</td>' .

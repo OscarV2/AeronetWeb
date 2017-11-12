@@ -20,6 +20,11 @@ class LoteFiltro_model extends CI_Model
         $this->db->insert('lotefiltros', $data);
     }
 
+    public function getLote($id)
+    {
+        return $this->db->get_where('lotefiltros', array('id' => $id));
+    }
+
     public function getLotesProyecto($id)
     {
         return $this->db->get_where('lotefiltros', array('idProyecto' => $id));

@@ -21,7 +21,9 @@ class Filtros extends CI_Controller
         $data = array(
             'idLote' => $this->input->get('idLote'),
             'tipo' => $this->input->get('tipo'),
-            'consecutivo' => $this->input->get('consecutivo') +1
+            'consecutivo' => $this->input->get('consecutivo') +1,
+            'max' =>$this->input->get('max'),
+            'fpp' =>$this->input->get('filtrosporpesar')
         );
 
         $this->load->view('layout/header');
@@ -47,15 +49,46 @@ class Filtros extends CI_Controller
     public function irLoteFiltros()
     {
         $idLote = $this->input->post('id');
+        if ($idLote == NULL){
+            $idLote = $this->input->get('id');
+
+        }
+
+        // get lote
+        $lote = $this->LoteFiltro_model->getLote($idLote)->result()[0];
+
+        //Total filtros pesados
+        $filtrosPesados = $lote->pesadospm10 + $lote->pesadospst + $lote->pesadospm25;
+        //Filtros por pesar PM10
+        $FppPM10 = $lote->cant_pm10 - $lote->pesadospm10;
+        //Filtros por pesar PST
+        $FppPST = $lote->cant_pst - $lote->pesadospst;
+        //Filtros por pesar PM2.5
+        $FppPM25 = $lote->cant_pm25 - $lote->pesadospm25;
+
+        //Consecutivos
+        $consePST  = $lote->cant_pst  - $FppPST;
+        $consePM10 = $lote->cant_pm10 - $FppPM10;
+        $consePM25 = $lote->cant_pm25 - $FppPM25;
 
         $filtros = array(
 
-            'cant_pst'   => $this->Filtro_model->getCantFiltrosPSTPesados($idLote),
-            'cant_pm10'  => $this->Filtro_model->getCantFiltrosPM10Pesados($idLote),
-            'cant_pm25'  => $this->Filtro_model->getCantFiltrosPM25Pesados($idLote),
-            'cant_Total' => $this->Filtro_model->getTotalPesados($idLote),
-            'filtrosPesados' => $this->Filtro_model->getFiltrosPorLote($idLote),
+        'filtrosPesados' => $filtrosPesados,
+        //Filtros por pesar PM10
+            'FppPM10' => $FppPM10,
+        //Filtros por pesar PST
+            'FppPST' => $FppPST,
+        //Filtros por pesar PM2.5
+            'FppPM25' => $FppPM25,
 
+        //Consecutivos
+            'consePST' => $consePST ,
+            'consePM10' => $consePM10 ,
+            'consePM25' => $consePM25,
+            'filtrosTodos' => $this->Filtro_model->getFiltrosPorLote($idLote),
+            'maxPST' => $lote->cant_pst,
+            'maxPM10' => $lote->cant_pm10,
+            'maxPM25' => $lote->cant_pm25,
             'idLote' => $idLote
         );
 
@@ -86,5 +119,6 @@ class Filtros extends CI_Controller
         }
 
         $this->Filtro_model->guardarNuevosFiltros($data);
+        echo 'success';
     }
 }

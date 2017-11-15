@@ -16,6 +16,6 @@ class Calibrador extends CI_Controller
 
     public function getCalibradores()
     {
-      echo json_encode($this->Calibrador_model->getCalibradores());
+      echo json_encode($this->Calibrador_model->getCalibradores()->result());
     }
 }

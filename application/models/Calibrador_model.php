@@ -16,7 +16,7 @@ class Calibrador_model extends CI_Model
 
     public function getCalibradores()
     {
-        return $this->db->get('CalibradorModel');
+        return $this->db->get('calibrador');
     }
 
 

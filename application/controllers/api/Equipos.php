@@ -13,33 +13,10 @@ class Equipos extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Equipo_model');
-        $this->load->model('Filtro_model');
     }
 
+    public function getEquipos(){
 
-
-    public function irAsignarFiltros()
-    {
-
-        $id = $this->input->get('id');
-        //echo '<h1>'.$id.'</h1>';
-
-        $idLote = $this->input->post('idLote');
-        $data = array(
-           'equipos' => $this->Equipo_model->getEquiposDesocupados($id),
-           'filtros' => ($this->Filtro_model->getFiltrosSinAsignar($idLote))->result()
-        );
-
-        //echo var_dump($data['filtros']);
-
-        $this->load->view('layout/header');
-        $this->load->view('coordinador/asignar_filtros', $data);
-
-    }
-
-    public function asignarFiltros(){
-
-
-
+        echo json_encode($this->Equipo_model->getEquipos()->result());
     }
 }

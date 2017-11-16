@@ -6,11 +6,17 @@
             <?php echo form_open('Welcome/login');?>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Usuario</label>
-                    <input class="form-control" id="exampleInputEmail1" name="usuario" type="text" aria-describedby="emailHelp" placeholder="Ingrese su usuario">
+                    <input class="form-control"
+                           id="exampleInputEmail1" name="usuario"
+                           type="text" aria-describedby="emailHelp"
+                           placeholder="Ingrese su usuario" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Contraseña</label>
-                    <input class="form-control" id="exampleInputPassword1" name="password" type="password" placeholder="Ingrese su contraseña">
+                    <input class="form-control"
+                           id="exampleInputPassword1" name="password"
+                           type="password"
+                           placeholder="Ingrese su contraseña" required>
                 </div>
 
                 <h5>Rol</h5>

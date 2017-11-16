@@ -6,7 +6,7 @@
  * Time: 11:09 PM
  */
 
-class Calibracion extends CI_Model
+class CalibracionModel extends CI_Model
 {
     public function __construct()
     {
@@ -16,6 +16,6 @@ class Calibracion extends CI_Model
 
     public function guardarCalibracion($data)
     {
-        $this->db->insert('calibracion', $data);
+        $this->db->insert('CalibracionModel', $data);
     }
 }

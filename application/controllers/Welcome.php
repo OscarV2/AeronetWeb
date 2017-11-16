@@ -22,7 +22,6 @@ class Welcome extends CI_Controller {
 	{
         $this->load->helper('form');
         $this->load->view('layout/header');
-        //$this->load->view('welcome_message');
         $this->load->view('login');
         $this->load->view('layout/footer');
 
@@ -31,31 +30,53 @@ class Welcome extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Proyecto_model');
     }
 
     public function login(){
         $this->load->helper(array('form', 'url'));
 
         $rol = $this->input->post('rol');
+        $usuario = $this->input->post('usuario');
+        $password = $this->input->post('password');
 
-        if ($rol == 'laboratorista'){
+        // verificar usuario y contraseña
+        $this->load->model('Usuario_model');
+        $existe = $this->Usuario_model->existeUsuario($usuario, $password);
 
-            $this->load->model('LoteFiltro_model');
-            $lotes =array(
-                'lotes' => $this->LoteFiltro_model->getLoteUsuario(7)
-            );
-            $this->load->view('layout/header');
-            $this->load->view('menu_laboratorio', $lotes);
-        }elseif ($rol == 'analista'){
+        if (sizeof($existe) > 0){
+
+            $rolUsuario = $existe[0]->rol;
+            if ($rolUsuario == $rol){
+
+                if ($rol == 'laboratorista'){
+
+                    $this->load->model('LoteFiltro_model');
+                    $lotes =array(
+                        'lotes' => $this->LoteFiltro_model->getLoteUsuario($existe->idusuarios)
+                    );
+                    $this->load->view('layout/header');
+                    $this->load->view('menu_laboratorio', $lotes);
+                }
+                elseif ($rol == 'analista'){
+
+                }elseif($rol == 'coordinador') {
+                    $this->irInicio();
+                }
+            }else{
+                // los roles no coinciden
+                echo '<h3>Los roles no coinciden</h3>';
+            }
 
         }else {
-           $this->irInicio();
-            }
+            // el usuario no existe
+            echo 'el usuario no existe';
+        }
+
     }
 
     public function irInicio()
     {
+        $this->load->model('Proyecto_model');
         $proyectos = array(
             'proyectos' => $this->Proyecto_model->obtenerTodosProyectos()
         );

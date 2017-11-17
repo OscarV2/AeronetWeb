@@ -143,14 +143,16 @@
                                 <th>Nombre</th>
                                 <th>Duracion</th>
                                 <th>Fecha de Inicio</th>
+                                <th>Estaciones</th>
                                 <th>Menu</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($proyectos->result() as $proyecto) {
+                            <?php foreach($proyectos as $proyecto) {
                                 echo '<tr><td>' .$proyecto->nombre . '</td>' .
                                     '<td>'. $proyecto->duracion . '</td>' .
                                     '<td>'. $proyecto->fechaInicio . '</td>' .
+                                    '<td>'. $proyecto->estaciones . '</td>' .
                                     '<td><div class="dropdown">' .
  ' <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
   'Opciones' .

@@ -81,9 +81,11 @@ class Welcome extends CI_Controller {
             'proyectos' => $this->Proyecto_model->obtenerTodosProyectos()
         );
 
+
         $this->load->view('layout/header');
         $this->load->view('coordinador/vista_coordinador', $proyectos);
         $this->load->view('layout/footer');
-    }
+
+        }
 
 }

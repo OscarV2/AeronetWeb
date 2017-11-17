@@ -20,9 +20,30 @@ class Proyecto_model extends CI_Model
         $this->db->insert('proyectos', $proyecto);
     }
 
+    //obtener proyectos activos
     public function obtenerTodosProyectos(){
 
-        return $this->db->get('proyectos');
+        $data = array();
+        $this->db->select('idProyecto, nombre, fechaInicio, duracion');
+        $proyectos = $this->db->get('proyectos')->result();
+
+        $this->db->select('nombre');
+        $this->db->where('proyectos_idProyecto', $proyectos[0]->idProyecto);
+        $estaciones = $this->db->get('estacion')->result();
+        if (sizeof($estaciones) > 0) {
+            $nombres = implode(', ', $this->estaciones($estaciones));
+            $proyectos[0]->estaciones = $nombres;
+        } else {
+            $proyectos[0]->estaciones = 'Sin estaciones asignadas.';
+        }
+
+        if (sizeof($proyectos) > 0) {
+            for ($i = 0; $i++; sizeof($proyectos)) {
+
+
+            }
+        }
+        return $proyectos;
     }
 
     public function culminarProyecto($id, $data)
@@ -32,5 +53,14 @@ class Proyecto_model extends CI_Model
         $this->db->update('proyectos', $data);
 
         //habilitar estaciones
+    }
+
+    private function estaciones($estaciones)
+    {
+        $estacion = array();
+        foreach ($estaciones as $row){
+            $estacion[] = $row->nombre;
+        }
+        return $estacion;
     }
 }

@@ -134,6 +134,11 @@
             <li class="breadcrumb-item">Asignar Filtros</li>
         </ol>
         <div class="row">
+            <?php
+            if(sizeof($equipos <=0)){
+               echo '<h2>No hay equipos habilitados para asignar filtros.</h2>' ;
+            }
+            ?>
             <form method="post" action="">
                 <!--Cargar equipos de estaciones asignadas -->
                 <div class="card-body">
@@ -232,7 +237,9 @@
                         console.log(data) ;
                         if (data === 'success'){
                             // mostrar modal
-                            alert('Filtros Asignados exitosamente');
+                            $('#modalAtras').modal('show');
+                        }else{
+                            alert('ERROR.');
                         }
                     }
                 });
@@ -246,6 +253,21 @@
         }
 
     </script>
+
+    <!-- Modal Filtros asignados exitosamente-->
+    <div class="modal fade" id="modalAtras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Filtros asignados exitosamente.</h5>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary"
+                       href="<?php echo site_url('Welcome/irInicio');?>">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 

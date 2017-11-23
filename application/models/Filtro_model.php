@@ -25,8 +25,24 @@ class Filtro_model extends CI_Model
     }
 
     public function getFiltrosSinAsignar($key)
+{
+    return $this->db->get_where('filtros',array('lotefiltros_id' => $key, 'idequipo' => NULL));
+}
+
+    public function getFiltrosAsignados()
     {
-        return $this->db->get_where('filtros',array('lotefiltros_id' => $key, 'idequipo' => NULL));
+        $this->db->where('instalado', NULL);
+        $this->db->where('recogido', NULL);
+        $this->db->where('idequipo', NULL, FALSE);
+
+        return $this->db->get('filtros');
+        /*
+        return $this->db->get_where('filtros',array(
+           // 'idequipo'  => !NULL,
+            'instalado' => NULL,
+            'recogido'  => NULL
+        ));
+        */
     }
 
     public function asignarEquipoFiltro($idEquipo, $codigoFiltro)

@@ -141,7 +141,7 @@
                             <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Duracion</th>
+                                <th>Duracion (meses)</th>
                                 <th>Fecha de Inicio</th>
                                 <th>Estaciones</th>
                                 <th>Menu</th>

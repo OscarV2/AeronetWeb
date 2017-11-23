@@ -27,23 +27,34 @@ class Proyecto_model extends CI_Model
         $this->db->select('idProyecto, nombre, fechaInicio, duracion');
         $proyectos = $this->db->get('proyectos')->result();
 
-        $this->db->select('nombre');
-        $this->db->where('proyectos_idProyecto', $proyectos[0]->idProyecto);
-        $estaciones = $this->db->get('estacion')->result();
-        if (sizeof($estaciones) > 0) {
-            $nombres = implode(', ', $this->estaciones($estaciones));
-            $proyectos[0]->estaciones = $nombres;
-        } else {
-            $proyectos[0]->estaciones = 'Sin estaciones asignadas.';
-        }
+        foreach ($proyectos as $proyecto){
+            $this->db->select('nombre');
+            $this->db->where('proyectos_idProyecto', $proyecto->idProyecto);
+            $estaciones = $this->db->get('estacion')->result();
 
-        if (sizeof($proyectos) > 0) {
-            for ($i = 0; $i++; sizeof($proyectos)) {
+            if (sizeof($estaciones) > 0) {
+                $nombres = implode(', ', $this->estaciones($estaciones));
 
-
+                array_push($data, array(
+                    'idProyecto' => $proyecto->idProyecto,
+                    'nombre'=> $proyecto->idProyecto,
+                    'fechaInicio'=> $proyecto->idProyecto,
+                    'duracion'=>$proyecto->idProyecto,
+                    'estaciones' => $nombres
+                ));
+            } else {
+                array_push($data, array(
+                    'idProyecto' => $proyecto->idProyecto,
+                    'nombre'=> $proyecto->idProyecto,
+                    'fechaInicio'=> $proyecto->idProyecto,
+                    'duracion'=>$proyecto->idProyecto,
+                    'estaciones' => 'Sin estaciones asignadas.'
+                ));
+                $proyectos[0]->estaciones = 'Sin estaciones asignadas.';
             }
         }
-        return $proyectos;
+
+        return $data;
     }
 
     public function culminarProyecto($id, $data)

@@ -148,7 +148,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($proyectos as $proyecto) {
+                            <?php
+                            if(sizeof($proyectos)>0){
+                            foreach($proyectos as $proyecto) {
                                 echo '<tr><td>' .$proyecto->nombre . '</td>' .
                                     '<td>'. $proyecto->duracion . '</td>' .
                                     '<td>'. $proyecto->fechaInicio . '</td>' .
@@ -167,7 +169,7 @@
                                     ' </div>' .
 '</div></td>' .
                                     '</tr>';
-                            } ?>
+                            } }?>
                             </tbody>
                         </table>
                     </div>

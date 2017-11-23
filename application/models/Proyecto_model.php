@@ -45,12 +45,11 @@ class Proyecto_model extends CI_Model
             } else {
                 array_push($data, array(
                     'idProyecto' => $proyecto->idProyecto,
-                    'nombre'=> $proyecto->idProyecto,
-                    'fechaInicio'=> $proyecto->idProyecto,
-                    'duracion'=>$proyecto->idProyecto,
+                    'nombre'=> $proyecto->nombre,
+                    'fechaInicio'=> $proyecto->fechaInicio,
+                    'duracion'=>$proyecto->duracion,
                     'estaciones' => 'Sin estaciones asignadas.'
                 ));
-                $proyectos[0]->estaciones = 'Sin estaciones asignadas.';
             }
         }
 

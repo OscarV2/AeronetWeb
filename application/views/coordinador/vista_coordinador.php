@@ -150,25 +150,28 @@
                             <tbody>
                             <?php
                             if(sizeof($proyectos)>0){
-                            foreach($proyectos as $proyecto) {
-                                echo '<tr><td>' .$proyecto->nombre . '</td>' .
-                                    '<td>'. $proyecto->duracion . '</td>' .
-                                    '<td>'. $proyecto->fechaInicio . '</td>' .
-                                    '<td>'. $proyecto->estaciones . '</td>' .
+
+                            foreach($proyectos as $proyecto ) {
+
+                                echo '<tr><td>' .$proyecto['nombre'] . '</td>' .
+                                    '<td>'. $proyecto['duracion'] . '</td>' .
+                                    '<td>'. $proyecto['fechaInicio'] . '</td>' .
+                                    '<td>'. $proyecto['estaciones'] . '</td>' .
                                     '<td><div class="dropdown">' .
  ' <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
   'Opciones' .
  '</button>' .
 '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' .
- '<a class="dropdown-item" href="'. site_url('Estaciones/irAsignarEstaciones')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Asignar Estaciones</a>' .
- '<a class="dropdown-item" href="'. site_url('Usuarios/irGestionarFiltros')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'" >Gestionar Filtros</a>' .
- '<a class="dropdown-item" href="'. site_url('LoteFiltros/irMenuLotes')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Asignar Filtros</a>' .
- '<a class="dropdown-item" href="'. site_url('LoteFiltros/irVerLotesProyecto')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Ver Lotes</a>' .
- '<a class="dropdown-item" href="'. site_url('Equipos/verFiltrosAsignados')  . "?id=" .$proyecto->idProyecto . "&nombre=" .$proyecto->nombre .'">Ver Equipos</a>' .
+ '<a class="dropdown-item" href="'. site_url('Estaciones/irAsignarEstaciones')  . "?id=" .$proyecto['idProyecto'] . "&nombre=" .$proyecto['nombre'] .'">Asignar Estaciones</a>' .
+ '<a class="dropdown-item" href="'. site_url('Usuarios/irGestionarFiltros')  . "?id=" .$proyecto['idProyecto']  . "&nombre=" .$proyecto['nombre'] .'" >Gestionar Filtros</a>' .
+ '<a class="dropdown-item" href="'. site_url('LoteFiltros/irMenuLotes')  . "?id=" .$proyecto['idProyecto']  . "&nombre=" .$proyecto['nombre'] .'">Asignar Filtros</a>' .
+ '<a class="dropdown-item" href="'. site_url('LoteFiltros/irVerLotesProyecto')  . "?id=" .$proyecto['idProyecto']  . "&nombre=" .$proyecto['nombre'] .'">Ver Lotes</a>' .
+ '<a class="dropdown-item" href="'. site_url('Equipos/verFiltrosAsignados')  . "?id=" .$proyecto['idProyecto']  . "&nombre=" .$proyecto['nombre'] .'">Ver Equipos</a>' .
 
                                     ' </div>' .
 '</div></td>' .
                                     '</tr>';
+
                             } }?>
                             </tbody>
                         </table>

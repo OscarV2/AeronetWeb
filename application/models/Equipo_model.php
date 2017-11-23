@@ -78,7 +78,7 @@ class Equipo_model extends CI_Model
             foreach ($query->result() as $equipo){
 
                 $this->db->select('identificador');
-                $this->db->where('pesado' , NULL);
+                $this->db->where('recogido' , NULL);
                 $this->db->where('idequipo' , $equipo->idequipo);
                 $filtros = $this->db->get('filtros');
 

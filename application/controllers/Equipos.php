@@ -47,8 +47,6 @@ class Equipos extends CI_Controller
         $this->load->view('layout/header');
         $this->load->view('coordinador/verEquipoConFiltroAsig', $data);
         $this->load->view('layout/footer');
-
-        //echo var_dump($equipos);
     }
 
     public function verEquiposPM10()

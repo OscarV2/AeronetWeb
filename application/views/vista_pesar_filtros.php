@@ -38,7 +38,7 @@
             <li class="breadcrumb-item active"></li>
         </ol>
         <h3 class="page-title">Nuevo Filtro</h3>
-
+        <?php echo '</h3>' .  date('d/m/Y H:m:s'). '</h3>';?>
         <form action=""
               method="post"
               id="formFiltros"

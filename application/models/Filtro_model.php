@@ -36,6 +36,27 @@ class Filtro_model extends CI_Model
         $this->db->update('filtros',$data);
     }
 
+    public function instalar($id, $fecha)
+    {
+        $data = array('instalado' => $fecha);
+        $this->db->where('idFiltros', $id);
+        $this->db->update('filtros',$data);
+    }
+
+    public function recoger($id, $fecha, $vol, $idequipo, $observaciones)
+    {
+        $data = array(
+            'recogido' => $fecha,
+            'volumen' => $vol,
+            'observaciones' => $observaciones
+        );
+        $this->db->where('idFiltros', $id);
+        $this->db->update('filtros',$data);
+
+        $this->db->where('idequipo', $idequipo);
+        $this->db->update('equipos', array('ocupado' => 0));
+    }
+
     public function guardarNuevosFiltros($data)
     {
         foreach ($data as $datos){

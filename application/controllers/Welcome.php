@@ -51,11 +51,14 @@ class Welcome extends CI_Controller {
                 if ($rol == 'laboratorista'){
 
                     $this->load->model('LoteFiltro_model');
+
                     $lotes =array(
-                        'lotes' => $this->LoteFiltro_model->getLoteUsuario($existe->idusuarios)
+                        'lotes' => $this->LoteFiltro_model->getLoteUsuario($existe[0]->idusuarios)
                     );
+
                     $this->load->view('layout/header');
                     $this->load->view('menu_laboratorio', $lotes);
+
                 }
                 elseif ($rol == 'analista'){
 

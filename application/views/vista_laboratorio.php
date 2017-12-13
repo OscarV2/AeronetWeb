@@ -44,7 +44,7 @@
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-filter"></i>
                         </div>
-                        <div class="mr-5"><?php echo $FppPM10;?> Filtros PM10</div>
+                        <div class="mr-5"><?php echo $FppPM10;?> Filtros <strong>PM10</strong> </div>
                     </div>
                     <a class="card-footer text-white clearfix small z-1" href="<?php echo site_url('Filtros/irPesarFiltros')  . "?idLote=" .$idLote . "&tipo=pm10" . "&consecutivo=". $consePM10."&max=".$maxPM10 ."&filtrosporpesar=". $FppPM10;?>">
                         <span class="float-left">Pesar Filtros</span>
@@ -60,7 +60,7 @@
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-filter"></i>
                         </div>
-                        <div class="mr-5"><?php echo $FppPM25;?> Filtros PM2.5</div>
+                        <div class="mr-5"><?php echo $FppPM25;?> Filtros <strong>PM2.5</strong></div>
                     </div>
                     <a class="card-footer text-white clearfix small z-1"
                        href="<?php echo site_url('Filtros/irPesarFiltros')  . "?idLote=" .$idLote . "&tipo=pm25" . "&consecutivo=". $consePM25 ."&max=".$maxPM25 ."&filtrosporpesar=". $FppPM25;?>">
@@ -100,19 +100,36 @@
                         <tr>
                             <th>Codigo</th>
                             <th>Variable</th>
-                            <th>Peso (ug)</th>
-                            <th>Fecha de pesado</th>
+                            <th>Peso Inicial(ug)</th>
+                            <th>Peso Final(ug)</th>
+                            <th>Fecha de pesado Inicial</th>
+                            <th>Fecha de pesado Final</th>
+                            <?php if ($filtrosPorPesarUltimaVez){
+                                echo '<th>Pesar:</th>';
+                            }?>
+
                         </tr>
                         </thead>
                         <tbody>
                         <?php
                         foreach ($filtrosTodos->result() as $filtro){
+                            $pesar = ($filtro->instalado == NULL) OR  ($filtro->recogido == NULL);
                             echo
                                 '<tr>'.
                                 '<td>'. $filtro->identificador.'</td>' .
-                                '<td>'. $filtro->tipo .
-                                '<td>'. $filtro->pesoInicial .'</td>' .
-                                '<td>'. $filtro->pesado .'</td></tr>';
+                                '<td style="text-align: center;">'. $filtro->tipo .
+                                '<td style="text-align: center;">'. $filtro->pesoInicial .'</td>' .
+                                '<td style="text-align: center;">'. $filtro->pesoFinal .'</td>' .
+                                '<td style="text-align: center;">'. $filtro->pesado .'</td>' .
+                                '<td style="text-align: center;">'. $filtro->pesadoFinal .'</td>' ;
+                            if (!$pesar){
+                                echo '<td>Función no disponible.</td></tr>' ;
+                            }else{
+                                echo '<td><form id="'.$filtro->idFiltros.'" method="post">' .
+                                    '<input class="form-control-sm" type="number" min="0" max="50" name="pesoFinal">'.
+                                    '<button style="margin-left: 5px;" type="submit" class="btn btn-primary btn-sm">Guardar</button>'.
+                                '</form></td></tr>' ;
+                            }
                         }
                         ?>
                         </tbody>
@@ -135,4 +152,72 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Seguro quieres salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Haz click en "Cerrar" si estas seguro de terminar con la sesion actual.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="login.html">Cerrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery-easing/jquery.easing.min.js')?>"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.js')?>"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="<?php echo base_url('assets/js/sb-admin.min.js')?>"></script>
+    <!-- Custom scripts for this page-->
+    <script src="<?php echo base_url('assets/js/sb-admin-datatables.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
+    <?php //echo base_url('Filtros/pesarFiltroFinal');?>
+    <script>
+        $('form').on('submit', function (e) {
+
+            e.preventDefault();
+            var user_id = $(this).attr('id');
+            console.log("id form " + user_id);
+            /*
+                //console.log($('form').serialize());
+                $.ajax({
+                    type: 'post',
+                    url: "" ,
+                    data: $('form').serialize(),
+                    success: function (data) {
+                        console.log(data) ;
+                        if (data === 'success'){
+                            // mostrar modal
+                            $('#modalAtras').modal('show');
+                        }else{
+                            alert('Error');
+                        }
+                    }
+                });
+            */
+        });
+
+    </script>
+</div>
+</body>
+
+</html>
 

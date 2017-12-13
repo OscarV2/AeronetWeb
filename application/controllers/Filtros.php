@@ -46,6 +46,7 @@ class Filtros extends CI_Controller
       echo 'success';
     }
 
+    //Vista del lote de filtros en Laboratorio.
     public function irLoteFiltros()
     {
         $idLote = $this->input->post('id');
@@ -71,6 +72,17 @@ class Filtros extends CI_Controller
         $consePM10 = $lote->cant_pm10 - $FppPM10;
         $consePM25 = $lote->cant_pm25 - $FppPM25;
 
+        $filtrosTodos = $this->Filtro_model->getFiltrosPorLote($idLote);
+
+        $pesosFinales = array();
+
+        foreach ($filtrosTodos->result() as $filtro){
+            $pesosFinales[] = $filtro->pesoFinal;
+        }
+
+        $filtrosPorPesarUltimaVez = in_array(0, $pesosFinales);
+
+
         $filtros = array(
 
         'filtrosPesados' => $filtrosPesados,
@@ -85,17 +97,23 @@ class Filtros extends CI_Controller
             'consePST' => $consePST ,
             'consePM10' => $consePM10 ,
             'consePM25' => $consePM25,
-            'filtrosTodos' => $this->Filtro_model->getFiltrosPorLote($idLote),
+            'filtrosTodos' => $filtrosTodos,
             'maxPST' => $lote->cant_pst,
             'maxPM10' => $lote->cant_pm10,
             'maxPM25' => $lote->cant_pm25,
-            'idLote' => $idLote
+            'idLote' => $idLote,
+            'filtrosPorPesarUltimaVez' => $filtrosPorPesarUltimaVez
+
         );
 
         $this->load->view('layout/header');
         $this->load->view('vista_laboratorio', $filtros);
-        $this->load->view('layout/footer');
 
+    }
+
+    public function pesarFiltroFinal()
+    {
+        
     }
 
     public function guardarFiltros()

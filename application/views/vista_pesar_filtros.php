@@ -56,7 +56,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label class="control-label">Peso (ug):</label>
-                        <input type="text" name="pesoNuevoFiltro[]"  class="form-control" required>
+                        <input type="number" step="any" name="pesoNuevoFiltro[]"  class="form-control" required>
                     </div>
 
                     <div class="form-group col-md-3">
@@ -76,21 +76,14 @@
                 </div>
             </section>
 
-            <div class="btn btn-primary col">
-                <button id="btn_guardar_filtros" type="submit" class="btn btn-primary btn-lg">  Guardar</button>
+            <div class="btn btn-primary">
+                <button style="text-align: center;" id="btn_guardar_filtros" type="submit" class="btn btn-primary btn-lg">  Guardar</button>
             </div>
         </form>
 
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-        <div class="container">
-            <div class="text-center">
-                <small>Copyright © Qualys 2017</small>
-            </div>
-        </div>
-    </footer>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
@@ -144,7 +137,7 @@
                         '</div>' +
                         '<div class="form-group col-md-3">' +
                         '<label class="control-label">Peso(ug):</label>' +
-                        '<input type="number" name="pesoNuevoFiltro[]" class="form-control" min="0" max="100" required>' +
+                        '<input type="number" step="any" name="pesoNuevoFiltro[]" class="form-control" min="0" max="100" required>' +
                         '</div>' +
                         '<div class="form-group col-md-3">' +
                         '<label class="control-label">Fecha:</label>' +

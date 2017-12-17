@@ -67,7 +67,7 @@
                                     '<tr>'.
                                     '<td>'. $estacion['nombreEstacion'].'</td>' .
                                     '<td>'. $estacion['modelo'].'</td>' .
-                                    '<td>'. $estacion['clase'].'</td>' .
+                                    '<td>'. $estacion['clase'].'<input name="clase" hidden value="'.$estacion['clase'].'"></td>' .
 
                                     '<td style="text-align: center;"><label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">' .
                                     '<input name="equipo" value="'. $estacion['idEquipo']. '" type="radio" class="custom-control-input">'.
@@ -184,19 +184,28 @@
                 //console.log($('form').serialize());
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo site_url('Analista/getMuestras');?>" ,
+                    url: "<?php echo site_url('Analista/existeLote');?>" ,
                     data: $('form').serialize(),
                     success: function (data) {
                         console.log(data) ;
                         if (data === 'success'){
                             // mostrar modal
-                            $('#modalAtras').modal('show');
+                            irVerMuestras();
                         }else if(data === 'no existe'){
                             alert('NO SE HAN TOMADO MUESTRAS EN ESTA ESTACION EN LA FECHA SELECCIONADA.');
                         }
                     }
                 });
         });
+
+        function irVerMuestras() {
+
+            $.ajax({
+                type: 'post',
+                url: "<?php echo site_url('Analista/getMuestras');?>" ,
+                data: $('form').serialize()
+            });
+        }
 
     </script>
 </div>

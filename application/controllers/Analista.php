@@ -37,6 +37,20 @@ class Analista extends CI_Controller
 
     }
 
+    public function existeLote()
+    {
+        $mes = $this->input->post('mes');
+        $year = $this->input->post('year');
+        $idEquipo = $this->input->post('equipo');
+
+        $lotes = $this->Analisis_model->existeLote($mes, $year);
+
+        if($lotes > 0){
+            echo 'success';
+        }else{
+            echo 'no existe';
+        }
+    }
 
     public function getMuestras()
     {
@@ -46,10 +60,13 @@ class Analista extends CI_Controller
 
         $muestras = $this->Analisis_model->getMuestras($idEquipo, $mes, $year);
 
-        $lotes = $this->Analisis_model->existeLote($mes, $year);
+        $data = array(
+            'muestras' => $muestras
+        );
+        $this->load->view('layout/header');
+        $this->load->view('analista_de_datos/muestras_informe', $data);
+        $this->load->view('layout/footer');
 
-        if($lotes > 0){
 
-        }
     }
 }

@@ -73,25 +73,26 @@ class Analisis_model extends CI_Model
                     $muestra = $this->getMuestraFiltro($idFiltro)->result();
                     $muestrasFiltros[] = array(
                         'filtro' => $filtro->identificador,
-                        'presion_amb' => $filtro->presion_amb,
-                        'temp_ambC' => $filtro->temp_ambC,
-                        'temp_ambK' => $filtro->temp_ambK,
-                        'presion_est_inicial' => $filtro->presion_est_inicial,
-                        'presion_est_final' => $filtro->presion_est_final,
-                        'presion_est_avg' => $filtro->presion_est_avg,
-                        'tiempo_operacion' => $filtro->tiempo_operacion,
-                        'PoPa' => $filtro->PoPa,
-                        'Qr' => $filtro->Qr,
-                        'Qstd' => $filtro->Qstd,
-                        'diff_rfo' => $filtro->diff_rfo,
-                        'Vstd' => $filtro->Vstd,
-                        'Wi' => $filtro->Wi,
-                        'Wf' => $filtro->Wf,
-                        'Wn' => $filtro->Wn,
-                        'variable' => $filtro->variable,
+                        'presion_amb' => $muestra->presion_amb,
+                        'temp_ambC' => $muestra->temp_ambC,
+                        'temp_ambK' => $muestra->temp_ambK,
+                        'presion_est_inicial' => $muestra->presion_est_inicial,
+                        'presion_est_final' => $muestra->presion_est_final,
+                        'presion_est_avg' => $muestra->presion_est_avg,
+                        'tiempo_operacion' => $muestra->tiempo_operacion,
+                        'PoPa' => $muestra->PoPa,
+                        'Qr' => $muestra->Qr,
+                        'Qstd' => $muestra->Qstd,
+                        'diff_rfo' => $muestra->diff_rfo,
+                        'Vstd' => $muestra->Vstd,
+                        'Wi' => $muestra->Wi,
+                        'Wf' => $muestra->Wf,
+                        'Wn' => $muestra->Wn,
+                        'variable' => $muestra->variable,
                     );
                 }
 
+                $response = $muestrasFiltros;
             }else{
                 $response = 'no hay filtros validos';
             }
@@ -99,6 +100,8 @@ class Analisis_model extends CI_Model
         }else {
             $response = 'no existe';
         }
+
+        return $muestrasFiltros;
     }
 
     public function getMuestraFiltro($idFiltro)

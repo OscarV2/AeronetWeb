@@ -31,7 +31,7 @@ class LoteFiltro_model extends CI_Model
     }
     public function getLoteUsuario($id)
     {
-        $this->db->select('mes, id');
+        $this->db->select('mes, id, nombre');
         $this->db->where('idusuario', $id);
         return $this->db->get('lotefiltros');
     }

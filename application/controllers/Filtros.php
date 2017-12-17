@@ -38,8 +38,10 @@ class Filtros extends CI_Controller
             'cant_pst' => $this->input->post('cant_pst'),
             'cant_pm10' => $this->input->post('cant_pm10'),
             'cant_pm25' => $this->input->post('cant_pm25'),
-            'mes' => $periodo,
+            'mes' => $this->input->post('mes'),
             'idProyecto' => $this->input->get('idProyecto'),
+            'year' => $this->input->post('year'),
+            'nombre' => $periodo
         );
 
       $this->LoteFiltro_model->nuevo($data);

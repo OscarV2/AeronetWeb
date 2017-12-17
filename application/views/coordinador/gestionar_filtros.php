@@ -1,4 +1,4 @@
-
+<!-- Nuevo Lote de filtros-->
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">

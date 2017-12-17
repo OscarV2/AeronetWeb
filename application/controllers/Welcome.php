@@ -61,7 +61,9 @@ class Welcome extends CI_Controller {
 
                 }
                 elseif ($rol == 'analista'){
-
+                    $this->load->view('layout/header');
+                    $this->load->view('analista_de_datos/index');
+                    $this->load->view('layout/footer');
                 }elseif($rol == 'coordinador') {
                     $this->irInicio();
                 }

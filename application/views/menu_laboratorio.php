@@ -28,7 +28,7 @@
                 <?php
                 foreach ($lotes->result() as $lote)
                 {
-                    echo '<option value="'. $lote->id . '">' . $lote->mes.'</option>';
+                    echo '<option value="'. $lote->id . '">' . $lote->nombre.'</option>';
                 }
                 ?>
             </select>

@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Nuevo Proyecto">
-                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearProyecto');?>">
+                <a class="nav-link" href="#">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Nuevo Informe</span>
                 </a>
@@ -45,70 +45,9 @@
 <div class="content-wrapper">
     <div class="container-fluid">
         <form action="" method="post">
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fa fa-table"></i> Estaciones
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>Estacion</th>
-                                <th>Equipo</th>
-                                <th>Tipo</th>
-                                <th>Seleccionar</th>
-                            </tr>
-                            <?php
-                            foreach ($estaciones as $estacion){
-                                //var_dump($estacion);
-
-                                echo
-                                    '<tr>'.
-                                    '<td>'. $estacion['nombreEstacion'].'</td>' .
-                                    '<td>'. $estacion['modelo'].'</td>' .
-                                    '<td>'. $estacion['clase'].'</td>' .
-
-                                    '<td style="text-align: center;"><label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">' .
-                                    '<input name="equipo" value="'. $estacion['idEquipo']. '" type="radio" class="custom-control-input">'.
-                                    '<span class="custom-control-indicator"></span>'.
-                                    '</label></td>' .
-                                    '</tr>';
-
-                            }
-                            ?>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleSelect1">Seleccionar mes</label>
-                <select name="mes" class="form-control" required>
-                    <option>Enero</option>
-                    <option>Febrero</option>
-                    <option>Marzo</option>
-                    <option>Abril</option>
-                    <option>Mayo</option>
-                    <option>Junio</option>
-                    <option>Julio</option>
-                    <option>Agosto</option>
-                    <option>Septiembre</option>
-                    <option>Octubre</option>
-                    <option>Noviembre</option>
-                    <option>Diciembre</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="number" name="year" min="2017" max="2020" class="form-control" id="exampleFormControlInput1" placeholder="Año" required>
-            </div>
 
             <button type="submit" class="btn btn-primary btn-block"><strong>Guardar</strong></button>
         </form>
-
 
     </div>
     <!-- /.container-fluid-->
@@ -181,21 +120,21 @@
         $('form').on('submit', function (e) {
 
             e.preventDefault();
-                //console.log($('form').serialize());
-                $.ajax({
-                    type: 'post',
-                    url: "<?php echo site_url('Analista/getMuestras');?>" ,
-                    data: $('form').serialize(),
-                    success: function (data) {
-                        console.log(data) ;
-                        if (data === 'success'){
-                            // mostrar modal
-                            $('#modalAtras').modal('show');
-                        }else if(data === 'no existe'){
-                            alert('NO SE HAN TOMADO MUESTRAS EN ESTA ESTACION EN LA FECHA SELECCIONADA.');
-                        }
+            //console.log($('form').serialize());
+            $.ajax({
+                type: 'post',
+                url: "<?php echo site_url('Analista/getMuestras');?>" ,
+                data: $('form').serialize(),
+                success: function (data) {
+                    console.log(data) ;
+                    if (data === 'success'){
+                        // mostrar modal
+                        $('#modalAtras').modal('show');
+                    }else if(data === 'no existe'){
+                        alert('NO SE HAN TOMADO MUESTRAS EN ESTA ESTACION EN LA FECHA SELECCIONADA.');
                     }
-                });
+                }
+            });
         });
 
     </script>

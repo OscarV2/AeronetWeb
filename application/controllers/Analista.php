@@ -26,18 +26,30 @@ class Analista extends CI_Controller
 
         $this->load->model('Estacion_model');
         $data = array(
-            'estaciones' => $this->Estacion_model->getEstaciones()
+            'estaciones' => $this->Estacion_model->getEstacionesAnalista()
         );
+
+        //var_dump($data);
 
         $this->load->view('layout/header');
         $this->load->view('analista_de_datos/estaciones', $data);
+
+
     }
+
 
     public function getMuestras()
     {
         $mes = $this->input->post('mes');
         $year = $this->input->post('year');
-        $idEstacion = $this->input->post('idEstacion');
-        echo $this->Analisis_model->existeLote($mes, $year);
+        $idEquipo = $this->input->post('equipo');
+
+        $muestras = $this->Analisis_model->getMuestras($idEquipo, $mes, $year);
+
+        $lotes = $this->Analisis_model->existeLote($mes, $year);
+
+        if($lotes > 0){
+
+        }
     }
 }

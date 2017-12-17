@@ -24,6 +24,32 @@ class Estacion_model extends CI_Model
         return $this->db->get('estacion');
     }
 
+    public function getEstacionesAnalista()
+    {
+        $response = array();
+        $estaciones = $this->getEstaciones()->result();
+
+        foreach ($estaciones as $estacion) {
+
+            $idEstacion = $estacion->idestacion;
+            $this->db->select('idequipo, modelo, clase');
+            $equiposEstacion = $this->db->get_where('equipos', array('estacion_idestacion' => $idEstacion))->result();
+
+            foreach ($equiposEstacion as $equipo){
+
+                array_push($response, array(
+                    'nombreEstacion' => $estacion->nombre,
+                    'idEquipo' => $equipo->idequipo,
+                    'modelo' => $equipo->modelo,
+                    'clase' => $equipo->clase,
+
+                ));
+            }
+        }
+
+        return $response;
+    }
+
     public function guardarNuevaEstacion($data)
     {
         $this->db->insert('estacion',$data);

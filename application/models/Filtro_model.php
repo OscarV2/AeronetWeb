@@ -59,18 +59,32 @@ class Filtro_model extends CI_Model
         $this->db->update('filtros',$data);
     }
 
-    public function recoger($id, $fecha, $vol, $idequipo, $observaciones)
+    public function recoger($data)
     {
+
+        $id = $data['idfiltro'];
+        $fecha = $data['fecha'];
+        $idequipo = $data['idequipo'];
+        $observaciones = $data['observaciones'];
+        $fechaMuestreo = $data['fecha_muestreo'];
+        //Muestra
+        $muestra = $this->setMuestra($data);
+
         $data = array(
             'recogido' => $fecha,
-            'volumen' => $vol,
-            'observaciones' => $observaciones
+            'observaciones' => $observaciones,
+            'fecha_muestreo' => $fechaMuestreo
         );
+
         $this->db->where('idFiltros', $id);
         $this->db->update('filtros',$data);
 
         $this->db->where('idequipo', $idequipo);
         $this->db->update('equipos', array('ocupado' => 0));
+
+        $this->db->where('idFiltro', $id);
+        $this->db->update('muestra', $muestra);
+
     }
 
     public function guardarNuevosFiltros($data)
@@ -117,5 +131,34 @@ class Filtro_model extends CI_Model
         $this->db->where('lotefiltros_id', $idLote);
         $this->db->where('pesado', !NULL);
         return $this->db->count_all_results('filtros');
+    }
+
+    private function setMuestra($data)
+    {
+        $muestra = array(
+            'presion_amb' => $data['presion_amb'],
+            'temp_ambC' => $data['temp_ambC'],
+            'temp_ambK' => $data['temp_ambK'],
+            'presion_est_inicial' => $data['presion_est_inicial'],
+            'presion_est_final' => $data['presion_est_final'],
+            'presion_est_avg' => $data['presion_est_avg'],
+            'horometro_inicial' => $data['horometro_inicial'],
+            'horometro_final' => $data['horometro_final'],
+            'PoPa' => $data['PoPa'],
+            'Qr' => $data['Qr'],
+            'Qstd' => $data['Qstd'],
+            'diff_rfo' => $data['diff_rfo'],
+            'tiempo_operacion' => $data['tiempo_operacion'],
+            'Vstd' => $data['Vstd']
+        );
+
+        return $muestra;
+    }
+
+    public function updateFiltro($id, $data)
+    {
+        $this->db->where('idFiltros', $id);
+        $this->db->update('filtros',$data);
+
     }
 }

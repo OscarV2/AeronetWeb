@@ -46,7 +46,6 @@ class Filtros extends CI_Controller
 
     public function instalarFiltro()
     {
-
         $data = json_decode(file_get_contents('php://input'), true);
         $filtro = $data['idfiltro'];
         $fecha = $data['fecha'];
@@ -59,13 +58,9 @@ class Filtros extends CI_Controller
     public function recogerFiltro()
     {
         $data = json_decode(file_get_contents('php://input'), true);
-        $id = $data['idfiltro'];
-        $fecha = $data['fecha'];
-        $vol = $data['volumen'];
-        $idequipo = $data['idequipo'];
-        $observaciones = $data['observaciones'];
 
-        $this->Filtro_model->recoger($id, $fecha, $vol, $idequipo, $observaciones);
+        $this->Filtro_model->recoger($data);
         echo 'Ok';
     }
+
 }

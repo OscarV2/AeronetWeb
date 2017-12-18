@@ -113,7 +113,7 @@
                         <tbody>
                         <?php
                         foreach ($filtrosTodos->result() as $filtro){
-                            $pesar =  ($filtro->recogido == NULL);
+                            $pesar =  (($filtro->recogido == NULL) OR ($filtro->pesoFinal > 0));
                             echo
                                 '<tr>'.
                                 '<td>'. $filtro->identificador.'</td>' .
@@ -125,9 +125,11 @@
                             if ($pesar){
                                 echo '<td>Función no disponible.</td></tr>' ;
                             }else{
-                                echo '<td><form id="'.$filtro->idFiltros.'" method="post">' .
-                                    '<input class="form-control-sm" type="number" min="0" max="50" name="pesoFinal">'.
-                                    '<button style="margin-left: 5px;" type="submit" class="btn btn-primary btn-sm">Guardar</button>'.
+                                echo '<td><form id="form'.$filtro->idFiltros.'" method="post">' .
+                                    '<input class="form-control-sm" type="number" min="0.1" max="50" step="any" name="pesoFinal">'.
+                                    '<input hidden name="id" value="'.$filtro->idFiltros.'">'.
+                                    '<input hidden name="fecha" value="'.date('d/m/Y').'">'.
+                                    '<button style="margin: 5px;" type="submit" class="btn btn-primary btn-sm">Guardar</button>'.
                                 '</form></td></tr>' ;
                             }
                         }
@@ -152,20 +154,16 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!--  Modal filtro pesado -->
+    <div class="modal fade" id="modalAtras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Seguro quieres salir?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+                    <h5 class="modal-title" id="exampleModalLabel">Filtro pesado exitosamente.</h5>
+
                 </div>
-                <div class="modal-body">Haz click en "Cerrar" si estas seguro de terminar con la sesion actual.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="login.html">Cerrar</a>
+                    <a class="btn btn-primary" href="#" data-dismiss="modal">Ok</a>
                 </div>
             </div>
         </div>
@@ -191,16 +189,23 @@
     <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
     <?php //echo base_url('Filtros/pesarFiltroFinal');?>
     <script>
+        $(document).ready(function(){
+            $('#modalAtras').on('hidden.bs.modal', function () {
+                location.reload();
+            });
+        });
+
         $('form').on('submit', function (e) {
 
             e.preventDefault();
             var user_id = $(this).attr('id');
             console.log("id form " + user_id);
-            /*
+            console.log($('form').serialize());
+
                 //console.log($('form').serialize());
                 $.ajax({
                     type: 'post',
-                    url: "" ,
+                    url: "<?php echo site_url('Filtros/pesarFiltroFinal');?>" ,
                     data: $('form').serialize(),
                     success: function (data) {
                         console.log(data) ;
@@ -212,7 +217,6 @@
                         }
                     }
                 });
-            */
         });
 
     </script>

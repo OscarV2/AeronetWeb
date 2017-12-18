@@ -115,7 +115,13 @@ class Filtros extends CI_Controller
 
     public function pesarFiltroFinal()
     {
-        
+        $idFiltro = $this->input->post('id');
+        $peso = $this->input->post('pesoFinal');
+        $fecha = $this->input->post('fecha');
+
+        $data = array('pesoFinal' => $peso, 'pesadoFinal' =>$fecha);
+        $this->Filtro_model->updateFiltro($idFiltro, $data);
+        echo 'success';
     }
 
     public function guardarFiltros()

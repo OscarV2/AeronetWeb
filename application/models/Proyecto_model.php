@@ -28,6 +28,7 @@ class Proyecto_model extends CI_Model
         $proyectos = $this->db->get('proyectos')->result();
 
         foreach ($proyectos as $proyecto){
+
             $this->db->select('nombre');
             $this->db->where('proyectos_idProyecto', $proyecto->idProyecto);
             $estaciones = $this->db->get('estacion')->result();
@@ -37,9 +38,9 @@ class Proyecto_model extends CI_Model
 
                 array_push($data, array(
                     'idProyecto' => $proyecto->idProyecto,
-                    'nombre'=> $proyecto->idProyecto,
-                    'fechaInicio'=> $proyecto->idProyecto,
-                    'duracion'=>$proyecto->idProyecto,
+                    'nombre'=> $proyecto->nombre,
+                    'fechaInicio'=> $proyecto->fechaInicio,
+                    'duracion'=>$proyecto->duracion,
                     'estaciones' => $nombres
                 ));
             } else {

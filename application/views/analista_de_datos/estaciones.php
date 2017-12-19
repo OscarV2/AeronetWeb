@@ -44,7 +44,7 @@
 </nav>
 <div class="content-wrapper">
     <div class="container-fluid">
-        <form action="" method="post">
+        <form action="<?php echo site_url('Analista/existeLote');?>" method="post">
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fa fa-table"></i> Estaciones
@@ -177,19 +177,21 @@
 
     <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
     <script>
-
+/*
         $('form').on('submit', function (e) {
 
             e.preventDefault();
                 //console.log($('form').serialize());
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo site_url('Analista/existeLote');?>" ,
+                    url: "" ,
                     data: $('form').serialize(),
                     success: function (data) {
                         console.log(data) ;
                         if (data === 'success'){
                             // mostrar modal
+                            console.log('data is success') ;
+
                             irVerMuestras();
                         }else if(data === 'no existe'){
                             alert('NO SE HAN TOMADO MUESTRAS EN ESTA ESTACION EN LA FECHA SELECCIONADA.');
@@ -197,13 +199,16 @@
                     }
                 });
         });
-
+*/
         function irVerMuestras() {
 
             $.ajax({
                 type: 'post',
                 url: "<?php echo site_url('Analista/getMuestras');?>" ,
-                data: $('form').serialize()
+                data: $('form').serialize(),
+                success: function() {
+                    window.location.href = "<?php echo site_url('Analista/getMuestras');?>";
+                }
             });
         }
 

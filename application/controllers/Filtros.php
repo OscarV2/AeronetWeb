@@ -120,8 +120,13 @@ class Filtros extends CI_Controller
         $fecha = $this->input->post('fecha');
 
         $data = array('pesoFinal' => $peso, 'pesadoFinal' =>$fecha);
-        $this->Filtro_model->updateFiltro($idFiltro, $data);
-        echo 'success';
+        try{
+            $this->Filtro_model->updateFiltro($idFiltro, $data);
+            $response = "success";
+        }catch (Error $e){
+            $response = "Error";
+    }
+        echo $response;
     }
 
     public function guardarFiltros()

@@ -199,14 +199,13 @@
 
             e.preventDefault();
             var user_id = $(this).attr('id');
-            console.log("id form " + user_id);
-            console.log($('form').serialize());
+            //console.log('datos unico form' + $('#' +user_id).serialize());
 
                 //console.log($('form').serialize());
                 $.ajax({
                     type: 'post',
                     url: "<?php echo site_url('Filtros/pesarFiltroFinal');?>" ,
-                    data: $('form').serialize(),
+                    data: $('#' +user_id).serialize(),
                     success: function (data) {
                         console.log(data) ;
                         if (data === 'success'){

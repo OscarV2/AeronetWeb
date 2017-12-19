@@ -46,7 +46,67 @@
     <div class="container-fluid">
         <form action="" method="post">
 
-            <button type="submit" class="btn btn-primary btn-block"><strong>Guardar</strong></button>
+            <!-- Example DataTables Card-->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Muestras
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Codigo</th>
+                                <th>Fecha de muestreo</th>
+                                <th>Pf inicial (Pulg HOH)</th>
+                                <th>Pf final (Pulg HOH)</th>
+                                <th>Pf Avg (mmHg)</th>
+                                <th>Pa (mmHg)</th>
+                                <th>Ta (°C)</th>
+                                <th>Ta (°K)</th>
+                                <th>Po/Pa</th>
+                                <th>Qr (m3/min)</th>
+                                <th>Qstd (m3/min)</th>
+                                <th>Tiempo de operación</th>
+                                <th>%DIF RFO</th>
+                                <th>Vstd (m3)</th>
+                                <th>Wi(g)</th>
+                                <th>Wf(g)</th>
+                                <th>Wn(g)</th>
+                                <th>PM10 (ug/m3)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            foreach ($muestras as $muestra){
+                                echo
+                                    '<tr>'.
+                                    '<td>'. $muestra['filtro'].'</td>' .
+                                    '<td>'. $muestra['fecha_muestreo'].'</td>' .
+                                    '<td>'. $muestra['presion_est_inicial'].'</td>' .
+                                    '<td>'. $muestra['presion_est_final'].'</td>' .
+                                    '<td>'. $muestra['presion_est_avg'].'</td>' .
+                                    '<td>'. $muestra['presion_amb'].'</td>' .
+                                    '<td>'. $muestra['temp_ambC'].'</td>' .
+                                    '<td>'. $muestra['temp_ambK'].'</td>' .
+                                    '<td>'. $muestra['PoPa'].'</td>' .
+                                    '<td>'. $muestra['Qr'].'</td>' .
+                                    '<td>'. $muestra['Qstd'].'</td>' .
+                                    '<td>'. $muestra['tiempo_operacion'].'</td>' .
+                                    '<td>'. $muestra['diff_rfo'].'</td>' .
+                                    '<td>'. $muestra['Vstd'].'</td>' .
+                                    '<td>'. $muestra['Wi'].'</td>' .
+                                    '<td>'. $muestra['Wf'].'</td>' .
+                                    '<td>'. $muestra['Wn'].'</td>' .
+                                    '<td>'. $muestra['variable'] .'</td></tr>';
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer small text-muted">Actualizado  ayer a las 11:59 PM</div>
+            </div>
         </form>
 
     </div>
@@ -115,29 +175,7 @@
     <script src="<?php echo base_url('assets/js/sb-admin-datatables.min.js')?>"></script>
 
     <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
-    <script>
 
-        $('form').on('submit', function (e) {
-
-            e.preventDefault();
-            //console.log($('form').serialize());
-            $.ajax({
-                type: 'post',
-                url: "<?php echo site_url('Analista/getMuestras');?>" ,
-                data: $('form').serialize(),
-                success: function (data) {
-                    console.log(data) ;
-                    if (data === 'success'){
-                        // mostrar modal
-                        $('#modalAtras').modal('show');
-                    }else if(data === 'no existe'){
-                        alert('NO SE HAN TOMADO MUESTRAS EN ESTA ESTACION EN LA FECHA SELECCIONADA.');
-                    }
-                }
-            });
-        });
-
-    </script>
 </div>
 </body>
 

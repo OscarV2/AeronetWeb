@@ -70,9 +70,11 @@ class Analisis_model extends CI_Model
                 foreach ($filtrosEquipo as $filtro) {
 
                     $idFiltro = $filtro->idFiltros;
-                    $muestra = $this->getMuestraFiltro($idFiltro)->result();
+                    $muestras = $this->getMuestraFiltro($idFiltro)->result();
+                    foreach ($muestras as $muestra)
                     $muestrasFiltros[] = array(
                         'filtro' => $filtro->identificador,
+                        'fecha_muestreo' => $filtro->fecha_muestreo,
                         'presion_amb' => $muestra->presion_amb,
                         'temp_ambC' => $muestra->temp_ambC,
                         'temp_ambK' => $muestra->temp_ambK,
@@ -101,7 +103,7 @@ class Analisis_model extends CI_Model
             $response = 'no existe';
         }
 
-        return $muestrasFiltros;
+        return $response;
     }
 
     public function getMuestraFiltro($idFiltro)

@@ -9,16 +9,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inicio">
+                <a class="nav-link" href="<?php echo site_url('Welcome/irInicio');?>">
+                    <i class="fa fa-fw fa-area-chart"></i>
+                    <span class="nav-link-text">Inicio</span>
+                </a>
+            </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nuevo Proyecto">
                 <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearProyecto');?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Nuevo Proyecto</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="ListaProyectos">
-                <a class="nav-link" href="<?php echo site_url('Coordinador/irListaProyectos');?>">
-                    <i class="fa fa-fw fa-area-chart"></i>
-                    <span class="nav-link-text">Lista de proyectos</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
@@ -27,21 +27,20 @@
                     <span class="nav-link-text">Nuevo Usuario</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link nav-link-collapse" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-wrench"></i>
                     <span class="nav-link-text">Equipos</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
                     <li>
-                        <a href="../navbar.html">PM10</a>
+                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pm10" ;?>">PM10</a>
                     </li>
                     <li>
-                        <a href="../cards.html">PST</a>
-
+                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pst" ;?>"">PST</a>
                     </li>
                     <li>
-                        <a href="../cards.html">PM2.5</a>
+                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pm2.5" ;?>"">PM2.5</a>
                     </li>
                 </ul>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Estaciones">
@@ -50,7 +49,6 @@
                     <span class="nav-link-text">Estaciones</span>
                 </a>
             </li>
-
             </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">

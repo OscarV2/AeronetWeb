@@ -113,7 +113,8 @@
                         <tbody>
                         <?php
                         foreach ($filtrosTodos->result() as $filtro){
-                            $pesar =  (($filtro->recogido == NULL) OR ($filtro->pesoFinal > 0));
+                            $pesar =  (($filtro->recogido == NULL));
+                            $pesado = ($filtro->pesoFinal > 0);
                             echo
                                 '<tr>'.
                                 '<td>'. $filtro->identificador.'</td>' .
@@ -124,7 +125,10 @@
                                 '<td style="text-align: center;">'. $filtro->pesadoFinal .'</td>' ;
                             if ($pesar){
                                 echo '<td>Función no disponible.</td></tr>' ;
-                            }else{
+                            }else if ($pesado){
+
+                            }
+                            else{
                                 echo '<td><form id="form'.$filtro->idFiltros.'" method="post">' .
                                     '<input class="form-control-sm" type="number" min="0.1" max="50" step="any" name="pesoFinal">'.
                                     '<input hidden name="id" value="'.$filtro->idFiltros.'">'.

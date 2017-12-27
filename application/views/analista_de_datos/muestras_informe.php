@@ -109,6 +109,72 @@
             </div>
         </form>
 
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-area-chart"></i> Resultados
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tablaResultados" width="100%" cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <td>Numero de datos(n)</td>
+                            <td><?php echo $resultados['numDatos'];?></td>
+                        </tr>
+                        <tr>
+                            <td>Promedio Aritmetico</td>
+                            <td><?php echo $resultados['promedio'];?></td>
+                        </tr>
+                        <tr>
+                            <td>Valor mas alto registrado(ug/m3)</td>
+                            <td><?php echo $resultados['max'];?></td>
+                        </tr>
+                        <tr>
+                            <td>Fecha de registro</td>
+                            <td><?php echo $resultados['fechaMax'];?></td>
+                        </tr><tr>
+                            <td>Valor mas bajo registrado(ug/m3)</td>
+                            <td><?php echo $resultados['min'];?></td>
+                        </tr>
+                        <tr>
+                            <td>Fecha de registro</td>
+                            <td><?php echo $resultados['fechaMin'];?></td>
+                        </tr>
+                        <tr>
+                            <td>Desviacion estándar</td>
+                            <td><?php echo $resultados['desviacion'];?></td>
+                        </tr>
+                        <tr>
+                            <td>Parametro de Distribucion T</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Intervalo de confianza para la media (95%) u1 </td>
+                            <td><?php echo $resultados['u2'];?></td>
+                        </tr>
+                        <tr>
+                            <td>Intervalo de confianza para la media (95%) u2 </td>
+                            <td><?php echo $resultados['u1'];?></td>
+                        </tr>
+                        <tr>
+                            <td>Mediana</td>
+                            <td><?php echo $resultados['mediana'];?></td>
+                        </tr>
+                        <tr>
+                            <td>Percentil 25</td>
+                            <td><?php echo $resultados['percentil25'];?></td>
+                        </tr>
+                        <tr>
+                            <td>Percentil 75</td>
+                            <td><?php echo $resultados['percentil75'];?></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->

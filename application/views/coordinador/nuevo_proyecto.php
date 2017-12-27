@@ -8,16 +8,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inicio">
+                <a class="nav-link" href="<?php echo site_url('Welcome/irInicio');?>">
+                    <i class="fa fa-fw fa-area-chart"></i>
+                    <span class="nav-link-text">Inicio</span>
+                </a>
+            </li>
             <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Nuevo Proyecto">
                 <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearProyecto');?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Nuevo Proyecto</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                <a class="nav-link" href="<?php echo site_url('Coordinador/irListaProyectos');?>">
-                    <i class="fa fa-fw fa-area-chart"></i>
-                    <span class="nav-link-text">Lista de proyectos</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">

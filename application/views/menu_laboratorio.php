@@ -60,16 +60,45 @@
         <i class="fa fa-angle-up"></i>
     </a>
     <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalFiltro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Seguro quieres salir?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Pesar Filtro Testigo</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Haz click en "Cerrar" si estas seguro de terminar con la sesion actual.</div>
+                <div class="modal-body">
+                    <form method="post" id="formFiltroTestigo">
+
+                        <div  class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Codigo:</label>
+                                    <input type="text" name="codigo"
+                                           required class="form-control">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Peso (ug):</label>
+                                    <input type="number" step="any" name="pesoNuevoFiltro"  class="form-control" required>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Fecha:</label>
+                                    <input type="text"
+                                           name="fechaNuevoFiltro"
+                                           required class="form-control"
+                                           readonly
+                                           value="<?php echo date('d-m-Y');?>">
+                                </div>
+
+                            </div>
+
+                        <div class="btn btn-primary">
+                            <button style="text-align: center;" id="btn_guardar_filtro" type="submit" class="btn btn-primary btn-lg">  Pesar</button>
+                        </div>
+                    </form>
+                </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                     <a class="btn btn-primary" href="login.html">Cerrar</a>
@@ -79,6 +108,7 @@
     </div>
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
+
     <script>
 
         $(document).ready(function () {
@@ -86,12 +116,10 @@
 
            if (lotes === null){
                $("#btnVerLotes").hide();
-
-               console.log("nuloooooooooo");
-           }else {
-               console.log("puede seguir");
            }
         });
+
+
     </script>
 
     <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
@@ -109,6 +137,7 @@
     <script src="<?php echo base_url('assets/js/sb-admin-datatables.min.js')?>"></script>
 
     <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
+
 </div>
 </body>
 

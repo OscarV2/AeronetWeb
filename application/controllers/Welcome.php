@@ -20,6 +20,11 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+        $this->load->view('index');
+    }
+
+    public function irLogin()
+    {
         $this->load->helper('form');
         $this->load->view('layout/header');
         $this->load->view('login');
@@ -52,13 +57,16 @@ class Welcome extends CI_Controller {
 
                     $this->load->model('LoteFiltro_model');
 
-                    $lotes =array(
-                        'lotes' => $this->LoteFiltro_model->getLoteUsuario($existe[0]->idusuarios)
+                    $lotes = array(
+                        'lotes' => $this->LoteFiltro_model->getLoteUsuario($existe[0]->idusuarios),
+                        'filtrosTestigos' => $this->LoteFiltro_model->getFiltros(),
+                        'totales' => $this->LoteFiltro_model->getTotales()
                     );
 
                     $this->load->view('layout/header');
                     $this->load->view('menu_laboratorio', $lotes);
-
+                    session_start();
+                    $_SESSION['idusuario'] = $existe[0]->idusuarios;
                 }
                 elseif ($rol == 'analista'){
                     $this->load->view('layout/header');
@@ -89,6 +97,11 @@ class Welcome extends CI_Controller {
         $this->load->view('layout/header');
         $this->load->view('coordinador/vista_coordinador', $proyectos);
         $this->load->view('layout/footer');
+    }
+
+    public function cerrarSesion()
+    {
+        
     }
 
 }

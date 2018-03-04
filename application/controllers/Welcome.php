@@ -26,7 +26,6 @@ class Welcome extends CI_Controller {
     public function irLogin()
     {
         $this->load->helper('form');
-        $this->load->view('layout/header');
         $this->load->view('login');
         $this->load->view('layout/footer');
 
@@ -35,6 +34,10 @@ class Welcome extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->output->set_header('Last-Modified:'.gmdate('D, d M Y H:i:s').'GMT');
+        $this->output->set_header('Cache-Control: no-cache, must-revalidate');
+        $this->output->set_header('Cache-Control: post-check=0, pre-check=0',false);
+        $this->output->set_header('Pragma: no-cache');
     }
 
     public function login(){
@@ -57,22 +60,42 @@ class Welcome extends CI_Controller {
 
                     $this->load->model('LoteFiltro_model');
 
-                    $lotes = array(
-                        'lotes' => $this->LoteFiltro_model->getLoteUsuario($existe[0]->idusuarios),
+                    $lotes = $this->LoteFiltro_model->getLoteUsuario($existe[0]->idusuarios);
+
+                    $data = array(
+                        'lotes' => $lotes,
                         'filtrosTestigos' => $this->LoteFiltro_model->getFiltros(),
-                        'totales' => $this->LoteFiltro_model->getTotales()
+                        'totales' => $this->LoteFiltro_model->getTotales(),
+                        'idusuario' => $existe[0]->idusuarios
                     );
 
+                    //$this->session->set_userdata('idusuario', $existe[0]->idusuarios);
+                    //$this->session->set_userdata($data);
+                    $this->guardarDatosSesion('laboratorista', $data);
                     $this->load->view('layout/header');
-                    $this->load->view('menu_laboratorio', $lotes);
-                    session_start();
-                    $_SESSION['idusuario'] = $existe[0]->idusuarios;
+                    $this->load->view('menu_laboratorio', $data);
+
                 }
                 elseif ($rol == 'analista'){
+
+                    $data = array(
+                        'usuarioNombre' => $existe[0]->nombre,
+                        'usuarioApe' => $existe[0]->apellidos
+                    );
+
+                    $this->guardarDatosSesion('analista', $data);
+
                     $this->load->view('layout/header');
                     $this->load->view('analista_de_datos/index');
                     $this->load->view('layout/footer');
                 }elseif($rol == 'coordinador') {
+
+                    $data = array(
+                        'usuarioNombre' => $existe[0]->nombre,
+                        'usuarioApe' => $existe[0]->apellidos
+                    );
+                    $this->guardarDatosSesion('coordinador', $data);
+
                     $this->irInicio();
                 }
             }else{
@@ -82,7 +105,7 @@ class Welcome extends CI_Controller {
 
         }else {
             // el usuario no existe
-            echo 'el usuario no existe';
+            $this->load->view();
         }
 
     }
@@ -97,6 +120,20 @@ class Welcome extends CI_Controller {
         $this->load->view('layout/header');
         $this->load->view('coordinador/vista_coordinador', $proyectos);
         $this->load->view('layout/footer');
+    }
+
+    public function guardarDatosSesion($rol, $data)
+    {
+        $this->load->library('session');
+
+        if ($rol == 'laboratorista'){
+            $this->session->set_userdata($data);
+        }elseif ($rol == 'analista'){
+            $this->session->set_userdata($data);
+        }
+        elseif ($rol == 'coordinador'){
+            $this->session->set_userdata($data);
+        }
     }
 
     public function cerrarSesion()

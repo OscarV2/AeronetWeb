@@ -20,5 +20,13 @@
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url();?>assets/css/sb-admin.css" rel="stylesheet">
 
-    <!--link href="<?php echo base_url();?>assets/css/custom-style.css" rel="stylesheet"-->
 </head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="#">Qualis</a>
+    <a class="navbar-brand" href="#"><?php echo $_SESSION['usuarioNombre'] . ' ' . $_SESSION['usuarioApe']; ?></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>

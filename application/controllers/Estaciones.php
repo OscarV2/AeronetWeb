@@ -11,6 +11,8 @@ class Estaciones extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Estacion_model');
+        $this->load->library('session');
+
     }
 
     public function irAsignarEstaciones()

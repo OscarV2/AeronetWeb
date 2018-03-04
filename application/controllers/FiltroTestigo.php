@@ -12,6 +12,10 @@ class FiltroTestigo extends CI_Controller
     {
         parent::__construct();
         $this->load->model('FiltroTestigo_model');
+        $this->output->set_header('Last-Modified:'.gmdate('D, d M Y H:i:s').'GMT');
+        $this->output->set_header('Cache-Control: no-cache, must-revalidate');
+        $this->output->set_header('Cache-Control: post-check=0, pre-check=0',false);
+        $this->output->set_header('Pragma: no-cache');
 
     }
 
@@ -33,6 +37,8 @@ class FiltroTestigo extends CI_Controller
 
     public function guardarFiltros()
     {
+        $this->load->library('session');
+
         $codigo = $this->input->post('codigo');
         $peso   = $this->input->post('pesoNuevoFiltro');
         $fecha  = $this->input->post('fecha');
@@ -46,16 +52,41 @@ class FiltroTestigo extends CI_Controller
         $this->FiltroTestigo_model->guardarNuevoFiltro($data);
 
         $this->load->model('LoteFiltro_model');
-        $idusuario = $_SESSION['idusuario'];
 
+        $idusuario = $this->session->idusuario;
+
+        $lotes = $this->LoteFiltro_model->getLoteUsuario($idusuario);
+
+        $b = $this->session->totales;
+
+        $err = 1;
+
+        $data = array(
+          'lotes' => $lotes,
+          'err' => $err,
+          'filtrosTestigos' => $this->session->filtrosTestigos,
+          'totales' => $this->session->totales
+        );
+        $this->load->view('layout/header');
+        $this->load->view('menu_laboratorio', $data);
+
+    }
+
+    public function irMenu($err)
+    {
+        $this->load->model('LoteFiltro_model');
+        //$idusuario = $_SESSION['idusuario'];
+
+        $data = array(
+            'err' => $err
+        );
+        /*
         $lotes = array(
             'lotes' => $this->LoteFiltro_model->getLoteUsuario($idusuario),
             'filtrosTestigos' => $this->LotreFiltro_model->getFiltros(),
             'totales' => $this->LotreFiltro_model->getTotales()
         );
-
-        $this->load->view('layout/header');
-        $this->load->view('menu_laboratorio', $lotes);
+*/
     }
 
 }

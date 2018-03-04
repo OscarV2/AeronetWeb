@@ -1,29 +1,21 @@
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-<!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="../index.html">Qualys</a>
-    <a class="navbar-brand" href="../index.html">Oscar Vega</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Inicio">
                 <a class="nav-link" href="<?php echo site_url('Welcome/irInicio');?>">
-                    <i class="fa fa-fw fa-area-chart"></i>
+                    <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Inicio</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nuevo Proyecto">
                 <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearProyecto');?>">
-                    <i class="fa fa-fw fa-dashboard"></i>
+                    <i class="fa fa-fw fa-calendar-plus-o"></i>
                     <span class="nav-link-text">Nuevo Proyecto</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
                 <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearUsuario');?>">
-                    <i class="fa fa-fw fa-table"></i>
+                    <i class="fa fa-fw fa-user-plus"></i>
                     <span class="nav-link-text">Nuevo Usuario</span>
                 </a>
             </li>

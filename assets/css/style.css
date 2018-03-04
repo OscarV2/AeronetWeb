@@ -55,3 +55,17 @@ p {
 footer.page-footer {
   margin: 0;
 }
+
+.card{
+  margin-top: 10px;
+}
+
+.upc-footer{
+  height: 30px;
+  width:  90px;
+}
+
+.imagen-logo{
+  height: 60px;
+  width:  190px;
+}

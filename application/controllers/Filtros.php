@@ -13,6 +13,12 @@ class Filtros extends CI_Controller
         parent::__construct();
         $this->load->model('Filtro_model');
         $this->load->model('LoteFiltro_model');
+        $this->load->library('session');
+
+        $this->output->set_header('Last-Modified:'.gmdate('D, d M Y H:i:s').'GMT');
+        $this->output->set_header('Cache-Control: no-cache, must-revalidate');
+        $this->output->set_header('Cache-Control: post-check=0, pre-check=0',false);
+        $this->output->set_header('Pragma: no-cache');
 
     }
 

@@ -18,6 +18,7 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
 	public function index()
 	{
         $this->load->view('index');
@@ -80,7 +81,8 @@ class Welcome extends CI_Controller {
 
                     $data = array(
                         'usuarioNombre' => $existe[0]->nombre,
-                        'usuarioApe' => $existe[0]->apellidos
+                        'usuarioApe' => $existe[0]->apellidos,
+                        'analista' => $existe[0]->nombre . ' ' .  $existe[0]->apellidos
                     );
 
                     $this->guardarDatosSesion('analista', $data);
@@ -100,12 +102,12 @@ class Welcome extends CI_Controller {
                 }
             }else{
                 // los roles no coinciden
-                echo '<h3>Los roles no coinciden</h3>';
+                $this->setError('Seleccione su tipo de operador correspondiente');
             }
 
         }else {
             // el usuario no existe
-            $this->load->view();
+            $this->setError('Usuario o contraseña incorrectos.');
         }
 
     }
@@ -138,7 +140,16 @@ class Welcome extends CI_Controller {
 
     public function cerrarSesion()
     {
-        
+        session_destroy();
+        $this->irLogin();
     }
 
+    public function setError($err)
+    {
+        $data = array('err' => $err);
+        $this->load->helper(array('form', 'url'));
+        $this->load->view('login', $data);
+        $this->load->view('layout/footer');
+
+    }
 }

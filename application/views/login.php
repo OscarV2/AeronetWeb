@@ -25,6 +25,15 @@
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Iniciar sesión</div>
         <div class="card-body">
+
+            <?php
+            if (isset($err)){
+                echo '<div class="alert alert-danger" role="alert"><b>' .
+                    $err .
+                    '</b></div>';
+            }
+            ?>
+
             <?php echo form_open('Welcome/login');?>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Usuario</label>

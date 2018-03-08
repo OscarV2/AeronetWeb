@@ -1,26 +1,20 @@
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-<!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="../index.html">Qualys</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inicio">
-                <a class="nav-link" href="<?php echo site_url('Welcome/irInicio');?>">
+                <a class="nav-link" href="<?php echo site_url('Analista/inicio');?>">
                     <i class="fa fa-fw fa-area-chart"></i>
                     <span class="nav-link-text">Inicio</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nuevo Proyecto">
-                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearProyecto');?>">
+                <a class="nav-link" href="#">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Validar Muestras</span>
                 </a>
             </li>
             <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Nuevo Proyecto">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<?php echo site_url('Analista/estaciones');?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Nuevo Informe</span>
                 </a>
@@ -36,7 +30,7 @@
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                <a class="nav-link" href="<?php echo site_url('Welcome/cerrarSesion');?>">
                     <i class="fa fa-fw fa-sign-out"></i>Cerrar Sesion</a>
             </li>
         </ul>
@@ -44,7 +38,7 @@
 </nav>
 <div class="content-wrapper">
     <div class="container-fluid">
-        <form action="" method="post">
+        <form action="<?php echo site_url('excel/Reportes/generarReporte');?>" method="post">
 
             <!-- Example DataTables Card-->
             <div class="card mb-3">
@@ -78,27 +72,29 @@
                             </thead>
                             <tbody>
                             <?php
-                            foreach ($muestras as $muestra){
-                                echo
-                                    '<tr>'.
-                                    '<td>'. $muestra['filtro'].'</td>' .
-                                    '<td>'. $muestra['fecha_muestreo'].'</td>' .
-                                    '<td>'. $muestra['presion_est_inicial'].'</td>' .
-                                    '<td>'. $muestra['presion_est_final'].'</td>' .
-                                    '<td>'. $muestra['presion_est_avg'].'</td>' .
-                                    '<td>'. $muestra['presion_amb'].'</td>' .
-                                    '<td>'. $muestra['temp_ambC'].'</td>' .
-                                    '<td>'. $muestra['temp_ambK'].'</td>' .
-                                    '<td>'. $muestra['PoPa'].'</td>' .
-                                    '<td>'. $muestra['Qr'].'</td>' .
-                                    '<td>'. $muestra['Qstd'].'</td>' .
-                                    '<td>'. $muestra['tiempo_operacion'].'</td>' .
-                                    '<td>'. $muestra['diff_rfo'].'</td>' .
-                                    '<td>'. $muestra['Vstd'].'</td>' .
-                                    '<td>'. $muestra['Wi'].'</td>' .
-                                    '<td>'. $muestra['Wf'].'</td>' .
-                                    '<td>'. $muestra['Wn'].'</td>' .
-                                    '<td>'. $muestra['variable'] .'</td></tr>';
+                            if (isset($muestras)){
+                                foreach ($muestras as $muestra){
+                                    echo
+                                        '<tr>'.
+                                        '<td>'. $muestra['filtro'].'</td>' .
+                                        '<td>'. $muestra['fecha_muestreo'].'</td>' .
+                                        '<td>'. $muestra['presion_est_inicial'].'</td>' .
+                                        '<td>'. $muestra['presion_est_final'].'</td>' .
+                                        '<td>'. $muestra['presion_est_avg'].'</td>' .
+                                        '<td>'. $muestra['presion_amb'].'</td>' .
+                                        '<td>'. $muestra['temp_ambC'].'</td>' .
+                                        '<td>'. $muestra['temp_ambK'].'</td>' .
+                                        '<td>'. $muestra['PoPa'].'</td>' .
+                                        '<td>'. $muestra['Qr'].'</td>' .
+                                        '<td>'. $muestra['Qstd'].'</td>' .
+                                        '<td>'. $muestra['tiempo_operacion'].'</td>' .
+                                        '<td>'. $muestra['diff_rfo'].'</td>' .
+                                        '<td>'. $muestra['Vstd'].'</td>' .
+                                        '<td>'. $muestra['Wi'].'</td>' .
+                                        '<td>'. $muestra['Wf'].'</td>' .
+                                        '<td>'. $muestra['Wn'].'</td>' .
+                                        '<td>'. $muestra['variable'] .'</td></tr>';
+                                }
                             }
                             ?>
                             </tbody>
@@ -106,6 +102,15 @@
                     </div>
                 </div>
                 <div class="card-footer small text-muted">Actualizado  ayer a las 11:59 PM</div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <button class="btn btn-primary" type="submit" value="1" name="reporte"><i class="fa fa-calculator"></i> Gerear Excel</button>
+                </div>
+                <div class="col-lg-6">
+                    <button class="btn btn-primary" type="submit" value="1" name="reporte"><i class="fa fa-file"></i> Gerear PDF</button>
+                </div>
             </div>
         </form>
 
@@ -174,6 +179,14 @@
             </div>
         </div>
 
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-area-chart"></i> Estadisticas
+            </div>
+            <div class="card-body">
+                <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            </div>
+        </div>
 
     </div>
     <!-- /.container-fluid-->
@@ -223,6 +236,9 @@
             </div>
         </div>
     </div>
+
+
+</div>
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
 
@@ -230,8 +246,6 @@
     <!-- Core plugin JavaScript-->
     <script src="<?php echo base_url('assets/vendor/jquery-easing/jquery.easing.min.js')?>"></script>
     <!-- Page level plugin JavaScript-->
-    <script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js')?>"></script>
-
     <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.js')?>"></script>
 
     <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.js')?>"></script>
@@ -240,9 +254,133 @@
     <!-- Custom scripts for this page-->
     <script src="<?php echo base_url('assets/js/sb-admin-datatables.min.js')?>"></script>
 
-    <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
-</div>
+    <script>
+
+        Highcharts.chart('container2', {
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                text: 'CONCENTRACION DE PM10(ug/m3)'
+            },
+            xAxis: [{
+                categories: [<?php
+                    foreach ($muestras as $muestra) {
+                        if (array_search($muestra, $muestras) == (sizeof($muestras) - 1)){
+                            echo  '"' . $muestra['fecha_muestreo'] . '"';
+                        }else{
+                            echo '"' . $muestra['fecha_muestreo'] . '", ';
+                        }
+                    }
+                    ?>],
+                crosshair: true
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value}',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+                title: {
+                    text: 'PM10(ug/m3)',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+                plotLines: [{
+                    value: 0,
+                    color: 'green',
+                    dashStyle: 'shortdash',
+                    width: 2,
+                    label: {
+                        text: 'Last quarter minimum'
+                    }
+                }, {
+                    value: 34,
+                    color: 'red',
+                    dashStyle: 'shortdash',
+                    width: 2,
+                    label: {
+                        text: 'Norma'
+                    }
+                }]
+            }, { // Secondary yAxis
+                title: {
+                    text: 'Precipitacion (mm)',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                labels: {
+                    format: '{value} mm',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                opposite: true
+            }],
+            tooltip: {
+                shared: true
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
+                verticalAlign: 'top',
+                y: 120,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            },
+            series: [{
+                name: 'PM10 (ug/m3)',
+                type: 'column',
+                yAxis: 1,
+                data: [<?php
+
+                    foreach ($muestras as $muestra) {
+                        //
+                        if (array_search($muestra, $muestras) == (sizeof($muestras) - 1)){
+                            echo $muestra['variable'];
+                        }else{
+                            echo $muestra['variable'] . ', ';
+                        }
+
+                    }
+                    ?>],
+                tooltip: {
+                    valueSuffix: ' ug/m3'
+                },
+                dataLabels: {
+                    enabled: true
+                }
+
+            }, {
+                name: 'Precipitacion (mm)',
+                type: 'spline',
+                data: [<?php
+
+                    foreach ($muestras as $muestra) {
+                        //
+                        if (array_search($muestra, $muestras) == (sizeof($muestras) - 1)){
+                            echo $muestra['variable'];
+                        }else{
+                            echo $muestra['variable'] . ', ';
+                        }
+
+                    }
+                    ?>],
+                tooltip: {
+                    valueSuffix: 'mm'
+                }
+            }]
+        });
+
+    </script>
+
 </body>
 
 </html>

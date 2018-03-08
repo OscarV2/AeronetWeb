@@ -16,22 +16,12 @@ class Analisis_model extends CI_Model
 
     public function existeLote($mes, $year)
     {
-        $response = "";
         $this->db->where('mes', $mes);
         $this->db->where('year', $year);
         $this->db->from('lotefiltros');
         $cantLotes = $this->db->count_all_results();
 
         return $cantLotes;
-        /*
-        if ($cantLotes > 0){
-            // el lote existe
-            $lote = $this->getLote($mes, $year)->result();
-
-        }else {
-            $response = 'no existe';
-        }
-        */
         }
 
     public function getLote($mes, $year)
@@ -113,6 +103,25 @@ class Analisis_model extends CI_Model
         ));
     }
 
+    public function getLoteId($mes, $year)
+    {
+        $this->db->select('id');
+        $this->db->where('mes', $mes);
+        $this->db->where('year', $year);
+        $this->db->limit(1);
 
+        return $this->db->get('lotefiltros');
+
+    }
+
+    public function filtrosPertenecenAEquipo($idEquipo, $idLote)
+    {
+        $this->db->where('idequipo', $idEquipo);
+        $this->db->where('lotefiltros_id', $idLote);
+        $this->db->from('filtros');
+        $cantFiltros = $this->db->count_all_results();
+
+        return $cantFiltros;
+    }
 
 }

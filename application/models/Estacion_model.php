@@ -42,7 +42,7 @@ class Estacion_model extends CI_Model
                     'idEquipo' => $equipo->idequipo,
                     'modelo' => $equipo->modelo,
                     'clase' => $equipo->clase,
-
+                    'idEstacion' => $idEstacion
                 ));
             }
         }
@@ -61,6 +61,22 @@ class Estacion_model extends CI_Model
         return $this->db->get('estacion');
     }
 
+    public function getDatosEstacionReporte($idEstacion)
+    {
+        $this->db->select('nombre, municipio, numero, msnm, localizacion');
+        $this->db->where('idestacion', $idEstacion);
+        return $this->db->get('estacion')->result();
+
+    }
+
+    public function getDatosEquipoReporte($idEquipo)
+    {
+        $this->db->select('variable, clase, modelo');
+        $this->db->where('idequipo', $idEquipo);
+
+        return $this->db->get('equipos')->result();
+
+    }
 
     public function asignarEstacion($data, $id)
     {

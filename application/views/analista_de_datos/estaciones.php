@@ -1,26 +1,20 @@
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-<!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="../index.html">Qualys</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inicio">
-                <a class="nav-link" href="<?php echo site_url('Welcome/irInicio');?>">
+                <a class="nav-link" href="<?php echo site_url('Analista/inicio');?>">
                     <i class="fa fa-fw fa-area-chart"></i>
                     <span class="nav-link-text">Inicio</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nuevo Proyecto">
-                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearProyecto');?>">
+                <a class="nav-link" href="<?php echo site_url('Analista/validar');?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Validar Muestras</span>
                 </a>
             </li>
             <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Nuevo Proyecto">
-                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearProyecto');?>">
+                <a class="nav-link" href="#">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Nuevo Informe</span>
                 </a>
@@ -36,7 +30,7 @@
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                <a class="nav-link" href="<?php echo site_url('Welcome/cerrarSesion');?>">
                     <i class="fa fa-fw fa-sign-out"></i>Cerrar Sesion</a>
             </li>
         </ul>
@@ -45,6 +39,14 @@
 <div class="content-wrapper">
     <div class="container-fluid">
         <form action="<?php echo site_url('Analista/existeLote');?>" method="post">
+
+            <?php
+            if (isset($err)){
+                echo '<div class="alert alert-danger" role="alert"><b>' .
+                    $err .
+                    '</b></div>';
+            }
+            ?>
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fa fa-table"></i> Estaciones
@@ -61,12 +63,11 @@
                             </tr>
                             <?php
                             foreach ($estaciones as $estacion){
-                                //var_dump($estacion);
 
                                 echo
                                     '<tr>'.
                                     '<td>'. $estacion['nombreEstacion'].'</td>' .
-                                    '<td>'. $estacion['modelo'].'</td>' .
+                                    '<td>'. $estacion['modelo'].'<input name="idEstacion" hidden value="'.$estacion['idEstacion'].'"></td>' .
                                     '<td>'. $estacion['clase'].'<input name="clase" hidden value="'.$estacion['clase'].'"></td>' .
 
                                     '<td style="text-align: center;"><label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">' .
@@ -85,30 +86,43 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="exampleSelect1">Seleccionar mes</label>
-                <select name="mes" class="form-control" required>
-                    <option>Enero</option>
-                    <option>Febrero</option>
-                    <option>Marzo</option>
-                    <option>Abril</option>
-                    <option>Mayo</option>
-                    <option>Junio</option>
-                    <option>Julio</option>
-                    <option>Agosto</option>
-                    <option>Septiembre</option>
-                    <option>Octubre</option>
-                    <option>Noviembre</option>
-                    <option>Diciembre</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="number" name="year" min="2017" max="2020" class="form-control" id="exampleFormControlInput1" placeholder="Año" required>
+            <div class="row">
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <label for="exampleSelect1">Seleccionar mes</label>
+                        <select id="exampleSelect1" name="mes" class="form-control" required>
+                            <option>Enero</option>
+                            <option>Febrero</option>
+                            <option>Marzo</option>
+                            <option>Abril</option>
+                            <option>Mayo</option>
+                            <option>Junio</option>
+                            <option>Julio</option>
+                            <option>Agosto</option>
+                            <option>Septiembre</option>
+                            <option>Octubre</option>
+                            <option>Noviembre</option>
+                            <option>Diciembre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="number" name="year" min="2017" max="2020" class="form-control" id="exampleFormControlInput1" placeholder="Año" required>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+
+                    <label for="selectMetodo">Seleccionar método</label>
+                    <select id="selectMetodo" name="metodo" class="form-control" required>
+                        <option>EPA e CFR Titulo 40 Parte 50 Apéndice J</option>
+                    </select>
+                </div>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block"><strong>Guardar</strong></button>
+            <button type="submit" class="btn btn-primary btn-block"><strong>Continuar</strong> <i class="fa fa-arrow-right"></i></button>
         </form>
-
 
     </div>
     <!-- /.container-fluid-->

@@ -12,6 +12,10 @@ class Analista extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Analisis_model');
+        $this->load->model('Estacion_model');
+
+        $this->load->library('session');
+
     }
 
     public function index()
@@ -23,17 +27,12 @@ class Analista extends CI_Controller
 
     public function estaciones()
     {
-
-        $this->load->model('Estacion_model');
         $data = array(
             'estaciones' => $this->Estacion_model->getEstacionesAnalista()
         );
 
-        //var_dump($data);
-
         $this->load->view('layout/header');
         $this->load->view('analista_de_datos/estaciones', $data);
-
 
     }
 
@@ -42,34 +41,52 @@ class Analista extends CI_Controller
         $mes = $this->input->post('mes');
         $year = $this->input->post('year');
         $idEquipo = $this->input->post('equipo');
+        $idEstacion = $this->input->post('idEstacion');
 
-        $lotes = $this->Analisis_model->existeLote($mes, $year);
+        if (isset($idEquipo)){
+            $lotes = $this->Analisis_model->existeLote($mes, $year);
 
-        if($lotes > 0){
-            $this->getMuestras($mes, $year, $idEquipo);
+            if($lotes > 0){         // el lote existe
+                $idLote = $this->Analisis_model->getLoteId($mes, $year)->result()[0]->id;
+
+                //Check if filters of this batch belong to this station
+                if ($this->Analisis_model->filtrosPertenecenAEquipo($idEquipo, $idLote) > 0){
+
+                    $this->getMuestras($idLote, $mes, $year, $idEquipo, $idEstacion);
+                }else{
+                    $this->setError('EL EQUIPO SELECCIONADO NO CORRESPONDE AL LOTE.');
+                }
+            }else{
+                $this->setError('ESTE LOTE NO EXISTE.');
+            }
         }else{
-            echo 'no existe';
+            $this->setError('POR FAVOR SELECCIONAR UN EQUIPO.');
         }
     }
 
-    public function getMuestras($mes, $year, $idEquipo)
+    public function getMuestras($idLote, $mes, $year, $idEquipo, $idEstacion)
     {
         $muestras = $this->Analisis_model->getMuestras($idEquipo, $mes, $year);
 
-        $resultados = array();
-        $variables  = array();
-        foreach ($muestras as $muestra){
-            $variables[] = $muestra['variable'];
+        if (sizeof($muestras) > 0){
+            $variables  = array();
+            foreach ($muestras as $muestra){
+                $variables[] = $muestra['variable'];
+            }
+
+            $resultados = $this->getResultados($variables, $muestras);
+            $data = array(
+                'muestras' => $muestras,
+                'resultados' => $resultados
+            );
+
+            $this->guardarDatosSesion($idLote, $idEquipo, $idEstacion, $mes, $year);
+            $this->load->view('layout/header');
+            $this->load->view('analista_de_datos/muestras_informe', $data);
+
+        }else{
+            $this->setError('ESTE LOTE NO EXISTE.');
         }
-
-        $resultados = $this->getResultados($variables, $muestras);
-        $data = array(
-            'muestras' => $muestras,
-            'resultados' => $resultados
-        );
-
-        $this->load->view('layout/header');
-        $this->load->view('analista_de_datos/muestras_informe', $data);
 
     }
 
@@ -100,6 +117,23 @@ class Analista extends CI_Controller
 
         $resultado['percentil75'] = $this->percentil75(count($variables), $variables);
 
+        $data = array(
+            'numDatos' => $resultado['numDatos'],
+            'fechaMin' =>  $resultado['fechaMin'],
+            'fechaMax' =>  $resultado['fechaMax'],
+            'promedio' => $resultado['promedio'] ,
+            'mediana' => $resultado['mediana'],
+            'desviacion' => $resultado['desviacion'],
+            'u1' => $resultado['u1'],
+            'u2' => $resultado['u2'],
+            'percentil25' => $resultado['percentil25'],
+            'percentil75' => $resultado['percentil75'],
+            'min' => $resultado['min'],
+            'max' => $resultado['max']
+        );
+
+        $this->session->set_userdata($data);
+
         return $resultado;
 
     }
@@ -125,6 +159,7 @@ class Analista extends CI_Controller
 
         return ($vars[$p] + $vars[$p+1] )/2;
     }
+
     function calculate_median($arr) {
         sort($arr);
         $count = count($arr); //total numbers in array
@@ -152,4 +187,61 @@ class Analista extends CI_Controller
 
         return ($vars[$p] + $vars[$p-1] )/2;
     }
+
+    public function inicio()
+    {
+
+        $this->load->view('layout/header');
+        $this->load->view('analista_de_datos/index');
+    }
+
+    public function validar()
+    {
+
+    }
+
+    public function lotePerteneceAEquipo($idequipo, $idLote)
+    {
+        return $idLote == $idequipo;
+    }
+
+    public function setError($err)
+    {
+        $this->load->model('Estacion_model');
+        $data = array(
+            'estaciones' => $this->Estacion_model->getEstacionesAnalista(),
+            'err' => $err
+        );
+
+        $this->load->view('layout/header');
+        $this->load->view('analista_de_datos/estaciones', $data);
+
+    }
+
+    private function guardarDatosSesion($idLote, $idEquipo, $idEstacion, $mes, $year)
+    {
+        $metodo = $this->input->post('metodo');
+
+        $estacion = $this->Estacion_model->getDatosEstacionReporte($idEstacion);
+        $equipo = $this->Estacion_model->getDatosEquipoReporte($idEquipo);
+
+        $data = array(
+            'idLote' => $idLote,
+            'idEquipo' => $idEquipo,
+            'idEstacion' => $idEstacion,
+            'msnm' => $estacion[0]->msnm,
+            'municipio' => $estacion[0]->municipio,
+            'numero' => $estacion[0]->numero,
+            'nombre' => $estacion[0]->nombre,
+            'localizacion' => $estacion[0]->localizacion,
+            'metodo' => $metodo,
+            'mes' => $mes,
+            'year' => $year,
+            'clase' => $equipo[0]->clase
+        );
+
+        $this->session->set_userdata($data);
+
+    }
+
 }

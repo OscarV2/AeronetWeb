@@ -28,6 +28,10 @@
             <li><a href="#">Publicaciones</a></li>
         </ul>
 
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#">GEAB</a></li>
+        </ul>
+
         <ul id="nav-mobile" class="side-nav">
             <li><a href="<?php echo site_url('Welcome/irLogin')?>">Login</a></li>
         </ul>

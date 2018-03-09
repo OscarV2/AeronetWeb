@@ -104,6 +104,81 @@
                 <div class="card-footer small text-muted">Actualizado  ayer a las 11:59 PM</div>
             </div>
 
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-area-chart"></i> Resultados
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="tablaResultados" width="100%" cellspacing="0">
+                            <tbody>
+                            <tr>
+                                <td>Numero de datos(n)</td>
+                                <td><?php echo $resultados['numDatos'];?></td>
+                            </tr>
+                            <tr>
+                                <td>Promedio Aritmetico</td>
+                                <td><?php echo $resultados['promedio'];?></td>
+                            </tr>
+                            <tr>
+                                <td>Valor mas alto registrado(ug/m3)</td>
+                                <td><?php echo $resultados['max'];?></td>
+                            </tr>
+                            <tr>
+                                <td>Fecha de registro</td>
+                                <td><?php echo $resultados['fechaMax'];?></td>
+                            </tr><tr>
+                                <td>Valor mas bajo registrado(ug/m3)</td>
+                                <td><?php echo $resultados['min'];?></td>
+                            </tr>
+                            <tr>
+                                <td>Fecha de registro</td>
+                                <td><?php echo $resultados['fechaMin'];?></td>
+                            </tr>
+                            <tr>
+                                <td>Desviacion estándar</td>
+                                <td><?php echo $resultados['desviacion'];?></td>
+                            </tr>
+                            <tr>
+                                <td>Parametro de Distribucion T</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Intervalo de confianza para la media (95%) u1 </td>
+                                <td><?php echo $resultados['u2'];?></td>
+                            </tr>
+                            <tr>
+                                <td>Intervalo de confianza para la media (95%) u2 </td>
+                                <td><?php echo $resultados['u1'];?></td>
+                            </tr>
+                            <tr>
+                                <td>Mediana</td>
+                                <td><?php echo $resultados['mediana'];?></td>
+                            </tr>
+                            <tr>
+                                <td>Percentil 25</td>
+                                <td><?php echo $resultados['percentil25'];?></td>
+                            </tr>
+                            <tr>
+                                <td>Percentil 75</td>
+                                <td><?php echo $resultados['percentil75'];?></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-area-chart"></i> Estadisticas
+                </div>
+                <div class="card-body">
+                    <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-lg-6">
                     <button class="btn btn-primary" type="submit" value="1" name="reporte"><i class="fa fa-calculator"></i> Gerear Excel</button>
@@ -114,79 +189,6 @@
             </div>
         </form>
 
-        <div class="card mb-3">
-            <div class="card-header">
-                <i class="fa fa-area-chart"></i> Resultados
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="tablaResultados" width="100%" cellspacing="0">
-                        <tbody>
-                        <tr>
-                            <td>Numero de datos(n)</td>
-                            <td><?php echo $resultados['numDatos'];?></td>
-                        </tr>
-                        <tr>
-                            <td>Promedio Aritmetico</td>
-                            <td><?php echo $resultados['promedio'];?></td>
-                        </tr>
-                        <tr>
-                            <td>Valor mas alto registrado(ug/m3)</td>
-                            <td><?php echo $resultados['max'];?></td>
-                        </tr>
-                        <tr>
-                            <td>Fecha de registro</td>
-                            <td><?php echo $resultados['fechaMax'];?></td>
-                        </tr><tr>
-                            <td>Valor mas bajo registrado(ug/m3)</td>
-                            <td><?php echo $resultados['min'];?></td>
-                        </tr>
-                        <tr>
-                            <td>Fecha de registro</td>
-                            <td><?php echo $resultados['fechaMin'];?></td>
-                        </tr>
-                        <tr>
-                            <td>Desviacion estándar</td>
-                            <td><?php echo $resultados['desviacion'];?></td>
-                        </tr>
-                        <tr>
-                            <td>Parametro de Distribucion T</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Intervalo de confianza para la media (95%) u1 </td>
-                            <td><?php echo $resultados['u2'];?></td>
-                        </tr>
-                        <tr>
-                            <td>Intervalo de confianza para la media (95%) u2 </td>
-                            <td><?php echo $resultados['u1'];?></td>
-                        </tr>
-                        <tr>
-                            <td>Mediana</td>
-                            <td><?php echo $resultados['mediana'];?></td>
-                        </tr>
-                        <tr>
-                            <td>Percentil 25</td>
-                            <td><?php echo $resultados['percentil25'];?></td>
-                        </tr>
-                        <tr>
-                            <td>Percentil 75</td>
-                            <td><?php echo $resultados['percentil75'];?></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-3">
-            <div class="card-header">
-                <i class="fa fa-area-chart"></i> Estadisticas
-            </div>
-            <div class="card-body">
-                <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-            </div>
-        </div>
 
     </div>
     <!-- /.container-fluid-->
@@ -292,22 +294,15 @@
                     }
                 },
                 plotLines: [{
-                    value: 0,
-                    color: 'green',
-                    dashStyle: 'shortdash',
-                    width: 2,
-                    label: {
-                        text: 'Last quarter minimum'
-                    }
-                }, {
-                    value: 34,
+                    value: 100,
                     color: 'red',
                     dashStyle: 'shortdash',
                     width: 2,
                     label: {
                         text: 'Norma'
                     }
-                }]
+                }],
+                max: 110
             }, { // Secondary yAxis
                 title: {
                     text: 'Precipitacion (mm)',
@@ -326,19 +321,10 @@
             tooltip: {
                 shared: true
             },
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                x: 120,
-                verticalAlign: 'top',
-                y: 120,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-            },
             series: [{
                 name: 'PM10 (ug/m3)',
                 type: 'column',
-                yAxis: 1,
+                yAxis: 1    ,
                 data: [<?php
 
                     foreach ($muestras as $muestra) {

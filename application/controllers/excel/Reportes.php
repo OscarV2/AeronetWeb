@@ -36,24 +36,13 @@ class Reportes extends CI_Controller
             ->setCategory('Report result file');
 
         $data = $this->getDatosSession();
-        //var_dump($data);
 
         $idLote   = $data['idLote'];
         $idEquipo = $data['idEquipo'];
 
-
         $muestras = $this->Reporte_model->getMuestras($idEquipo, $idLote);
 
         $this->escribirExcel($spreadsheet, $muestras, $data);
-
-
-
-
-
-
-
-
-
     }
 
     private function escribirExcel($spreadsheet,  $muestras, $data)
@@ -71,7 +60,6 @@ class Reportes extends CI_Controller
         $spreadsheet->getActiveSheet()->mergeCells('E4:I4');
         $spreadsheet->getActiveSheet()->mergeCells('E5:I5');
         $spreadsheet->getActiveSheet()->mergeCells('E6:I6');
-
 
         $spreadsheet->getActiveSheet()->mergeCells('J3:M3');
         $spreadsheet->getActiveSheet()->mergeCells('J4:M4');
@@ -141,7 +129,7 @@ class Reportes extends CI_Controller
     public function getDatosSession()
     {
         $idEquipo = $_SESSION['idEquipo'];
-        $datosEquipo =
+
         $data = array();
         $data['idLote'] = $_SESSION['idLote'];
         $data['idEquipo'] = $idEquipo;
@@ -207,11 +195,17 @@ class Reportes extends CI_Controller
     private function guardar($spreadsheet)
     {
         $writer = new Xlsx($spreadsheet);
+        $file = APPPATH . 'reportes/reporte.xlsx';
+
         try {
-            $writer->save('reporte.xlsx');
+            $writer->save($file);
         } catch (\PhpOffice\PhpSpreadsheet\Writer\Exception $e) {
             echo $e;
         }
+        //return $file;
+        $this->load->helper('download');
+        $data = file_get_contents($file);
+        force_download(basename($file), $data);
         /*
         $file = APPPATH . 'reportes/reporte.xlsx';
         try {
@@ -279,6 +273,10 @@ class Reportes extends CI_Controller
         $i = $ultimaFila;
 
         $this->estiloResumen($spreadsheet, $ultimaFila);
+
+        $this->pasteImage($spreadsheet, $ultimaFila);
+
+
 
     }
 
@@ -374,7 +372,6 @@ class Reportes extends CI_Controller
 
 
         $ultimaFila++;
-        echo $ultimaFila;
         $spreadsheet->getActiveSheet()->mergeCells('R' . (string)($ultimaFila + 8) . ':T' . (string)($ultimaFila + 9));
 
         for ($i = $ultimaFila; $i < ($ultimaFila + 13); $i++){
@@ -415,6 +412,31 @@ class Reportes extends CI_Controller
         $ultimaFila++;
         $spreadsheet->getActiveSheet()->setCellValue('R' . $ultimaFila, 'Percentil 75');
 
+    }
+
+    private function pasteImage($spreadsheet, $ultimaFila)
+    {
+
+        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        //$path = base_url('assets/img/chart.png');
+        $path = FCPATH . 'assets\img\chart.png';
+
+        $drawing->setName('Logo');
+        $drawing->setDescription('Logo');
+        try {
+            $drawing->setPath($path);
+            $drawing->setHeight(416);
+            $drawing->setName('Paid');
+            $drawing->setDescription('Paid');
+            $drawing->setCoordinates('B' . (string)($ultimaFila + 2));
+            try {
+                $drawing->setWorksheet($spreadsheet->getActiveSheet());
+            } catch (\PhpOffice\PhpSpreadsheet\Exception $e) {
+                echo $e;
+            }
+        } catch (\PhpOffice\PhpSpreadsheet\Exception $e) {
+            echo $e;
+        }
 
     }
 }

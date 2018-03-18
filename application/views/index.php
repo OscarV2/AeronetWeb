@@ -56,15 +56,15 @@
         <li>
             <img src="<?php echo base_url('assets/img/calidad_aire3.jpg')?>"> <!-- random image -->
             <div class="caption left-align">
-                <h3>Left Aligned Caption</h3>
-                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                <h3>Nuestros Equipos</h3>
+                <h5 class="light grey-text text-lighten-3">Red de equipos de ultima tecnología.</h5>
             </div>
         </li>
         <li>
             <img src="<?php echo base_url('assets/img/calidad_aire4.jpg')?>"> <!-- random image -->
             <div class="caption right-align">
-                <h3>Right Aligned Caption</h3>
-                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                <h3>GEAB</h3>
+                <h5 class="light grey-text text-lighten-3">Grupo de investigacion comprometido con el medio ambiente.</h5>
             </div>
         </li>
     </ul>
@@ -77,6 +77,8 @@
         <div class="row">
             <div class="col s12 m4">
                 <div class="icon-block">
+                    <img class="center" src="<?php echo base_url('assets/img/PST.jpg')?>" alt="Unsplashed background img 1">
+
                     <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
                     <h5 class="center">Speeds up development</h5>
 

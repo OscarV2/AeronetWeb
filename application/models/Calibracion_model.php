@@ -6,7 +6,8 @@
  * Time: 11:09 PM
  */
 
-class CalibracionModel extends CI_Model
+class
+Calibracion_Model extends CI_Model
 {
     public function __construct()
     {

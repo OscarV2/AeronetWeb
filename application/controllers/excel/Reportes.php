@@ -23,6 +23,9 @@ class Reportes extends CI_Controller
 
     public function generarReporte()
     {
+        $svgData = base64_decode($this->input->post('imagen'));
+
+        file_put_contents('assets/imgReporte/reporte.png', $svgData);
 
         $spreadsheet = new Spreadsheet();
 
@@ -43,6 +46,8 @@ class Reportes extends CI_Controller
         $muestras = $this->Reporte_model->getMuestras($idEquipo, $idLote);
 
         $this->escribirExcel($spreadsheet, $muestras, $data);
+
+        echo 'success';
     }
 
     private function escribirExcel($spreadsheet,  $muestras, $data)
@@ -202,19 +207,20 @@ class Reportes extends CI_Controller
         } catch (\PhpOffice\PhpSpreadsheet\Writer\Exception $e) {
             echo $e;
         }
-        //return $file;
+
+
+    }
+
+    public function descargar()
+    {
+        $file = APPPATH . 'reportes/reporte.xlsx';
+
         $this->load->helper('download');
         $data = file_get_contents($file);
         force_download(basename($file), $data);
-        /*
-        $file = APPPATH . 'reportes/reporte.xlsx';
-        try {
-            $writer->save($file);
-        } catch (\PhpOffice\PhpSpreadsheet\Writer\Exception $e) {
-            echo $e;
-        }
-        */
     }
+
+
 
     private function darEstiloExcel($spreadsheet, $ultimaFila)
     {
@@ -416,10 +422,8 @@ class Reportes extends CI_Controller
 
     private function pasteImage($spreadsheet, $ultimaFila)
     {
-
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-        //$path = base_url('assets/img/chart.png');
-        $path = FCPATH . 'assets\img\chart.png';
+        $path = FCPATH . 'assets\imgReporte\reporte.png';
 
         $drawing->setName('Logo');
         $drawing->setDescription('Logo');

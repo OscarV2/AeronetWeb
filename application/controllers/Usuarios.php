@@ -12,6 +12,8 @@ class Usuarios extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Usuario_model');
+        $this->load->library('session');
+
     }
 
     public function nuevoUsuario()

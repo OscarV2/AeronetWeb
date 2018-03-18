@@ -16,7 +16,7 @@ class Calibracion extends CI_Controller
 
     public function nuevaCalibracion()
     {
-        $calibracion = $this->input->post('');
-        //$this->Calibracion_model->guardarCalibracion();
+        $data = json_decode(file_get_contents('php://input'), true);
+        $this->Calibracion_model->guardarCalibracion($data);
     }
 }

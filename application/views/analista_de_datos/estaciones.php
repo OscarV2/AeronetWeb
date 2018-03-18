@@ -38,7 +38,7 @@
 </nav>
 <div class="content-wrapper">
     <div class="container-fluid">
-        <form action="<?php echo site_url('Analista/existeLote');?>" method="post">
+        <form action="<?php echo site_url('Analista/existeLote');?>" method="post" enctype="multipart/form-data">
 
             <?php
             if (isset($err)){
@@ -118,6 +118,16 @@
                     <select id="selectMetodo" name="metodo" class="form-control" required>
                         <option>EPA e CFR Titulo 40 Parte 50 Apéndice J</option>
                     </select>
+
+                    <div class="form-group">
+                        <label for="exampleInputFile">Precipitaciones del mes.</label>
+                        <input type="file"
+                               class="form-control-file"
+                               name="foto"
+                               required
+                               id="exampleInputFile" aria-describedby="fileHelp" >
+                        <small id="fileHelp" class="form-text text-muted">Tamaño maximo de archivo: 2M.</small>
+                    </div>
                 </div>
             </div>
 

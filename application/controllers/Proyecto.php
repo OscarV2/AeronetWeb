@@ -12,6 +12,7 @@ class Proyecto extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Proyecto_model');
+        $this->load->library('session');
 
     }
 

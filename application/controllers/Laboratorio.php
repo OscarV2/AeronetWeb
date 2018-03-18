@@ -13,6 +13,8 @@ class Laboratorio extends CI_Controller
         parent::__construct();
         $this->load->model('Proyecto_model');
         $this->load->helper('form');
+        $this->load->library('session');
+
     }
 
     public function irPesarFiltros()

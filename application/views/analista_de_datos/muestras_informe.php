@@ -104,7 +104,6 @@
                 <div class="card-footer small text-muted">Actualizado  ayer a las 11:59 PM</div>
             </div>
 
-
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fa fa-area-chart"></i> Resultados
@@ -170,6 +169,7 @@
                 </div>
             </div>
 
+            <!-- Chart Estadisticas Pluviosidad vs ug/m3 -->
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fa fa-area-chart"></i> Estadisticas
@@ -179,12 +179,12 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="alert alert-warning" role="alert">
+                Señor Analista tenga en cuenta que, para descargar sus reportes, las <b>VENTANAS EMERGENTES</b> deben estar habilitadas en su navegador.
+            </div>
+            <div class="row center">
                 <div class="col-lg-6">
-                    <button class="btn btn-primary" type="submit" value="1" name="reporte"><i class="fa fa-calculator"></i> Gerear Excel</button>
-                </div>
-                <div class="col-lg-6">
-                    <button class="btn btn-primary" type="submit" value="1" name="reporte"><i class="fa fa-file"></i> Gerear PDF</button>
+                    <button class="btn btn-primary" type="submit" value="1" name="reporte"><i class="fa fa-calculator"></i> Generar Excel</button>
                 </div>
             </div>
         </form>
@@ -204,6 +204,7 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
+
 
     <!-- Modal Exito-->
     <div class="modal fade" id="modalAtras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -239,7 +240,9 @@
         </div>
     </div>
 
+    <canvas id="canvas" hidden></canvas>
 
+    <img id="imag" hidden>
 </div>
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
@@ -258,10 +261,9 @@
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
-
     <script>
 
-        Highcharts.chart('container2', {
+        var chart = new Highcharts.Chart('container2', {
             chart: {
                 zoomType: 'xy'
             },
@@ -324,7 +326,7 @@
             series: [{
                 name: 'PM10 (ug/m3)',
                 type: 'column',
-                yAxis: 1    ,
+                yAxis: 0    ,
                 data: [<?php
 
                     foreach ($muestras as $muestra) {
@@ -364,6 +366,52 @@
                 }
             }]
         });
+        var formato;
+
+        var svg = chart.getSVG({
+            exporting: {
+                sourceWidth: chart.chartWidth,
+                sourceHeight: chart.chartHeight
+            }
+        });
+        var canvas = document.getElementById('canvas');
+        var imag = document.getElementById('imag');
+
+        var base64FromSvg = btoa(svg);
+        var b64Start = 'data:image/svg+xml;base64,';
+
+        // prepend a "header"
+        var image64 = b64Start + base64FromSvg;
+
+        imag.src = image64;
+
+        $(document).ready(function (){
+            //canvas.getContext('2d').drawImage(imag, imag.width, imag.height);
+
+            canvas.width = imag.width;
+            canvas.height = imag.height;
+        });
+
+        $('form').on('submit', function (e) {
+            e.preventDefault();
+
+            canvas.getContext('2d').drawImage(imag, 0, 0);
+
+            formato = canvas.toDataURL("image/png"); //img is data:image/png;base64
+
+            dataImage = formato.split(',');
+            $.ajax({
+                type: 'post',
+                url: "<?php echo site_url('excel/Reportes/generarReporte');?>" ,
+                data: {'imagen' : dataImage[1]},
+                success: function () {
+                    window.open("<?php echo site_url('excel/Reportes/descargar');?>",'_blank');
+                }
+            });
+
+
+        });
+
 
     </script>
 

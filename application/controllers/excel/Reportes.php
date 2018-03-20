@@ -197,31 +197,6 @@ class Reportes extends CI_Controller
             ->setCellValue('T6', 'b');
     }
 
-    private function guardar($spreadsheet)
-    {
-        $writer = new Xlsx($spreadsheet);
-        $file = APPPATH . 'reportes/reporte.xlsx';
-
-        try {
-            $writer->save($file);
-        } catch (\PhpOffice\PhpSpreadsheet\Writer\Exception $e) {
-            echo $e;
-        }
-
-
-    }
-
-    public function descargar()
-    {
-        $file = APPPATH . 'reportes/reporte.xlsx';
-
-        $this->load->helper('download');
-        $data = file_get_contents($file);
-        force_download(basename($file), $data);
-    }
-
-
-
     private function darEstiloExcel($spreadsheet, $ultimaFila)
     {
         $spreadsheet->getActiveSheet()->getStyle('B8:W8')->getFont()->setBold(true);
@@ -317,6 +292,7 @@ class Reportes extends CI_Controller
             $filaCelda++;
             $muestraNumero++;
         }
+        $this->pasteImage($spreadsheet, $filaCelda);
         $this->escribirResumen($spreadsheet, $data ,$filaCelda);
         $this->darEstiloExcel($spreadsheet, $filaCelda);
 
@@ -443,4 +419,35 @@ class Reportes extends CI_Controller
         }
 
     }
+
+    private function guardar($spreadsheet)
+    {
+        $writer = new Xlsx($spreadsheet);
+        $file = APPPATH . 'reportes/reporte.xlsx';
+
+        try {
+            $writer->save($file);
+        } catch (\PhpOffice\PhpSpreadsheet\Writer\Exception $e) {
+            echo $e;
+        }
+
+
+    }
+
+    public function descargar()
+    {
+        /*
+        $file = APPPATH . 'reportes/reporte.xlsx';
+
+        $this->load->helper('download');
+        $data = file_get_contents($file);
+        force_download(basename($file), $data);
+        */
+    }
+
+    public function ping()
+    {
+        
+    }
+
 }

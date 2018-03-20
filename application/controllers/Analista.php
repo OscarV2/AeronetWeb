@@ -38,6 +38,9 @@ class Analista extends CI_Controller
 
     public function existeLote()
     {
+
+        //$this->guardarPrecipitaciones();
+
         $mes = $this->input->post('mes');
         $year = $this->input->post('year');
         $idEquipo = $this->input->post('equipo');
@@ -62,6 +65,8 @@ class Analista extends CI_Controller
         }else{
             $this->setError('POR FAVOR SELECCIONAR UN EQUIPO.');
         }
+
+
     }
 
     public function getMuestras($idLote, $mes, $year, $idEquipo, $idEstacion)
@@ -244,4 +249,40 @@ class Analista extends CI_Controller
 
     }
 
+    private function guardarPrecipitaciones(){
+
+        $path = FCPATH . 'application/meteorologia';
+
+        $config['upload_path'] = $path;
+        $config['allowed_types'] = 'txt';
+        $config['max_size']     = '250';
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('precipitaciones'))
+        {
+
+            $error = $this->upload->display_errors();
+            echo $error;
+
+        }
+        else
+        {
+            // se guardo correctamente el archivo
+            // se procede a leer para comprobar
+            // que corresponde con mes y año
+            $documento = $this->upload->data();
+            $nombre = $documento['file_name'];
+
+            $this->leerDocumento($nombre);
+            echo $nombre;
+        }
+    }
+
+    private function leerDocumento($nombre){
+
+        
+        $this->session->set_userdata('precipitaciones', $nombre);
+
+    }
 }

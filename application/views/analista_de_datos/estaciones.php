@@ -118,16 +118,16 @@
                     <select id="selectMetodo" name="metodo" class="form-control" required>
                         <option>EPA e CFR Titulo 40 Parte 50 Apéndice J</option>
                     </select>
-
+<!--
                     <div class="form-group">
                         <label for="exampleInputFile">Precipitaciones del mes.</label>
                         <input type="file"
                                class="form-control-file"
-                               name="foto"
+                               name="precipitaciones"
                                required
                                id="exampleInputFile" aria-describedby="fileHelp" >
                         <small id="fileHelp" class="form-text text-muted">Tamaño maximo de archivo: 2M.</small>
-                    </div>
+                    </div-->
                 </div>
             </div>
 
@@ -140,7 +140,7 @@
     <footer class="sticky-footer">
         <div class="container">
             <div class="text-center">
-                <small>Copyright © Qualis 2017</small>
+                <small>Copyright © Qualis 2018</small>
             </div>
         </div>
     </footer>

@@ -73,7 +73,6 @@ class Welcome extends CI_Controller {
                     //$this->session->set_userdata('idusuario', $existe[0]->idusuarios);
                     //$this->session->set_userdata($data);
                     $this->guardarDatosSesion('laboratorista', $data);
-                    $this->load->view('layout/header');
                     $this->load->view('menu_laboratorio', $data);
 
                 }
@@ -140,6 +139,7 @@ class Welcome extends CI_Controller {
 
     public function cerrarSesion()
     {
+        $this->load->library('session');
         session_destroy();
         $this->irLogin();
     }

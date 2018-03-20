@@ -76,7 +76,7 @@
                                 foreach ($muestras as $muestra){
                                     echo
                                         '<tr>'.
-                                        '<td>'. $muestra['filtro'].'</td>' .
+                                        '<td class="tabla-muestras"><b>'. $muestra['filtro'].'</b></td>' .
                                         '<td>'. $muestra['fecha_muestreo'].'</td>' .
                                         '<td>'. $muestra['presion_est_inicial'].'</td>' .
                                         '<td>'. $muestra['presion_est_final'].'</td>' .
@@ -188,8 +188,6 @@
                 </div>
             </div>
         </form>
-
-
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
@@ -385,9 +383,24 @@
 
         imag.src = image64;
 
+        var popupBlocked;
         $(document).ready(function (){
             //canvas.getContext('2d').drawImage(imag, imag.width, imag.height);
 
+            prueba = window.open("<?php echo site_url('excel/Reportes/ping');?>",'_blank');
+
+            if (prueba === undefined){
+                console.log('Indefinida');
+                popupBlocked = true;
+            }else if(prueba.closed){
+                console.log('CErrado');
+                popupBlocked = true;
+
+            }else{
+                popupBlocked = false;
+                console.log('Todo bien');
+                prueba.close();
+            }
             canvas.width = imag.width;
             canvas.height = imag.height;
         });
@@ -400,19 +413,24 @@
             formato = canvas.toDataURL("image/png"); //img is data:image/png;base64
 
             dataImage = formato.split(',');
-            $.ajax({
-                type: 'post',
-                url: "<?php echo site_url('excel/Reportes/generarReporte');?>" ,
-                data: {'imagen' : dataImage[1]},
-                success: function () {
-                    window.open("<?php echo site_url('excel/Reportes/descargar');?>",'_blank');
-                }
-            });
 
+            if (!popupBlocked){
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo site_url('excel/Reportes/generarReporte');?>" ,
+                    data: {'imagen' : dataImage[1]},
+                    success: function (data) {
+
+                        console.log(data);
+
+                        window.open("<?php echo site_url('excel/Reportes/descargar');?>",'_blank');
+                    }
+                });
+            }else {
+                alert("DEBE HABILITAR LAS VENTANAS EMERGENTES EN SU NAVEGADOR PARA DESCARGAR SU REPORTE.")
+            }
 
         });
-
-
     </script>
 
 </body>

@@ -32,7 +32,6 @@ class Filtros extends CI_Controller
             'fpp' =>$this->input->get('filtrosporpesar')
         );
 
-        $this->load->view('layout/header');
         $this->load->view('vista_pesar_filtros', $data);
         $this->load->view('layout/footer');
     }
@@ -114,9 +113,7 @@ class Filtros extends CI_Controller
 
         );
 
-        $this->load->view('layout/header');
         $this->load->view('vista_laboratorio', $filtros);
-
     }
 
     public function pesarFiltroFinal()

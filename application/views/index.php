@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Qualis</title>
 
+    <link rel="icon" href="<?php echo base_url('assets/img/logo.jpg')?>">
+
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/materialize.css')?>" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -18,7 +20,7 @@
               <a id="logo-container" href="#" class="brand-logo">Qualis</a>
 
 -->
-        <img alt="Logo" class="imagen-logo" src="<?php echo base_url('assets/img/calidad-aire.jpg')?>">
+        <img alt="Logo" class="imagen-logo" src="<?php echo base_url('assets/img/logo.jpg')?>">
 
         <ul class="right hide-on-med-and-down">
             <li><a href="<?php echo site_url('Welcome/irLogin')?>">Login</a></li>
@@ -77,7 +79,6 @@
         <div class="row">
             <div class="col s12 m4">
                 <div class="icon-block">
-                    <img class="center" src="<?php echo base_url('assets/img/PST.jpg')?>" alt="Unsplashed background img 1">
 
                     <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
                     <h5 class="center">Speeds up development</h5>
@@ -181,6 +182,7 @@
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
+
                 <h5 class="white-text">Company Bio</h5>
                 <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
 
@@ -188,7 +190,6 @@
             <div class="col l3 s12">
                 <h5 class="white-text">Settings</h5>
                 <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
                     <li><a class="white-text" href="#!">Link 2</a></li>
                     <li><a class="white-text" href="#!">Link 3</a></li>
                     <li><a class="white-text" href="#!">Link 4</a></li>
@@ -220,7 +221,6 @@
 <script>
     $(document).ready(function(){
         $('.slider').slider();
-        console.log('documen readt');
 
     });
 

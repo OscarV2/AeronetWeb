@@ -39,6 +39,10 @@ class Welcome extends CI_Controller {
         $this->output->set_header('Cache-Control: no-cache, must-revalidate');
         $this->output->set_header('Cache-Control: post-check=0, pre-check=0',false);
         $this->output->set_header('Pragma: no-cache');
+
+
+        $this->load->library('session');
+
     }
 
     public function login(){
@@ -67,7 +71,9 @@ class Welcome extends CI_Controller {
                         'lotes' => $lotes,
                         'filtrosTestigos' => $this->LoteFiltro_model->getFiltros(),
                         'totales' => $this->LoteFiltro_model->getTotales(),
-                        'idusuario' => $existe[0]->idusuarios
+                        'idusuario' => $existe[0]->idusuarios,
+                        'usuarioNombre' => $existe[0]->nombre,
+                        'usuarioApe' => $existe[0]->apellidos
                     );
 
                     //$this->session->set_userdata('idusuario', $existe[0]->idusuarios);
@@ -125,7 +131,6 @@ class Welcome extends CI_Controller {
 
     public function guardarDatosSesion($rol, $data)
     {
-        $this->load->library('session');
 
         if ($rol == 'laboratorista'){
             $this->session->set_userdata($data);

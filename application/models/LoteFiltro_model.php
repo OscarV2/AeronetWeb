@@ -57,7 +57,7 @@ class LoteFiltro_model extends CI_Model
     /*getFiltros testigos*/
     public function getFiltros()
     {
-        return $this->db->get('filtroTestigo')->result();
+        return $this->db->get('filtrotestigo')->result();
     }
 
     public function getLoteUsuario($id)

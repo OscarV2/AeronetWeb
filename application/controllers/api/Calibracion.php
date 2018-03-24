@@ -19,4 +19,10 @@ class Calibracion extends CI_Controller
         $data = json_decode(file_get_contents('php://input'), true);
         $this->Calibracion_model->guardarCalibracion($data);
     }
+
+    public function getCalibraciones()
+    {
+        //retorna las ultimas calibraciones de cada equipo
+        echo json_encode($this->Calibracion_model->getUltimasCalibraciones());
+    }
 }

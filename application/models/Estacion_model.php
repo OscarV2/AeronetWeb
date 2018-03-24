@@ -71,7 +71,7 @@ class Estacion_model extends CI_Model
 
     public function getDatosEquipoReporte($idEquipo)
     {
-        $this->db->select('variable, clase, modelo');
+        $this->db->select('variable, clase, modelo, metodo');
         $this->db->where('idequipo', $idEquipo);
 
         return $this->db->get('equipos')->result();

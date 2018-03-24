@@ -13,7 +13,6 @@ class Analista extends CI_Controller
         parent::__construct();
         $this->load->model('Analisis_model');
         $this->load->model('Estacion_model');
-
         $this->load->library('session');
 
     }
@@ -38,7 +37,6 @@ class Analista extends CI_Controller
 
     public function existeLote()
     {
-
         //$this->guardarPrecipitaciones();
 
         $mes = $this->input->post('mes');
@@ -65,7 +63,6 @@ class Analista extends CI_Controller
         }else{
             $this->setError('POR FAVOR SELECCIONAR UN EQUIPO.');
         }
-
 
     }
 
@@ -202,6 +199,30 @@ class Analista extends CI_Controller
 
     public function validar()
     {
+        //buscar muestras sin validar
+
+        $data = array(
+            'muestras' => $this->Analisis_model->getFiltrosSinValidar(),
+        );
+
+        $this->load->view('layout/header');
+        $this->load->view('analista_de_datos/validar_muestras', $data);
+    }
+
+    public function validarMuestras()
+    {
+        $validas = $this->input->post('validas');
+        $invalidas = $this->input->post('invalidas');
+
+        if (!(sizeof($validas) > 0 and sizeof($invalidas) > 0)){
+            echo 'sin datos';
+        }else{
+            $this->Analisis_model->updateMuestrasValidar($validas);
+            $this->Analisis_model->updateMuestrasInValidar($invalidas);
+
+            echo 'success';
+
+        }
 
     }
 
@@ -225,7 +246,6 @@ class Analista extends CI_Controller
 
     private function guardarDatosSesion($idLote, $idEquipo, $idEstacion, $mes, $year)
     {
-        $metodo = $this->input->post('metodo');
 
         $estacion = $this->Estacion_model->getDatosEstacionReporte($idEstacion);
         $equipo = $this->Estacion_model->getDatosEquipoReporte($idEquipo);
@@ -239,7 +259,7 @@ class Analista extends CI_Controller
             'numero' => $estacion[0]->numero,
             'nombre' => $estacion[0]->nombre,
             'localizacion' => $estacion[0]->localizacion,
-            'metodo' => $metodo,
+            'metodo' => $equipo[0]->metodo,
             'mes' => $mes,
             'year' => $year,
             'clase' => $equipo[0]->clase

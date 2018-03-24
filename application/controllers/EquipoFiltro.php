@@ -13,6 +13,8 @@ class EquipoFiltro extends CI_Controller
         parent::__construct();
         $this->load->model('Filtro_model');
         $this->load->model('Equipo_model');
+        $this->load->library('session');
+
     }
 
     //Asignar equipos

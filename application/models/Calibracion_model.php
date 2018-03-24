@@ -17,6 +17,29 @@ Calibracion_Model extends CI_Model
 
     public function guardarCalibracion($data)
     {
-        $this->db->insert('CalibracionModel', $data);
+        $this->db->insert('calibracion', $data);
+    }
+
+    public function getUltimasCalibraciones()
+    {
+        $idequipos = array();
+        $calibraciones = array();
+        // get Equipos ids
+        $this->db->select('idequipo');
+        $equipos = $this->db->get('equipos');
+
+         foreach ($equipos->result() as $equipo){
+             $idequipos[] = $equipo->idequipo;
+
+             $this->db->where('equipos_idequipo', $equipo->idequipo);
+             $this->db->from('calibracion');
+             $this->db->order_by('id','desc');
+             $this->db->limit(1);
+             $calibraciones[] = $this->db->get()->row();
+         }
+         //return $idequipos;
+         return $calibraciones;
+
+        // get calibraciones
     }
 }

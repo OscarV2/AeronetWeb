@@ -113,11 +113,6 @@
                 </div>
 
                 <div class="col-lg-6">
-
-                    <label for="selectMetodo">Seleccionar método</label>
-                    <select id="selectMetodo" name="metodo" class="form-control" required>
-                        <option>EPA e CFR Titulo 40 Parte 50 Apéndice J</option>
-                    </select>
 <!--
                     <div class="form-group">
                         <label for="exampleInputFile">Precipitaciones del mes.</label>

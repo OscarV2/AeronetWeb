@@ -17,13 +17,13 @@ class FiltroTestigo_model extends CI_Model
 
     public function guardarNuevoFiltro($data)
     {
-            $this->db->insert('filtroTestigo',$data);
+            $this->db->insert('filtrotestigo',$data);
     }
 
     public function actualizarFiltros($id ,$data)
     {
         $this->db->where('id', $id);
-        $this->db->update('filtroTestigo',$data);
+        $this->db->update('filtrotestigo',$data);
     }
 
 

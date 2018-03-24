@@ -299,7 +299,7 @@
                     dashStyle: 'shortdash',
                     width: 2,
                     label: {
-                        text: 'Norma'
+                        text: 'Norma diaria ug/m3.'
                     }
                 }],
                 max: 110

@@ -110,11 +110,11 @@ class Analisis_model extends CI_Model
 
 
     }
+
     public function updateMuestrasInValidar($data)
     {
-
         $validos = array('valido' => 2);
-        if (sizeof($validos)) {
+        if (sizeof($data) > 0) {
             foreach ($data as $idFiltro){
                 $this->db->where('idFiltros', $idFiltro);
                 $this->db->update('filtros', $validos);
@@ -203,6 +203,35 @@ class Analisis_model extends CI_Model
         $cantFiltros = $this->db->count_all_results();
 
         return $cantFiltros;
+    }
+
+    public function getFechasMuestreo($mes, $year)
+    {
+        //getIdLoteFiltro
+        $this->db->select('id');
+        $this->db->where('mes',$mes);
+        $this->db->where('year',$year);
+
+        $data = 'Error';
+        $result = $this->db->get('lotefiltros')->row();
+        if (isset($result)){
+            $idLote = $result->id;
+
+            $this->db->select('fecha_muestreo');
+            $this->db->where('lotefiltros_id',$idLote);
+            $this->db->where('fecha_muestreo is NOT NULL');
+            $fechas = $this->db->get('filtros');
+
+            if (sizeof($fechas) > 0){
+                $data = array();
+                foreach ($fechas->result() as $fecha){
+                    $data[] = $fecha->fecha_muestreo;
+                }
+            }
+        }
+
+        return $data;
+
     }
 
 }

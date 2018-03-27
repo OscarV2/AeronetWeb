@@ -37,13 +37,18 @@ class Analista extends CI_Controller
 
     public function existeLote()
     {
-        //$this->guardarPrecipitaciones();
 
         $mes = $this->input->post('mes');
         $year = $this->input->post('year');
         $idEquipo = $this->input->post('equipo');
         $idEstacion = $this->input->post('idEstacion');
+        $precipitaciones = $this->input->post('precipitaciones');
 
+        $data = array('precipitaciones' => $precipitaciones);
+        $this->session->set_userdata($data);
+
+        //var_dump($precipitaciones);
+        
         if (isset($idEquipo)){
             $lotes = $this->Analisis_model->existeLote($mes, $year);
 
@@ -53,7 +58,7 @@ class Analista extends CI_Controller
                 //Check if filters of this batch belong to this station
                 if ($this->Analisis_model->filtrosPertenecenAEquipo($idEquipo, $idLote) > 0){
 
-                    $this->getMuestras($idLote, $mes, $year, $idEquipo, $idEstacion);
+                    $this->getMuestras($idLote, $mes, $year, $idEquipo, $idEstacion, $precipitaciones);
                 }else{
                     $this->setError('EL EQUIPO SELECCIONADO NO CORRESPONDE AL LOTE.');
                 }
@@ -66,30 +71,36 @@ class Analista extends CI_Controller
 
     }
 
-    public function getMuestras($idLote, $mes, $year, $idEquipo, $idEstacion)
+    public function getMuestras($idLote, $mes, $year, $idEquipo, $idEstacion, $precipitaciones)
     {
         $muestras = $this->Analisis_model->getMuestras($idEquipo, $mes, $year);
 
-        if (sizeof($muestras) > 0){
-            $variables  = array();
-            foreach ($muestras as $muestra){
-                $variables[] = $muestra['variable'];
-            }
+        if ($muestras == 'no hay filtros validos'){
 
-            $resultados = $this->getResultados($variables, $muestras);
-            $data = array(
-                'muestras' => $muestras,
-                'resultados' => $resultados
-            );
-
-            $this->guardarDatosSesion($idLote, $idEquipo, $idEstacion, $mes, $year);
-            $this->load->view('layout/header');
-            $this->load->view('analista_de_datos/muestras_informe', $data);
+            $this->setError('LAS MUESTRAS ASIGNADAS A ESTE LOTE NO HAN SIDO VALIDADAS.');
 
         }else{
-            $this->setError('ESTE LOTE NO EXISTE.');
-        }
+            if (sizeof($muestras) > 0){
+                $variables  = array();
+                foreach ($muestras as $muestra){
+                    $variables[] = $muestra['variable'];
+                }
 
+                $resultados = $this->getResultados($variables, $muestras);
+                $data = array(
+                    'muestras' => $muestras,
+                    'resultados' => $resultados,
+                    'precipitaciones' => $precipitaciones
+                );
+
+                $this->guardarDatosSesion($idLote, $idEquipo, $idEstacion, $mes, $year);
+                $this->load->view('layout/header');
+                $this->load->view('analista_de_datos/muestras_informe', $data);
+
+            }else{
+                $this->setError('ESTE LOTE NO EXISTE.');
+            }
+        }
     }
 
     private function getResultados($variables, $muestras)
@@ -214,7 +225,7 @@ class Analista extends CI_Controller
         $validas = $this->input->post('validas');
         $invalidas = $this->input->post('invalidas');
 
-        if (!(sizeof($validas) > 0 and sizeof($invalidas) > 0)){
+        if ((sizeof($validas) == 0) and (sizeof($invalidas) == 0)){
             echo 'sin datos';
         }else{
             $this->Analisis_model->updateMuestrasValidar($validas);
@@ -249,7 +260,6 @@ class Analista extends CI_Controller
 
         $estacion = $this->Estacion_model->getDatosEstacionReporte($idEstacion);
         $equipo = $this->Estacion_model->getDatosEquipoReporte($idEquipo);
-
         $data = array(
             'idLote' => $idLote,
             'idEquipo' => $idEquipo,
@@ -263,46 +273,21 @@ class Analista extends CI_Controller
             'mes' => $mes,
             'year' => $year,
             'clase' => $equipo[0]->clase
+
         );
 
         $this->session->set_userdata($data);
 
     }
 
-    private function guardarPrecipitaciones(){
+    public function getFechasMuestreo()
+    {
+        $mes = $this->input->post('mes');
+        $year = $this->input->post('year');
 
-        $path = FCPATH . 'application/meteorologia';
-
-        $config['upload_path'] = $path;
-        $config['allowed_types'] = 'txt';
-        $config['max_size']     = '250';
-
-        $this->load->library('upload', $config);
-
-        if ( ! $this->upload->do_upload('precipitaciones'))
-        {
-
-            $error = $this->upload->display_errors();
-            echo $error;
-
-        }
-        else
-        {
-            // se guardo correctamente el archivo
-            // se procede a leer para comprobar
-            // que corresponde con mes y año
-            $documento = $this->upload->data();
-            $nombre = $documento['file_name'];
-
-            $this->leerDocumento($nombre);
-            echo $nombre;
-        }
-    }
-
-    private function leerDocumento($nombre){
-
-        
-        $this->session->set_userdata('precipitaciones', $nombre);
+        echo json_encode($this->Analisis_model->getFechasMuestreo($mes, $year));
 
     }
+
+
 }

@@ -35,7 +35,11 @@ Calibracion_Model extends CI_Model
              $this->db->from('calibracion');
              $this->db->order_by('id','desc');
              $this->db->limit(1);
-             $calibraciones[] = $this->db->get()->row();
+             $calibracion = $this->db->get()->row();
+             if (sizeof($calibracion)>0){
+                 $calibraciones[] = $calibracion;
+             }
+
          }
          //return $idequipos;
          return $calibraciones;

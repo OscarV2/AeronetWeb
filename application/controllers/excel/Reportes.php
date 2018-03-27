@@ -135,6 +135,7 @@ class Reportes extends CI_Controller
     {
         $idEquipo = $_SESSION['idEquipo'];
 
+
         $data = array();
         $data['idLote'] = $_SESSION['idLote'];
         $data['idEquipo'] = $idEquipo;
@@ -436,13 +437,13 @@ class Reportes extends CI_Controller
 
     public function descargar()
     {
-        /*
+
         $file = APPPATH . 'reportes/reporte.xlsx';
 
         $this->load->helper('download');
         $data = file_get_contents($file);
         force_download(basename($file), $data);
-        */
+
     }
 
     public function ping()

@@ -203,7 +203,6 @@
         <i class="fa fa-angle-up"></i>
     </a>
 
-
     <!-- Modal Exito-->
     <div class="modal fade" id="modalAtras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -238,7 +237,7 @@
         </div>
     </div>
 
-    <canvas id="canvas" hidden></canvas>
+    <canvas id="canvas" hidden ></canvas>
 
     <img id="imag" hidden>
 </div>
@@ -263,7 +262,12 @@
 
         var chart = new Highcharts.Chart('container2', {
             chart: {
-                zoomType: 'xy'
+                zoomType: 'xy',
+                events : {
+                    load : function () {
+
+                    }
+                }
             },
             title: {
                 text: 'CONCENTRACION DE PM10(ug/m3)'
@@ -294,12 +298,12 @@
                     }
                 },
                 plotLines: [{
-                    value: 100,
+                    value: 120,
                     color: 'red',
                     dashStyle: 'shortdash',
                     width: 2,
                     label: {
-                        text: 'Norma diaria ug/m3.'
+                        text: 'Norma diaria permitida ug/m3.'
                     }
                 }],
                 max: 110
@@ -349,12 +353,12 @@
                 type: 'spline',
                 data: [<?php
 
-                    foreach ($muestras as $muestra) {
-                        //
-                        if (array_search($muestra, $muestras) == (sizeof($muestras) - 1)){
-                            echo $muestra['variable'];
+                    for ($i = 0;$i < sizeof($precipitaciones); $i++) {
+
+                        if ($i == (sizeof($precipitaciones) - 1)){
+                            echo $precipitaciones[$i];
                         }else{
-                            echo $muestra['variable'] . ', ';
+                            echo $precipitaciones[$i] . ', ';
                         }
 
                     }
@@ -381,11 +385,26 @@
         // prepend a "header"
         var image64 = b64Start + base64FromSvg;
 
+        //$("imag").attr('hidden', false);
         imag.src = image64;
+
+        imag.onload = function (ev) {
+
+            cargarCanvas();
+
+        };
+        function cargarCanvas() {
+
+
+            canvas.width = imag.width;
+            canvas.height = imag.height;
+            canvas.getContext('2d').drawImage(imag, 0, 0);
+
+        }
 
         var popupBlocked;
         $(document).ready(function (){
-            //canvas.getContext('2d').drawImage(imag, imag.width, imag.height);
+//            canvas.getContext('2d').drawImage(imag, imag.width, imag.height);
 
             prueba = window.open("<?php echo site_url('excel/Reportes/ping');?>",'_blank');
 
@@ -398,11 +417,8 @@
 
             }else{
                 popupBlocked = false;
-                console.log('Todo bien');
                 prueba.close();
             }
-            canvas.width = imag.width;
-            canvas.height = imag.height;
         });
 
         $('form').on('submit', function (e) {

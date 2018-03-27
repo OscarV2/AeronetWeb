@@ -61,6 +61,9 @@
                                 <th>Tipo</th>
                                 <th>Seleccionar</th>
                             </tr>
+
+                            </thead>
+                            <tbody>
                             <?php
                             foreach ($estaciones as $estacion){
 
@@ -78,8 +81,6 @@
 
                             }
                             ?>
-                            </thead>
-                            <tbody>
                             </tbody>
                         </table>
                     </div>
@@ -90,8 +91,9 @@
                 <div class="col-lg-6">
 
                     <div class="form-group">
-                        <label for="exampleSelect1">Seleccionar mes</label>
-                        <select id="exampleSelect1" name="mes" class="form-control" required>
+                        <label for="mesSelect">Seleccionar mes</label>
+                        <select id="mesSelect" name="mes" class="form-control" required>
+                            <option disabled selected>Seleccionar</option>
                             <option>Enero</option>
                             <option>Febrero</option>
                             <option>Marzo</option>
@@ -108,11 +110,13 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="number" name="year" min="2017" max="2020" class="form-control" id="exampleFormControlInput1" placeholder="Año" required>
+                        <input type="number" name="year" min="2017" max="2020" value="<?php echo date("Y"); ?>" class="form-control" id="exampleFormControlInput1" placeholder="Año" required>
                     </div>
                 </div>
 
                 <div class="col-lg-6">
+
+
 <!--
                     <div class="form-group">
                         <label for="exampleInputFile">Precipitaciones del mes.</label>
@@ -126,6 +130,26 @@
                 </div>
             </div>
 
+            <div id="pre_table" hidden class="card-mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Ingrese datos de precipitaciones.
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Fecha_muestreo</th>
+                                <th>Precipitacion (mm)</th>
+                            </tr>
+                            </thead>
+                            <tbody id="precipitaciones">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <button type="submit" class="btn btn-primary btn-block"><strong>Continuar</strong> <i class="fa fa-arrow-right"></i></button>
         </form>
 
@@ -143,17 +167,20 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
-
-    <!-- Modal Exito-->
-    <div class="modal fade" id="modalAtras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- modal no hay fechas muestrep -->
+    <div class="modal fade" id="modalFechas" tabindex="-1" role="dialog" aria-labelledby="modalFechas" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Estaciones asignadas exitosamente.</h5>
+                    <h5 class="modal-title" id="modalFechasLabel">Error</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
+                <div class="modal-body">No existen muestras para el lote seleccionado.</div>
                 <div class="modal-footer">
-                    <a class="btn btn-primary"
-                       href="<?php echo site_url('Welcome/irInicio');?>">Ok</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">OK</button>
+                    <a class="btn btn-primary" href="">Cerrar</a>
                 </div>
             </div>
         </div>
@@ -172,11 +199,13 @@
                 <div class="modal-body">Haz click en "Cerrar" si estas seguro de terminar con la sesion actual.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="login.html">Cerrar</a>
+                    <a class="btn btn-primary" href="<?php echo site_url('Welcome/irInicio');?>">Cerrar</a>
                 </div>
             </div>
         </div>
     </div>
+
+</div>
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
 
@@ -193,46 +222,53 @@
     <script src="<?php echo base_url('assets/js/sb-admin.min.js')?>"></script>
     <!-- Custom scripts for this page-->
     <script src="<?php echo base_url('assets/js/sb-admin-datatables.min.js')?>"></script>
-
     <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
     <script>
-/*
-        $('form').on('submit', function (e) {
 
-            e.preventDefault();
-                //console.log($('form').serialize());
-                $.ajax({
-                    type: 'post',
-                    url: "" ,
-                    data: $('form').serialize(),
-                    success: function (data) {
-                        console.log(data) ;
-                        if (data === 'success'){
-                            // mostrar modal
-                            console.log('data is success') ;
 
-                            irVerMuestras();
-                        }else if(data === 'no existe'){
-                            alert('NO SE HAN TOMADO MUESTRAS EN ESTA ESTACION EN LA FECHA SELECCIONADA.');
-                        }
-                    }
-                });
+        $("#mesSelect").change(function() {
+            var optionSelected = $("option:selected", this);
+            var mes = optionSelected.text();
+            var year = $("input[name='year']").val();
+            console.log("añiooo" + year);
+            getFechasMuestreoMes(mes, year);
         });
-*/
-        function irVerMuestras() {
+
+
+        function verPrecipitaciones(data) {
+
+            $('#pre_table').attr('hidden', false);
+            var campoPre = $('#precipitaciones');
+            
+            for (var i = 0; i < data.length; i++){
+                campoPre.append('<tr><td>' + data[i] +'</td>' +
+                    '<td><input type="number" step="0.1" name="precipitaciones[]" value="0">' +
+                    '</td>' +
+                    '</tr>');
+            }
+
+        }
+
+        function getFechasMuestreoMes(mes, year) {
 
             $.ajax({
                 type: 'post',
-                url: "<?php echo site_url('Analista/getMuestras');?>" ,
-                data: $('form').serialize(),
-                success: function() {
-                    window.location.href = "<?php echo site_url('Analista/getMuestras');?>";
-                }
-            });
+                url: "<?php echo site_url('Analista/getFechasMuestreo');?>" ,
+                data: {'mes' : mes,
+                    'year' : year},
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    if (data === 'Error') {
+                        $('#modalFechas').modal('show');
+                    }else{
+                        console.log("tamaño array " + data.length);
+                            verPrecipitaciones(data);
+                        }
+                    }
+                });
         }
 
     </script>
-</div>
 </body>
-
 </html>

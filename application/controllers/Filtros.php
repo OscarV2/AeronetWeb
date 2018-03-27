@@ -124,7 +124,9 @@ class Filtros extends CI_Controller
 
         $data = array('pesoFinal' => $peso, 'pesadoFinal' =>$fecha);
         try{
-            $this->Filtro_model->updateFiltro($idFiltro, $data);
+            $this->Filtro_model->updateFiltro($idFiltro,  $data);
+            $this->Filtro_model->updateMuestra($idFiltro, $peso);
+
             $response = "success";
         }catch (Error $e){
             $response = "Error";

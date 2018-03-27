@@ -20,7 +20,7 @@ class Filtros extends CI_Controller
     {
         echo json_encode($this->Filtro_model->getFiltrosAsignados()->result());
     }
-
+/*
     public function guardarFiltros()
     {
         $idLote = $this->input->get('idLote');
@@ -43,24 +43,24 @@ class Filtros extends CI_Controller
 
         $this->Filtro_model->guardarNuevosFiltros($data);
     }
-
+*/
     public function instalarFiltro()
     {
         $data = json_decode(file_get_contents('php://input'), true);
-        $filtro = $data['idfiltro'];
-        $fecha = $data['fecha'];
-
-        $this->Filtro_model->instalar($filtro, $fecha);
-        echo 'Ok';
+        $filtro = $data['idFiltros'];
+        $fecha = $data['instalado'];
+        $idEquipo = $data['idequipo'];
+        $this->Filtro_model->instalar($filtro, $fecha, $idEquipo);
 
     }
 
     public function recogerFiltro()
     {
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = array();
+        parse_str(file_get_contents('php://input'), $data);
 
         $this->Filtro_model->recoger($data);
-        echo 'Ok';
+//echo 'Ok';
     }
 
 }

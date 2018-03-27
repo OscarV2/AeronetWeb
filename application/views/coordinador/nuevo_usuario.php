@@ -184,7 +184,7 @@
                 <div class="modal-body">Haz click en "Cerrar" si estas seguro de terminar con la sesion actual.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="login.html">Cerrar</a>
+                    <a class="btn btn-primary" href="<?php echo site_url('Welcome/cerrarSesion');?>">Cerrar</a>
                 </div>
             </div>
         </div>

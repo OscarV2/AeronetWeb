@@ -52,9 +52,9 @@ class Filtro_model extends CI_Model
         $this->db->update('filtros',$data);
     }
 
-    public function instalar($id, $fecha)
+    public function instalar($id, $fecha, $idequipo)
     {
-        $data = array('instalado' => $fecha);
+        $data = array('instalado' => $fecha, 'idequipo' => $idequipo);
         $this->db->where('idFiltros', $id);
         $this->db->update('filtros',$data);
     }
@@ -62,8 +62,8 @@ class Filtro_model extends CI_Model
     public function recoger($data)
     {
 
-        $id = $data['idfiltro'];
-        $fecha = $data['fecha'];
+        $id = $data['idFiltro'];
+        $fecha = $data['recogido'];
         $idequipo = $data['idequipo'];
         $observaciones = $data['observaciones'];
         $fechaMuestreo = $data['fecha_muestreo'];
@@ -159,6 +159,15 @@ class Filtro_model extends CI_Model
     {
         $this->db->where('idFiltros', $id);
         $this->db->update('filtros',$data);
+
+    }
+
+    public function updateMuestra($id, $data)
+    {
+
+        $data = array('Wf' => $data);
+        $this->db->where('idFiltro', $id);
+        $this->db->update('muestra',$data);
 
     }
 }

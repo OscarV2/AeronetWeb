@@ -13,13 +13,13 @@
                     <span class="nav-link-text">Nuevo Proyecto</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="nuevo Usuario">
                 <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearUsuario');?>">
                     <i class="fa fa-fw fa-user-plus"></i>
                     <span class="nav-link-text">Nuevo Usuario</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Equipos">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-wrench"></i>
                     <span class="nav-link-text">Equipos</span>
@@ -35,12 +35,18 @@
                         <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pm2.5" ;?>"">PM2.5</a>
                     </li>
                 </ul>
+            </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Estaciones">
                 <a class="nav-link" href="<?php echo site_url('Coordinador/irEstaciones');?>">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Estaciones</span>
                 </a>
             </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nuevo Equipo">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearEquipo');?>">
+                    <i class="fa fa-fw fa-calculator"></i>
+                    <span class="nav-link-text">Nuevo Equipo</span>
+                </a>
             </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
@@ -94,15 +100,15 @@
                                     '<td>'. $proyecto['fechaInicio'] . '</td>' .
                                     '<td>'. $proyecto['estaciones'] . '</td>' .
                                     '<td><div class="dropdown">' .
- ' <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
-  'Opciones' .
- '</button>' .
-'<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' .
- '<a class="dropdown-item" href="'. site_url('Estaciones/irAsignarEstaciones')  . "?id=" .$proyecto['idProyecto'] . "&nombre=" .$proyecto['nombre'] .'">Asignar Estaciones</a>' .
- '<a class="dropdown-item" href="'. site_url('Usuarios/irGestionarFiltros')  . "?id=" .$proyecto['idProyecto']  . "&nombre=" .$proyecto['nombre'] .'" >Gestionar Filtros</a>' .
- '<a class="dropdown-item" href="'. site_url('LoteFiltros/irMenuLotes')  . "?id=" .$proyecto['idProyecto']  . "&nombre=" .$proyecto['nombre'] .'">Asignar Filtros</a>' .
- '<a class="dropdown-item" href="'. site_url('LoteFiltros/irVerLotesProyecto')  . "?id=" .$proyecto['idProyecto']  . "&nombre=" .$proyecto['nombre'] .'">Ver Lotes</a>' .
- '<a class="dropdown-item" href="'. site_url('Equipos/verFiltrosAsignados')  . "?id=" .$proyecto['idProyecto']  . "&nombre=" .$proyecto['nombre'] .'">Ver Equipos</a>' .
+                                    ' <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' .
+                                      'Opciones' .
+                                     '</button>' .
+                                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' .
+                                     '<a class="dropdown-item" href="'. site_url('Estaciones/irAsignarEstaciones')  . "?id=" .$proyecto['idProyecto'] . "&nombre=" .$proyecto['nombre'] .'">Asignar Estaciones</a>' .
+                                     '<a class="dropdown-item" href="'. site_url('Usuarios/irGestionarFiltros')  . "?id=" .$proyecto['idProyecto']  . "&nombre=" .$proyecto['nombre'] .'" >Gestionar Filtros</a>' .
+                                     '<a class="dropdown-item" href="'. site_url('LoteFiltros/irMenuLotes')  . "?id=" .$proyecto['idProyecto']  . "&nombre=" .$proyecto['nombre'] .'">Asignar Filtros</a>' .
+                                     '<a class="dropdown-item" href="'. site_url('LoteFiltros/irVerLotesProyecto')  . "?id=" .$proyecto['idProyecto']  . "&nombre=" .$proyecto['nombre'] .'">Ver Lotes</a>' .
+                                     '<a class="dropdown-item" href="'. site_url('Equipos/verFiltrosAsignados')  . "?id=" .$proyecto['idProyecto']  . "&nombre=" .$proyecto['nombre'] .'">Ver Equipos</a>' .
 
                                     ' </div>' .
 '</div></td>' .

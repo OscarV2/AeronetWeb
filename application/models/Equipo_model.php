@@ -121,4 +121,21 @@ class Equipo_model extends CI_Model
     {
         return $this->db->get_where('equipos',array('variable' => $tipo));
     }
+
+    //nuevo equipo
+    public function nuevoEquipo($data)
+    {
+        //return true;
+       $this->db->insert('equipos', $data);
+    }
+
+    public function getIdEquipoBySerial($serial)
+    {
+        $this->db->select('idequipo');
+        $this->db->where('serial', $serial);
+
+        return $this->db->get('equipos')->row()->idequipo;
+
+    }
+
 }

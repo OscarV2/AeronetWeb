@@ -12,27 +12,26 @@
                     <span class="nav-link-text">Nuevo Proyecto</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="nuevo Usuario">
                 <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearUsuario');?>">
                     <i class="fa fa-fw fa-user-plus"></i>
                     <span class="nav-link-text">Nuevo Usuario</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Equipos">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-wrench"></i>
                     <span class="nav-link-text">Equipos</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
                     <li>
-                        <a href="lista-equipos.php">PM10</a>
+                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pm10" ;?>">PM10</a>
                     </li>
                     <li>
-                        <a href="lista-equipos.php">PST</a>
-
+                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pst" ;?>"">PST</a>
                     </li>
                     <li>
-                        <a href="lista-equipos.php">PM2.5</a>
+                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pm2.5" ;?>"">PM2.5</a>
                     </li>
                 </ul>
             </li>
@@ -42,7 +41,12 @@
                     <span class="nav-link-text">Estaciones</span>
                 </a>
             </li>
-
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nuevo Equipo">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearEquipo');?>">
+                    <i class="fa fa-fw fa-calculator"></i>
+                    <span class="nav-link-text">Nuevo Equipo</span>
+                </a>
+            </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">

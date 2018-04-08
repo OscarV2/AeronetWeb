@@ -40,4 +40,41 @@ class Estaciones extends CI_Controller
 
     }
 
+    public function crearEstacion()
+    {
+        $longitud = (string)$this->input->post('longitud');
+        $latitud = (string)$this->input->post('latitud');
+
+        $localizacion = $latitud . ',' . $longitud;
+
+        $data = array(
+            'nombre' => $this->input->post('nombreEstacion'),
+            'municipio' => $this->input->post('municipio'),
+            'msnm' => $this->input->post('msnm'),
+            'tipo' => $this->input->post('tipoEst'),
+            'localizacion' => $localizacion
+        );
+
+        try{
+            $this->Estacion_model->guardarNuevaEstacion($data);
+
+            $this->estacionCreatedSuccessfully(2);
+        }catch (Error $error){
+            $this->estacionCreatedSuccessfully(0);
+        }
+    }
+
+
+    private function estacionCreatedSuccessfully($err)
+    {
+
+        $estaciones = $this->Estacion_model->getEstaciones();
+        $data = array('estaciones' => $estaciones, 'err' => $err);
+        $this->load->view('layout/header');
+        $this->load->view('coordinador/nuevo_equipo', $data);
+    }
+
+
+
+
 }

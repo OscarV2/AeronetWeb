@@ -1,39 +1,38 @@
 
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nuevo Proyecto">
-                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearProyecto');?>">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inicio">
+                <a class="nav-link" href="<?php echo site_url('Welcome/irInicio');?>">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Inicio</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                <a class="nav-link" href="<?php echo site_url('Coordinador/irListaProyectos');?>">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nuevo Proyecto">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearProyecto');?>">
                     <i class="fa fa-fw fa-calendar-plus-o"></i>
                     <span class="nav-link-text">Nuevo Proyecto</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="nuevo Usuario">
                 <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearUsuario');?>">
                     <i class="fa fa-fw fa-user-plus"></i>
                     <span class="nav-link-text">Nuevo Usuario</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Equipos">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-wrench"></i>
                     <span class="nav-link-text">Equipos</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
                     <li>
-                        <a href="lista-equipos.php">PM10</a>
+                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pm10" ;?>">PM10</a>
                     </li>
                     <li>
-                        <a href="lista-equipos.php">PST</a>
-
+                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pst" ;?>"">PST</a>
                     </li>
                     <li>
-                        <a href="lista-equipos.php">PM2.5</a>
+                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pm2.5" ;?>"">PM2.5</a>
                     </li>
                 </ul>
             </li>
@@ -43,7 +42,12 @@
                     <span class="nav-link-text">Estaciones</span>
                 </a>
             </li>
-
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nuevo Equipo">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearEquipo');?>">
+                    <i class="fa fa-fw fa-calculator"></i>
+                    <span class="nav-link-text">Nuevo Equipo</span>
+                </a>
+            </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
@@ -87,45 +91,64 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Bootstrap core JavaScript-->
-    <script src="../../vendor/jquery/jquery.min.js"></script>
-    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="../../js/sb-admin.min.js"></script>
 
+
+</div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/jquery-easing/jquery.easing.min.js')?>"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.js')?>"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="<?php echo base_url('assets/js/sb-admin.min.js')?>"></script>
+    <!-- Custom scripts for this page-->
+    <script src="<?php echo base_url('assets/js/sb-admin-datatables.min.js')?>"></script>
+
+    <script src="<?php echo base_url('assets/js/sb-admin-charts.min.js')?>"></script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL8fCskYf-G2CQMljQ-GGaLrBa352EtVs&callback=initMap">
     </script>
     <script>
+
+        var estaciones = <?php echo $estaciones;?>;
+
+        console.log(estaciones);
+
+        //llenar array con
+        var localizacion;
+
+
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -34.397, lng: 150.644},
+                center: {lat: 10.470266, lng: -73.266961},
                 zoom: 12
             });
             var infoWindow = new google.maps.InfoWindow({map: map});
 
-            // Try HTML5 geolocation.
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
+            for (var i = 0; i < estaciones.length; i++){
 
-                    infoWindow.setPosition(pos);
-                    infoWindow.setContent('Coluvion. (Valledupar)');
-                    map.setCenter(pos);
-                }, function() {
-                    handleLocationError(true, infoWindow, map.getCenter());
+                localizacion = estaciones[i].localizacion.split(',');
+
+                var myLatLng = {lat: parseFloat(localizacion[0]),
+                    lng: parseFloat(localizacion[1])};
+
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: estaciones[i].nombre
                 });
-            } else {
-                // Browser doesn't support Geolocation
-                handleLocationError(false, infoWindow, map.getCenter());
+
             }
         }
+
+        initMap();
     </script>
-</div>
 </body>
 </html>

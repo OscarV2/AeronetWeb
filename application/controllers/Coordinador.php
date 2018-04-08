@@ -42,9 +42,13 @@ class Coordinador extends CI_Controller
     }
 
     public function irEstaciones(){
+
+        $this->load->model('Estacion_model');
+
+        $data = array('estaciones' => json_encode($this->Estacion_model->getEstaciones()->result()));
+
         $this->load->view('layout/header');
-        $this->load->view('coordinador/estaciones');
-        $this->load->view('layout/footer');
+        $this->load->view('coordinador/estaciones', $data);
 
     }
 
@@ -81,10 +85,16 @@ class Coordinador extends CI_Controller
         echo 'success';
     }
 
-    public function vistaActividadExitosa()
+    public function irCrearEquipo()
     {
+        $this->load->model('Estacion_model');
+
+        $estaciones = $this->Estacion_model->getEstaciones();
+        $data = array('estaciones' => $estaciones);
         $this->load->view('layout/header');
-        $this->load->view('success_message');
-        $this->load->view('layout/footer');
+        $this->load->view('coordinador/nuevo_equipo', $data);
     }
+
+
+
 }

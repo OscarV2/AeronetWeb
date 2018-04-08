@@ -43,6 +43,12 @@
                     <span class="nav-link-text">Estaciones</span>
                 </a>
             </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nuevo Equipo">
+                <a class="nav-link" href="<?php echo site_url('Coordinador/irCrearEquipo');?>">
+                    <i class="fa fa-fw fa-calculator"></i>
+                    <span class="nav-link-text">Nuevo Equipo</span>
+                </a>
+            </li>
 
         </ul>
         <ul class="navbar-nav sidenav-toggler">
@@ -152,6 +158,7 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
+
     <!-- Modal-->
     <div class="modal fade" id="modalNuevoUsuario"
          tabindex="-1" role="dialog"

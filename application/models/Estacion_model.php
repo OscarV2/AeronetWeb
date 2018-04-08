@@ -24,6 +24,7 @@ class Estacion_model extends CI_Model
         return $this->db->get('estacion');
     }
 
+
     public function getEstacionesAnalista()
     {
         $response = array();
@@ -49,6 +50,7 @@ class Estacion_model extends CI_Model
 
         return $response;
     }
+    //nueva estacion
 
     public function guardarNuevaEstacion($data)
     {
@@ -91,4 +93,6 @@ class Estacion_model extends CI_Model
         }
 
     }
+
+
 }

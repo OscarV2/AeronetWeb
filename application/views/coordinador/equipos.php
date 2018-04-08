@@ -41,7 +41,7 @@
                     <span class="nav-link-text">Estaciones</span>
                 </a>
             </li>
-            </li>
+
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
@@ -80,7 +80,7 @@
                                 <th>Codigo</th>
                                 <th>Modelo</th>
                                 <th>Clase</th>
-                                <th>Estacion</th>
+                                <th>Descripción</th>
 
                             </tr>
                             </thead>

@@ -19,21 +19,20 @@
                     <span class="nav-link-text">Nuevo Usuario</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Equipos">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-wrench"></i>
                     <span class="nav-link-text">Equipos</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
                     <li>
-                        <a href="lista-equipos.php">PM10</a>
+                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pm10" ;?>">PM10</a>
                     </li>
                     <li>
-                        <a href="lista-equipos.php">PST</a>
-
+                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pst" ;?>"">PST</a>
                     </li>
                     <li>
-                        <a href="lista-equipos.php">PM2.5</a>
+                        <a href="<?php echo site_url('Equipos/verEquiposPM10') . "?tipo=pm2.5" ;?>"">PM2.5</a>
                     </li>
                 </ul>
             </li>
@@ -84,13 +83,13 @@
             <div class="form-row">
             <div class="col">
         <div class="form-group label-floating">
-            <label class="control-label">Nombres</label>
+            <label class="control-label"><i class="fa fa-user"></i> Nombres</label>
             <input type="text" name="nombre" required class="form-control">
         </div>
     </div>
             <div class="col">
         <div class="form-group label-floating">
-            <label class="control-label">Apellidos</label>
+            <label class="control-label"><i class="fa fa-user"></i> Apellidos</label>
             <input type="text" name="apellidos" required class="form-control">
         </div>
     </div>
@@ -99,13 +98,13 @@
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group label-floating">
-                            <label class="control-label">Cedula</label>
+                            <label class="control-label"><i class="fa fa-id-card"></i> Cedula</label>
                             <input type="number" name="password" required  class="form-control">
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group label-floating">
-                            <label class="control-label">Correo</label>
+                            <label class="control-label"><i class="fa fa-envelope"></i> Correo</label>
                             <input type="email" name="correo"  required class="form-control">
                         </div>
                     </div>
@@ -113,7 +112,7 @@
 
             <div class="col-md-3">
                 <div class="form-group label-floating">
-                    <label class="control-label">Telefono</label>
+                    <label class="control-label"><i class="fa fa-phone"></i> Telefono</label>
                     <input type="number" name="telefono" class="form-control">
                 </div>
             </div>
@@ -140,7 +139,8 @@
                 </label>
 
             </div>
-                <button style="margin-top: 15px;" type="submit" class="btn btn-primary btn-lg">Guardar</button>
+
+            <button style="margin-top: 15px;" type="submit" class="btn btn-primary btn-lg pull-right">Guardar</button>
 
             </form>
         </div>
@@ -150,14 +150,10 @@
     <footer class="sticky-footer">
         <div class="container">
             <div class="text-center">
-                <small>Copyright © Qualys 2017</small>
+                <small>Copyright © Qualys <?php echo date("Y") ?></small>
             </div>
         </div>
     </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fa fa-angle-up"></i>
-    </a>
 
     <!-- Modal-->
     <div class="modal fade" id="modalNuevoUsuario"

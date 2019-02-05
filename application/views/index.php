@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Qualis</title>
 
-    <link rel="icon" href="<?php echo base_url('assets/img/logo.jpg')?>">
+    <link rel="icon" href="<?php echo base_url('assets/img/qualis.jpg')?>">
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -20,7 +20,7 @@
               <a id="logo-container" href="#" class="brand-logo">Qualis</a>
 
 -->
-        <img alt="Logo" class="imagen-logo" src="<?php echo base_url('assets/img/logo.jpg')?>">
+        <img alt="Logo" class="imagen-logo" src="<?php echo base_url('assets/img/qualis.jpg')?>">
 
         <ul class="right hide-on-med-and-down">
             <li><a href="<?php echo site_url('Welcome/irLogin')?>">Login</a></li>

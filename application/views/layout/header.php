@@ -11,7 +11,7 @@
     <title>Qualis</title>
     <!-- Bootstrap core CSS-->
 
-    <link rel="icon" href="<?php echo base_url('assets/img/logo.jpg')?>">
+    <link rel="icon" href="<?php echo base_url('assets/img/qualis.jpg')?>">
 
     <link href="<?php echo base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->

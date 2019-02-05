@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/AeronetWeb/';
-
+//$config['base_url'] = 'http://www.smartbill.us:81/AeronetWeb/';
 /*
 |--------------------------------------------------------------------------
 | Index File

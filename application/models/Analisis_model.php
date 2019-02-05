@@ -52,40 +52,46 @@ class Analisis_model extends CI_Model
         $this->db->select('idFiltros, identificador, fecha_muestreo, observaciones');
         $this->db->where('valido', 0);
 
+      
+
         $filtros = $this->db->get('filtros');
+        
+        if (sizeof($filtros->result()) > 0){
 
-        if (sizeof($filtros) > 0){
             foreach ($filtros->result() as $filtro){
-
-                 $muestra = $this->db->get_where('muestra', array(
-                    'idFiltro' => $filtro->idFiltros
-                ))->result()[0];
-
-                 $row = array(
-                     'idFiltros' => $filtro->idFiltros,
-                     'identificador' => $filtro->identificador,
-                     'fecha_muestreo' => $filtro->fecha_muestreo,
-                     'presion_amb' => $muestra->presion_amb,
-                     'temp_ambC' => $muestra->temp_ambC,
-                     'temp_ambK' => $muestra->temp_ambK,
-                     'presion_est_inicial' => $muestra->presion_est_inicial,
-                     'presion_est_final' => $muestra->presion_est_final,
-                     'presion_est_avg' => $muestra->presion_est_avg,
-                     'tiempo_operacion' => $muestra->tiempo_operacion,
-                     'PoPa' => $muestra->PoPa,
-                     'Qr' => $muestra->Qr,
-                     'Qstd' => $muestra->Qstd,
-                     'diff_rfo' => $muestra->diff_rfo,
-                     'Vstd' => $muestra->Vstd,
-                     'Wi' => $muestra->Wi,
-                     'Wf' => $muestra->Wf,
-                     'Wn' => $muestra->Wn,
-                     'variable' => $muestra->variable,
-                 );
-
-                 $data[] = $row;
+    
+                     $muestra = $this->db->get_where('muestra', array(
+                        'idFiltro' => $filtro->idFiltros
+                    ))->result()[0];
+    
+                     $row = array(
+                         'idFiltros' => $filtro->idFiltros,
+                         'identificador' => $filtro->identificador,
+                         'fecha_muestreo' => $filtro->fecha_muestreo,
+                         'presion_amb' => $muestra->presion_amb,
+                         'temp_ambC' => $muestra->temp_ambC,
+                         'temp_ambK' => $muestra->temp_ambK,
+                         'presion_est_inicial' => $muestra->presion_est_inicial,
+                         'presion_est_final' => $muestra->presion_est_final,
+                         'presion_est_avg' => $muestra->presion_est_avg,
+                         'tiempo_operacion' => $muestra->tiempo_operacion,
+                         'PoPa' => $muestra->PoPa,
+                         'Qr' => $muestra->Qr,
+                         'Qstd' => $muestra->Qstd,
+                         'diff_rfo' => $muestra->diff_rfo,
+                         'Vstd' => $muestra->Vstd,
+                         'Wi' => $muestra->Wi,
+                         'Wf' => $muestra->Wf,
+                         'Wn' => $muestra->Wn,
+                         'variable' => $muestra->variable,
+                     );
+    
+                     $data[] = $row;
+                }
             }
-        }
+      
+
+        
 
         return $data;
         /*

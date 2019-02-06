@@ -81,7 +81,7 @@
                                 <th>Modelo</th>
                                 <th>Clase</th>
                                 <th>Descripción</th>
-
+                                <th>Propietario</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -89,9 +89,10 @@
                             foreach ($equipos->result() as $equipo){
                                 echo
                                     '<tr>'.
-                                    '<td>'. $equipo->localizacion.'</td>' .
-                                    '<td>'. $equipo->codigo .
+                                    '<td>'. $equipo->idequipo.'</td>' .
+                                    '<td>'. $equipo->modelo .
                                     '<td>'. $equipo->clase .'</td>' .
+                                    '<td>'. $equipo->descripcion .'</td>' .
                                     '<td>'. $equipo->descripcion .'</td></tr>';
                             }
                             ?>

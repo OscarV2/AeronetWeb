@@ -225,19 +225,19 @@
                                 <div class="col">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Pendiente curva de calibracion (m) :</label>
-                                        <input type="number" maxlength="10" step="0.1" name="m" required  class="form-control">
+                                        <input type="number" maxlength="10" step="0.00000001" name="m" required  class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group label-floating">
                                         <label class="control-label">Intercepto (b):</label>
-                                        <input type="number" maxlength="10" step="0.1" name="b" required  class="form-control">
+                                        <input type="number" maxlength="10" step="0.00000001" name="b" required  class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group label-floating">
                                         <label class="control-label">r:</label>
-                                        <input type="number" maxlength="10" step="0.1" name="r" required  class="form-control">
+                                        <input type="number" maxlength="10" step="0.00000001" name="r" required  class="form-control">
                                     </div>
                                 </div>
                             </div>

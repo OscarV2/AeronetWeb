@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <title>Qualis</title>
 
-    <link rel="icon" href="<?php echo base_url('assets/img/logo.jpg')?>">
+    <link rel="icon" href="<?php echo base_url('assets/img/qualis.jpg')?>">
     <!-- Bootstrap core CSS-->
 
     <link href="<?php echo base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
